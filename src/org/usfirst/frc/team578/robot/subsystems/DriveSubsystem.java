@@ -6,6 +6,8 @@ import org.usfirst.frc.team578.robot.RobotMap;
 import org.usfirst.frc.team578.robot.commands.DriveCommand;
 
 import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.CANTalon.ControlMode;
+import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -16,14 +18,14 @@ public class DriveSubsystem extends Subsystem {
     
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
-	CANTalon frontLeftTalon = new CANTalon(RobotMap.FRONT_LEFT_TALON);
-	CANTalon frontRightTalon = new CANTalon(RobotMap.FRONT_RIGHT_TALON);
-	CANTalon backLeftTalon = new CANTalon(RobotMap.BACK_LEFT_TALON);
-	CANTalon backRightTalon = new CANTalon(RobotMap.BACK_RIGHT_TALON);
+	CANTalon frontLeftTalon = initializeTalon(RobotMap.FRONT_LEFT_TALON);
+	CANTalon frontRightTalon = initializeTalon(RobotMap.FRONT_RIGHT_TALON);
+	CANTalon backLeftTalon = initializeTalon(RobotMap.BACK_LEFT_TALON);
+	CANTalon backRightTalon = initializeTalon(RobotMap.BACK_RIGHT_TALON);
 	RobotDrive robotDrive; 
 	
 	public DriveSubsystem(){
-		robotDrive = new RobotDrive(frontLeftTalon, backLeftTalon, frontRightTalon, backRightTalon);
+		//robotDrive = new RobotDrive(frontLeftTalon, backLeftTalon, frontRightTalon, backRightTalon);
 	}
 
     public void initDefaultCommand() {
@@ -48,6 +50,18 @@ public class DriveSubsystem extends Subsystem {
     		frontRightTalon.set(rightX);
     		backRightTalon.set(-rightX);
     	}
+    }
+    
+    public CANTalon initializeTalon(int channel)
+    {
+    	CANTalon talon= new CANTalon(channel);
+    	
+    	talon.changeControlMode(ControlMode.Speed);
+    	talon.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+    	talon.setPID(2, 0, 0, 0, 0, 10, 0);
+    	talon.enableControl();
+    	
+    	return talon;
     }
 }
 

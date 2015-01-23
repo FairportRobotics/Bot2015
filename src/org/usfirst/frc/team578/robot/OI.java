@@ -1,5 +1,7 @@
 package org.usfirst.frc.team578.robot;
 
+import org.usfirst.frc.team578.robot.commands.ElevatorCommand;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -39,10 +41,19 @@ public class OI {
 	
 	Joystick leftJoystick = new Joystick(RobotMap.LEFT_JOYSTICK);
 	Joystick rightJoystick = new Joystick(RobotMap.RIGHT_JOYSTICK);
-    Button button = new JoystickButton(leftJoystick, 1);
+    Button buttonONE = new JoystickButton(leftJoystick, 1);
     Button buttonTWO = new JoystickButton(leftJoystick, 2);
     Button buttonTHREE = new JoystickButton(leftJoystick, 3);
     Button buttonFOUR = new JoystickButton(leftJoystick, 4);
+    
+    
+    public OI()
+    {
+    	buttonONE.whenPressed(new ElevatorCommand(1));
+    	buttonTWO.whenPressed(new ElevatorCommand(2));
+    	buttonTHREE.whenPressed(new ElevatorCommand(3));
+    	buttonFOUR.whenPressed(new ElevatorCommand(4));
+    }
 	
 	public double getLeftStickY()
 	{
@@ -63,5 +74,7 @@ public class OI {
 	{
 		return rightJoystick.getX();
 	}
+	
+	
 }
 

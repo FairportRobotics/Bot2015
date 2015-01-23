@@ -23,5 +23,8 @@ public class RobotMap {
 	public static final int LEFT_JOYSTICK=1;
 	public static final int RIGHT_JOYSTICK=2;
 	public static final int ELEVATOR_TALON = 1;
-	
+	public static final int FIBINACCI_WHEEL=1;
+	public static final int WHEEL_LEFT=1;
+	public static final int WHEEL_RIGHT = 2;
+	public static final int FIBINACCI_SWITCH = 1;
 }
