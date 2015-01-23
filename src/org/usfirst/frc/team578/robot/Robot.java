@@ -20,7 +20,7 @@ public class Robot extends IterativeRobot {
 
 	public static final DriveSubsystem driveSubsystem = new DriveSubsystem();
 	public static final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
-	public static OI oi;
+	public static OI io;
 
     Command autonomousCommand;
 
@@ -29,7 +29,7 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
-		oi = new OI();
+		io = new OI();
         // instantiate the command used for the autonomous period
         autonomousCommand = new DriveCommand();
     }
