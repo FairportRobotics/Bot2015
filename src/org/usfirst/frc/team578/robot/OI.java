@@ -1,5 +1,6 @@
 package org.usfirst.frc.team578.robot;
 
+import org.usfirst.frc.team578.robot.commands.EjectTotesCommand;
 import org.usfirst.frc.team578.robot.commands.ElevatorCommand;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -45,7 +46,13 @@ public class OI {
     Button buttonTWO = new JoystickButton(leftJoystick, 2);
     Button buttonTHREE = new JoystickButton(leftJoystick, 3);
     Button buttonFOUR = new JoystickButton(leftJoystick, 4);
-    
+    Joystick gamePad = new Joystick(RobotMap.GAMEPAD);
+    Joystick joystick = new Joystick(RobotMap.JOYSTICK);
+    Button buttonSix = new JoystickButton(gamePad, RobotMap.CONTROLLER_B6);
+    Button buttonEight = new JoystickButton(gamePad, RobotMap.CONTROLLER_B6);
+    Button buttonNine = new JoystickButton(gamePad, RobotMap.CONTROLLER_B6);
+    Button leftTrigger = new JoystickButton(joystick, RobotMap.TRIGGER_LEFT_JOYSTICK);
+    Button rightTrigger = new JoystickButton(joystick, RobotMap.TRIGGER_RIGHT_JOYSTICK);
     
     public OI()
     {
@@ -53,6 +60,9 @@ public class OI {
     	buttonTWO.whenPressed(new ElevatorCommand(2));
     	buttonTHREE.whenPressed(new ElevatorCommand(3));
     	buttonFOUR.whenPressed(new ElevatorCommand(4));
+    	
+    	buttonNine.whenPressed(new EjectTotesCommand());
+    	
     }
 	
 	public double getLeftStickY()
@@ -75,6 +85,30 @@ public class OI {
 		return rightJoystick.getX();
 	}
 	
+	public Button getButtonSix()
+	{
+		return buttonSix;
+	}
+	
+	public Button getButtonEight()
+	{
+		return buttonEight;
+	}
+	
+	public Button getButtonNine()
+	{
+		return buttonNine;
+	}
+	
+	public Button getLeftTrigger()
+	{
+		return leftTrigger;
+	}
+	
+	public Button getRightTrigger()
+	{
+		return rightTrigger;
+	}
 	
 }
 
