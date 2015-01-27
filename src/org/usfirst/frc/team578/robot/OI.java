@@ -47,12 +47,11 @@ public class OI {
     Button buttonTHREE = new JoystickButton(leftJoystick, 3);
     Button buttonFOUR = new JoystickButton(leftJoystick, 4);
     Joystick gamePad = new Joystick(RobotMap.GAMEPAD);
-    Joystick joystick = new Joystick(RobotMap.JOYSTICK);
     Button buttonSix = new JoystickButton(gamePad, RobotMap.CONTROLLER_B6);
     Button buttonEight = new JoystickButton(gamePad, RobotMap.CONTROLLER_B6);
     Button buttonNine = new JoystickButton(gamePad, RobotMap.CONTROLLER_B6);
-    Button leftTrigger = new JoystickButton(joystick, RobotMap.TRIGGER_LEFT_JOYSTICK);
-    Button rightTrigger = new JoystickButton(joystick, RobotMap.TRIGGER_RIGHT_JOYSTICK);
+    Button leftTrigger = new JoystickButton(leftJoystick, RobotMap.TRIGGER_LEFT_JOYSTICK);
+    Button rightTrigger = new JoystickButton(rightJoystick, RobotMap.TRIGGER_RIGHT_JOYSTICK);
     
     public OI()
     {

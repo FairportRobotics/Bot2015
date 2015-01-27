@@ -20,7 +20,6 @@ public class RobotMap {
 	public static final int FRONT_LEFT_TALON=2;
 	public static final int BACK_RIGHT_TALON=3;
 	public static final int FRONT_RIGHT_TALON=4;
-	public static final int JOYSTICK=1;
 	public static final int LEFT_JOYSTICK=1;
 	public static final int RIGHT_JOYSTICK=2;
 	public static final int TRIGGER_RIGHT_JOYSTICK=3;
