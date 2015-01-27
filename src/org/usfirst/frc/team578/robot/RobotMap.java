@@ -22,6 +22,14 @@ public class RobotMap {
 	public static final int FRONT_RIGHT_TALON=4;
 	public static final int LEFT_JOYSTICK=1;
 	public static final int RIGHT_JOYSTICK=2;
+	public static final int GAMEPAD=3;
 	public static final int ELEVATOR_TALON = 1;
-	
+	public static final int ELEVATOR_LVL_1= 0;
+	public static final int ELEVATOR_LVL_2= 1;
+	public static final int ELEVATOR_LVL_3= 2;
+	public static final int ELEVATOR_LVL_4= 3;
+	public static final int CONTROLLER_B1= 1;
+	public static final int CONTROLLER_B2= 2;
+	public static final int CONTROLLER_B3= 3;
+	public static final int CONTROLLER_B4= 4;
 }

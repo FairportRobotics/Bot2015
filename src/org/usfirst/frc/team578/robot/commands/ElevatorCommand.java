@@ -26,8 +26,7 @@ public class ElevatorCommand extends Command {
 	@Override
 	protected void execute() {
 		// TODO Auto-generated method stub
-		Robot.driveSubsystem.drive(Robot.oi.getLeftStickY(), Robot.oi.getRightStickY(), Robot.oi.getLeftStickX(), Robot.oi.getRightStickX());
-		isFinished();
+		
 	}
 
 	@Override

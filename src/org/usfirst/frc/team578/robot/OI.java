@@ -39,10 +39,11 @@ public class OI {
 	
 	Joystick leftJoystick = new Joystick(RobotMap.LEFT_JOYSTICK);
 	Joystick rightJoystick = new Joystick(RobotMap.RIGHT_JOYSTICK);
-    Button button = new JoystickButton(leftJoystick, 1);
-    Button buttonTWO = new JoystickButton(leftJoystick, 2);
-    Button buttonTHREE = new JoystickButton(leftJoystick, 3);
-    Button buttonFOUR = new JoystickButton(leftJoystick, 4);
+	Joystick gamePad = new Joystick(RobotMap.GAMEPAD); 
+    Button buttonOne = new JoystickButton(gamePad, RobotMap.CONTROLLER_B1);
+    Button buttonTwo = new JoystickButton(gamePad, RobotMap.CONTROLLER_B2);
+    Button buttonThree = new JoystickButton(gamePad, RobotMap.CONTROLLER_B3);
+    Button buttonFour = new JoystickButton(gamePad, RobotMap.CONTROLLER_B4);
 	
 	public double getLeftStickY()
 	{
@@ -62,6 +63,26 @@ public class OI {
 	public double getRightStickX()
 	{
 		return rightJoystick.getX();
+	}
+	
+	public Button getButtonOne()
+	{
+		return buttonOne;
+	}
+	
+	public Button getButtonTwo()
+	{
+		return buttonTwo;
+	}
+	
+	public Button getButtonThree()
+	{
+		return buttonThree;
+	}
+	
+	public Button getButtonFour()
+	{
+		return buttonFour;
 	}
 }
 
