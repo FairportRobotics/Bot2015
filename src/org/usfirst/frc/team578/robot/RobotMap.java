@@ -24,13 +24,13 @@ public class RobotMap {
 	public static final int RIGHT_JOYSTICK=2;
 	public static final int TRIGGER_RIGHT_JOYSTICK=3;
 	public static final int TRIGGER_LEFT_JOYSTICK=4;
-	public static final int ELEVATOR_TALON = 1;
-	public static final int FIBINACCI_WHEEL=1;
+	public static final int ELEVATOR_TALON = 10;
+	public static final int FIBINACCI_WHEEL=0;
 	public static final int WHEEL_LEFT=1;
 	public static final int WHEEL_RIGHT = 2;
 	public static final int FIBINACCI_SWITCH = 0;
 	public static final int CONTROLLER_B6 = 6;
 	public static final int CONTROLLER_B8 = 8;
 	public static final int CONTROLLER_B9 = 9;
-	public static final int GAMEPAD=1;
+	public static final int GAMEPAD=0;
 }
