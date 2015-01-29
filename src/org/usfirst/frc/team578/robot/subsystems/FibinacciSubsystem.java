@@ -14,6 +14,11 @@ public class FibinacciSubsystem extends Subsystem {
 	private Relay fibinacci = new Relay(RobotMap.FIBINACCI_WHEEL);
 	private boolean extending = false;
 
+	public FibinacciSubsystem()
+	{
+		setDirection();
+	}
+	
 	@Override
 	protected void initDefaultCommand() {
 		// TODO Auto-generated method stub

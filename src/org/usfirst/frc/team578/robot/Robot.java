@@ -1,14 +1,12 @@
 package org.usfirst.frc.team578.robot;
 
-import edu.wpi.first.wpilibj.IterativeRobot; 
+import org.usfirst.frc.team578.robot.commands.DriveCommand;
+import org.usfirst.frc.team578.robot.subsystems.FibinacciSubsystem;
+
+import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-
-import org.usfirst.frc.team578.robot.commands.DriveCommand;
-import org.usfirst.frc.team578.robot.subsystems.DriveSubsystem;
-import org.usfirst.frc.team578.robot.subsystems.ElevatorSubsystem;
-import org.usfirst.frc.team578.robot.subsystems.FibinacciSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -19,10 +17,11 @@ import org.usfirst.frc.team578.robot.subsystems.FibinacciSubsystem;
  */
 public class Robot extends IterativeRobot {
 
-	public static final DriveSubsystem driveSubsystem = new DriveSubsystem();
-	public static final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
+	//public static final DriveSubsystem driveSubsystem = new DriveSubsystem();
+	//public static final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
 	public static final FibinacciSubsystem fibinacciSubsystem = new FibinacciSubsystem();
 	public static OI oi;
+	private static long startTime;
 
     Command autonomousCommand;
 
@@ -30,10 +29,16 @@ public class Robot extends IterativeRobot {
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
+    public static long getElapsedTime()
+    {
+    	return (System.currentTimeMillis() - startTime) / 1000;
+    }
+    
     public void robotInit() {
 		oi = new OI();
         // instantiate the command used for the autonomous period
         autonomousCommand = new DriveCommand();
+        startTime = System.currentTimeMillis();
     }
 	
 	public void disabledPeriodic() {

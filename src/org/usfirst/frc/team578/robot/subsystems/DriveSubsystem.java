@@ -31,7 +31,7 @@ public class DriveSubsystem extends Subsystem {
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
-    	setDefaultCommand(new DriveCommand()); 
+    	//setDefaultCommand(new DriveCommand()); 
     }
     
     public void drive(double leftX, double leftY, double rightX, double rightY){
