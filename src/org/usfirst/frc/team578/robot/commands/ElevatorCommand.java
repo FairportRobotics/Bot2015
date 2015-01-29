@@ -1,10 +1,7 @@
 package org.usfirst.frc.team578.robot.commands;
 
-import org.usfirst.frc.team578.robot.Robot; 
-import org.usfirst.frc.team578.robot.RobotMap;
+import org.usfirst.frc.team578.robot.Robot;
 
-import edu.wpi.first.wpilibj.CANTalon;
-import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class ElevatorCommand extends Command {
@@ -15,6 +12,7 @@ public class ElevatorCommand extends Command {
 	public ElevatorCommand(int desiredPosition) {
 		// TODO Auto-generated constructor stub
 		this.desiredPosition = desiredPosition;
+		requires(Robot.elevatorSubsystem);
 	}
 	
 	@Override
@@ -25,15 +23,14 @@ public class ElevatorCommand extends Command {
 
 	@Override
 	protected void execute() {
-		// TODO Auto-generated method stub
-		//Robot.driveSubsystem.drive(Robot.oi.getLeftStickY(), Robot.oi.getRightStickY(), Robot.oi.getLeftStickX(), Robot.oi.getRightStickX());
-		isFinished();
+		// TODO Auto-generated method stud
+		Robot.elevatorSubsystem.setLevel(desiredPosition);
 	}
 
 	@Override
 	protected boolean isFinished() {
 		// TODO Auto-generated method stub
-		return true;
+		return Robot.elevatorSubsystem.getCurrentLevel() == desiredPosition;
 	}
 
 	@Override

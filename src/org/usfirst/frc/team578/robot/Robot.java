@@ -1,6 +1,8 @@
 package org.usfirst.frc.team578.robot;
 
 import org.usfirst.frc.team578.robot.commands.DriveCommand;
+import org.usfirst.frc.team578.robot.subsystems.DriveSubsystem;
+import org.usfirst.frc.team578.robot.subsystems.ElevatorSubsystem;
 import org.usfirst.frc.team578.robot.subsystems.FibinacciSubsystem;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -17,8 +19,8 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
  */
 public class Robot extends IterativeRobot {
 
-	//public static final DriveSubsystem driveSubsystem = new DriveSubsystem();
-	//public static final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
+	public static final DriveSubsystem driveSubsystem = new DriveSubsystem();
+	public static final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
 	public static final FibinacciSubsystem fibinacciSubsystem = new FibinacciSubsystem();
 	public static OI oi;
 	private static long startTime;

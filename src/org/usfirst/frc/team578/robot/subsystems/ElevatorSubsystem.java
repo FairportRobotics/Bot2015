@@ -39,18 +39,22 @@ public class ElevatorSubsystem extends Subsystem {
 		if (level == 1) {
 			if (levelOne.get()) {
 				elevatorTalon.set(0);
+				currLevel = 1;
 			}
 		} else if (level == 2) {
 			if (levelTwo.get()) {
 				elevatorTalon.set(0);
+				currLevel = 2;
 			}
 		} else if (level == 3) {
 			if (levelThree.get()) {
 				elevatorTalon.set(0);
+				currLevel = 3;
 			}
 		} else if (level == 4) {
 			if (levelFour.get()) {
 				elevatorTalon.set(0);
+				currLevel = 4;
 			}
 		}
 	}
