@@ -11,28 +11,45 @@ public class ElevatorCommand extends Command {
 
 	
 	private int desiredPosition;
-
+	private boolean running;
+	
 	public ElevatorCommand(int desiredPosition) {
 		// TODO Auto-generated constructor stub
+        requires(Robot.elevatorSubsystem);
 		this.desiredPosition = desiredPosition;
 	}
 	
 	@Override
 	protected void initialize() {
 		// TODO Auto-generated method stub
-        requires(Robot.elevatorSubsystem);
+        running = false;
 	}
 
 	@Override
 	protected void execute() {
 		// TODO Auto-generated method stub
-		
+		if(running)
+		{
+				running = false;
+		}
+		else
+		{
+			Robot.elevatorSubsystem.setLevel(desiredPosition);
+			running = true;
+		}
 	}
 
 	@Override
 	protected boolean isFinished() {
 		// TODO Auto-generated method stub
-		return true;
+		if(!running)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 	@Override
