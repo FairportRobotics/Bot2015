@@ -14,7 +14,6 @@ import org.usfirst.frc.team578.robot.Robot;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class EjectTotesCommand extends Command {
 
@@ -25,7 +24,8 @@ public class EjectTotesCommand extends Command {
 	public EjectTotesCommand()
 	{
 		requires(Robot.fibinacciSubsystem);
-		SmartDashboard.putString("Eject", "true!");
+		//SmartDashboard.putString("Eject", "true!");
+		Robot.messenger.sendMessage("Eject!");
 		writeLog2("START");
 	}
 
@@ -62,14 +62,14 @@ public class EjectTotesCommand extends Command {
 			Robot.oi.getRightTrigger().get();
 			Robot.oi.getLeftTrigger().get();
 
-			writeLog2(" 6: " + Robot.oi.getButtonSix().get() + " 8: " + Robot.oi.getButtonEight().get() + " 9: " + Robot.oi.getButtonNine().get() + " LTrigg: " + Robot.oi.getLeftTrigger().get() + " RightTrigg: " + Robot.oi.getRightTrigger().get());
+			Robot.messenger.sendMessage(" 6: " + Robot.oi.getButtonSix().get() + " 8: " + Robot.oi.getButtonEight().get() + " 9: " + Robot.oi.getButtonNine().get() + " LTrigg: " + Robot.oi.getLeftTrigger().get() + " RightTrigg: " + Robot.oi.getRightTrigger().get());
 
 			if((Robot.oi.getButtonSix().get()||Robot.oi.getButtonEight().get())&&(Robot.oi.getRightTrigger().get()||Robot.oi.getLeftTrigger().get())&&Robot.oi.getButtonNine().get())
 			{
 				Robot.fibinacciSubsystem.extendFibinacci();
 				offSwitch = false;
 				running = true;
-				writeLog2("Extend");
+				Robot.messenger.sendMessage("Extend");
 			}
 		
 		}
@@ -83,7 +83,7 @@ public class EjectTotesCommand extends Command {
 		if((!running)&&(!Robot.oi.getButtonNine().get()))
 		{
 			ret = true;
-			writeLog2("finish: true");
+			Robot.messenger.sendMessage("finish: true");
 		}else{
 			ret = false;
 		}
