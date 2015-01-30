@@ -21,10 +21,9 @@ public class EjectTotesCommand extends Command {
 	private boolean offSwitch;
 	private static File log = new File("/log.txt");
 
-	public EjectTotesCommand()
-	{
+	public EjectTotesCommand() {
 		requires(Robot.fibinacciSubsystem);
-		//SmartDashboard.putString("Eject", "true!");
+		// SmartDashboard.putString("Eject", "true!");
 		Robot.messenger.sendMessage("Eject!");
 		writeLog2("START");
 	}
@@ -39,61 +38,58 @@ public class EjectTotesCommand extends Command {
 	@Override
 	protected void execute() {
 		// TODO Auto-generated method stub
-		
-		//writeLog2("readSwitch: " + Robot.fibinacciSubsystem.readSwitch() + " offSwitch: " + offSwitch + " running: " + running);		
-		
-		writeLog2(getButtons());
-		
-		if(running)
-		{
-			if(offSwitch&&Robot.fibinacciSubsystem.readSwitch())
-			{
-				Robot.fibinacciSubsystem.stopFibinacci();
-				offSwitch=false;
-				running=false;
-			}else{
-				offSwitch=Robot.fibinacciSubsystem.readSwitch();
-			}
 
-		}else{
-			Robot.oi.getButtonSix().get();
-			Robot.oi.getButtonEight().get();
-			Robot.oi.getButtonNine().get();
-			Robot.oi.getRightTrigger().get();
-			Robot.oi.getLeftTrigger().get();
+		// writeLog2("readSwitch: " + Robot.fibinacciSubsystem.readSwitch() +
+		// " offSwitch: " + offSwitch + " running: " + running);
+		/*
+		 * writeLog2(getButtons());
+		 * 
+		 * if(running) { if(offSwitch&&Robot.fibinacciSubsystem.readSwitch()) {
+		 * Robot.fibinacciSubsystem.stopFibinacci(); offSwitch=false;
+		 * running=false; }else{
+		 * offSwitch=Robot.fibinacciSubsystem.readSwitch(); }
+		 * 
+		 * }else{ Robot.oi.getButtonSix().get();
+		 * Robot.oi.getButtonEight().get(); Robot.oi.getButtonNine().get();
+		 * Robot.oi.getRightTrigger().get(); Robot.oi.getLeftTrigger().get();
+		 * 
+		 * Robot.messenger.sendMessage(" 6: " + Robot.oi.getButtonSix().get() +
+		 * " 8: " + Robot.oi.getButtonEight().get() + " 9: " +
+		 * Robot.oi.getButtonNine().get() + " LTrigg: " +
+		 * Robot.oi.getLeftTrigger().get() + " RightTrigg: " +
+		 * Robot.oi.getRightTrigger().get());
+		 * 
+		 * if((Robot.oi.getButtonSix().get()||Robot.oi.getButtonEight().get())&&(
+		 * Robot
+		 * .oi.getRightTrigger().get()||Robot.oi.getLeftTrigger().get())&&Robot
+		 * .oi.getButtonNine().get()) {
+		 * Robot.fibinacciSubsystem.extendFibinacci(); offSwitch = false;
+		 * running = true; Robot.messenger.sendMessage("Extend"); }
+		 * 
+		 * }
+		 */
 
-			Robot.messenger.sendMessage(" 6: " + Robot.oi.getButtonSix().get() + " 8: " + Robot.oi.getButtonEight().get() + " 9: " + Robot.oi.getButtonNine().get() + " LTrigg: " + Robot.oi.getLeftTrigger().get() + " RightTrigg: " + Robot.oi.getRightTrigger().get());
-
-			if((Robot.oi.getButtonSix().get()||Robot.oi.getButtonEight().get())&&(Robot.oi.getRightTrigger().get()||Robot.oi.getLeftTrigger().get())&&Robot.oi.getButtonNine().get())
-			{
-				Robot.fibinacciSubsystem.extendFibinacci();
-				offSwitch = false;
-				running = true;
-				Robot.messenger.sendMessage("Extend");
-			}
-		
+		if (!Robot.fibinacciSubsystem.readSwitch()) {
+			Robot.fibinacciSubsystem.extendFibinacci();
 		}
-
 	}
 
 	@Override
 	protected boolean isFinished() {
 		// TODO Auto-generated method stub
-		boolean ret;
-		if((!running)&&(!Robot.oi.getButtonNine().get()))
-		{
-			ret = true;
-			Robot.messenger.sendMessage("finish: true");
-		}else{
-			ret = false;
-		}
-		return ret;
+		/*
+		 * boolean ret; if((!running)&&(!Robot.oi.getButtonNine().get())) { ret
+		 * = true; Robot.messenger.sendMessage("finish: true"); }else{ ret =
+		 * false; } return ret;
+		 */
+
+		return Robot.fibinacciSubsystem.readSwitch();
 	}
 
 	@Override
 	protected void end() {
 		// TODO Auto-generated method stub
-
+		Robot.fibinacciSubsystem.stopFibinacci();
 	}
 
 	@Override
@@ -103,46 +99,40 @@ public class EjectTotesCommand extends Command {
 	}
 
 	private void writeLog(String message) {
-		
+
 		Scanner sc = null;
-		
+
 		try {
 			sc = new Scanner(log);
 		} catch (FileNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		
+
 		String old = "";
-		while (sc.hasNextLine())
-		{
+		while (sc.hasNextLine()) {
 			old += sc.nextLine() + "\n";
 		}
-		
+
 		PrintWriter pw = null;
-		try
-		{
-			//pw = new PrintWriter(log.getOutputStream());			
-			pw.write(old + "\n" + Robot.getElapsedTime() + " | "+ message);
-		}
-		catch(Exception e)
-		{
+		try {
+			// pw = new PrintWriter(log.getOutputStream());
+			pw.write(old + "\n" + Robot.getElapsedTime() + " | " + message);
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 		pw.flush();
 		pw.close();
 	}
-	
-	public void writeLog2(String message)
-	{
+
+	public void writeLog2(String message) {
 		FileWriter fw = null;
-		
-		try
-		{
+
+		try {
 			fw = new FileWriter("/log.txt", true);
-			
-			fw.write(Robot.getElapsedTime() + " | "+ message + "\n");
+
+			fw.write(Robot.getElapsedTime() + " | " + message + "\n");
 			fw.flush();
 			fw.close();
 		} catch (IOException e) {
@@ -150,27 +140,25 @@ public class EjectTotesCommand extends Command {
 			e.printStackTrace();
 		}
 	}
-	
-	public String getButtons()
-	{
+
+	public String getButtons() {
 		OI oi = Robot.oi;
-		
+
 		String s = "";
-		
-		for (Field f : oi.getClass().getDeclaredFields())
-		{
-			if (f.getType().equals(Button.class))
-			{
+
+		for (Field f : oi.getClass().getDeclaredFields()) {
+			if (f.getType().equals(Button.class)) {
 				f.setAccessible(true);
 				try {
-					s += f.getName() + ": " + ((JoystickButton) f.get(oi)).get() + " ";
+					s += f.getName() + ": "
+							+ ((JoystickButton) f.get(oi)).get() + " ";
 				} catch (IllegalArgumentException | IllegalAccessException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
 		}
-		
+
 		return s;
 	}
 
