@@ -8,8 +8,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class IntakeSubsystem extends Subsystem {
 	
 	
-	private CANTalon wheel1 = new CANTalon(RobotMap.WHEEL_LEFT);
-	private CANTalon wheel2 = new CANTalon(RobotMap.WHEEL_RIGHT);
+	private CANTalon leftIntakeTalon = new CANTalon(RobotMap.LEFT_INTAKE_TALON);
+	private CANTalon rightIntakeTalon = new CANTalon(RobotMap.RIGHT_INTAKE_TALON);
 	
 	@Override
 	protected void initDefaultCommand() {
@@ -19,20 +19,20 @@ public class IntakeSubsystem extends Subsystem {
 	
 	public void spinIntake()
 	{
-		wheel1.set(0.5);
-		wheel2.set(0.5);
+		leftIntakeTalon.set(0.5);
+		rightIntakeTalon.set(0.5);
 	}
 	
 	public void spinOutput()
 	{
-		wheel1.set(-0.5);
-		wheel2.set(-0.5);
+		leftIntakeTalon.set(-0.5);
+		rightIntakeTalon.set(-0.5);
 	}
 	
 	public void spinStop()
 	{
-		wheel1.set(0);
-		wheel2.set(0);
+		leftIntakeTalon.set(0);
+		rightIntakeTalon.set(0);
 	}
 
 }

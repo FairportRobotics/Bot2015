@@ -8,10 +8,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class ElevatorSubsystem extends Subsystem {
 
-	DigitalInput levelOne = new DigitalInput(0);
-	DigitalInput levelTwo = new DigitalInput(1);
-	DigitalInput levelThree = new DigitalInput(2);
-	DigitalInput levelFour = new DigitalInput(3);
+	DigitalInput levelOne = new DigitalInput(RobotMap.ELEVATOR_LEVEL_ONE_SWITCH);
+	DigitalInput levelTwo = new DigitalInput(RobotMap.ELEVATOR_LEVEL_TWO_SWITCH);
+	DigitalInput levelThree = new DigitalInput(RobotMap.ELEVATOR_LEVEL_THREE_SWITCH);
+	DigitalInput levelFour = new DigitalInput(RobotMap.ELEVATOR_LEVEL_FOUR_SWITCH);
 
 	CANTalon elevatorTalon = new CANTalon(RobotMap.ELEVATOR_TALON);
 
