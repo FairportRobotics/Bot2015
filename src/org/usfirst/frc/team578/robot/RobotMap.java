@@ -18,9 +18,9 @@ public class RobotMap {
 	// public static int rangefinderModule = 1;
 
 	//DriveTrain talon ID's
-	public static final int BACK_LEFT_TALON = 1;
-	public static final int FRONT_LEFT_TALON = 2;
-	public static final int BACK_RIGHT_TALON = 3;
+	public static final int BACK_LEFT_TALON = 5;
+	public static final int FRONT_LEFT_TALON = 7;
+	public static final int BACK_RIGHT_TALON = 1;
 	public static final int FRONT_RIGHT_TALON = 4;
 	// public static final int JOYSTICK=0;
 	

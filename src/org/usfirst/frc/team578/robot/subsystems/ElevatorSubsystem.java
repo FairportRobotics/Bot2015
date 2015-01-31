@@ -1,10 +1,12 @@
 package org.usfirst.frc.team578.robot.subsystems;
 
+import org.usfirst.frc.team578.robot.Robot;
 import org.usfirst.frc.team578.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class ElevatorSubsystem extends Subsystem {
 
@@ -37,21 +39,25 @@ public class ElevatorSubsystem extends Subsystem {
 
 		if (offset > 0) {
 			elevatorTalon.set(0.5);
+			SmartDashboard.putNumber("Elevator Value", .5);
+			
 		} else if (offset < 0) {
 			elevatorTalon.set(-0.5);
+			SmartDashboard.putNumber("Elevator Value", -.5);
 		}
 
 		if (levelTwo.get()) {
 			if (level == 2) {
 				elevatorTalon.set(0);
+				SmartDashboard.putNumber("Elevator Value", 0);
 				currLevel = 2;;
 			}
 		} else if (levelThree.get()) {
 			if (level == 3) {
 				elevatorTalon.set(0);
+				SmartDashboard.putNumber("Elevator Value", 0);
 				currLevel = 3;
 			}
 		}
 	}
-
 }

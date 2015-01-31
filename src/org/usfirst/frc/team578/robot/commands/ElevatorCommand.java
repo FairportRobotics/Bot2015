@@ -3,6 +3,7 @@ package org.usfirst.frc.team578.robot.commands;
 import org.usfirst.frc.team578.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class ElevatorCommand extends Command {
 	
@@ -10,13 +11,14 @@ public class ElevatorCommand extends Command {
 
 	public ElevatorCommand(int desiredPosition) {
 		// TODO Auto-generated constructor stub
+		requires(Robot.elevatorSubsystem);
 		this.desiredPosition = desiredPosition;
 	}
 	
 	@Override
 	protected void initialize() {
 		// TODO Auto-generated method stub
-        requires(Robot.elevatorSubsystem);
+		SmartDashboard.putNumber("Elevator Value", 0);
 	}
 
 	@Override
