@@ -14,6 +14,7 @@ import org.usfirst.frc.team578.robot.Robot;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class EjectTotesCommand extends Command {
 	
@@ -103,6 +104,7 @@ public class EjectTotesCommand extends Command {
 			running = true;
 		}
 
+		SmartDashboard.putBoolean("Fibinacci Value", fibWasFalse);
 //		SmartDashboard.putString("ADOIA", "AOIHDA");
 //		
 //		if (Robot.fibinacciSubsystem.readSwitch()) {
