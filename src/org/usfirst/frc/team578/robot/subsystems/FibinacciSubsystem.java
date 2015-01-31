@@ -1,5 +1,4 @@
 package org.usfirst.frc.team578.robot.subsystems;
-
 import org.usfirst.frc.team578.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -11,40 +10,52 @@ public class FibinacciSubsystem extends Subsystem {
 	private DigitalInput fibinacciSwitch = new DigitalInput(RobotMap.FIBINACCI_SWITCH);
 	private Relay fibinacci = new Relay(RobotMap.FIBINACCI_WHEEL);
 	private boolean extending = false;
-
-	public FibinacciSubsystem()
-	{
+	
+	/**
+	 * 
+	 */
+	public FibinacciSubsystem() {
 		setDirection();
 	}
 	
+	/**
+	 * 
+	 */
 	@Override
 	protected void initDefaultCommand() {
 		// TODO Auto-generated method stub
 
 	}
 	
-	public void extendFibinacci()
-	{
+	/**
+	 * 
+	 */
+	public void extendFibinacci() {
 		fibinacci.set(Relay.Value.kOn);
 		extending = true;
 	}
 	
-	public boolean readSwitch()
-	{
+	/**
+	 * 
+	 * @return
+	 */
+	public boolean readSwitch() {
 		return fibinacciSwitch.get();
 	}
 	
-	public void setDirection()
-	{
+	/**
+	 * 
+	 */
+	public void setDirection() {
 		fibinacci.setDirection(Relay.Direction.kForward);
 	}
 	
-	public void stopFibinacci()
-	{
+	/**
+	 * 
+	 */
+	public void stopFibinacci() {
 		//MAY STOP IMMEDIATELY BE PREPARED TO ADD A DELAY
-				fibinacci.set(Relay.Value.kOff);
-				extending = false;
+		fibinacci.set(Relay.Value.kOff);
+		extending = false;
 	}
-
-
 }

@@ -1,5 +1,4 @@
 package org.usfirst.frc.team578.robot.commands;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -23,12 +22,18 @@ public class EjectTotesCommand extends Command {
 	private boolean offSwitch;
 	private static File log = new File("/log.txt");
 
+	/**
+	 * 
+	 */
 	public EjectTotesCommand() {
 		requires(Robot.fibinacciSubsystem);
 		// SmartDashboard.putString("Eject", "true!");
 		writeLog2("START");
 	}
 
+	/**
+	 * 
+	 */
 	@Override
 	protected void initialize() {
 		// TODO Auto-generated method stub
@@ -36,6 +41,9 @@ public class EjectTotesCommand extends Command {
 		offSwitch = false;
 	}
 
+	/**
+	 * 
+	 */
 	@Override
 	protected void execute() {
 		// TODO Auto-generated method stub
@@ -112,6 +120,9 @@ public class EjectTotesCommand extends Command {
 //		}
 	}
 
+	/**
+	 * 
+	 */
 	@Override
 	protected boolean isFinished() {
 		// TODO Auto-generated method stub
@@ -125,6 +136,9 @@ public class EjectTotesCommand extends Command {
 
 	}
 
+	/**
+	 * 
+	 */
 	@Override
 	protected void end() {
 		// TODO Auto-generated method stub
@@ -133,12 +147,19 @@ public class EjectTotesCommand extends Command {
 		offSwitch = false;
 	}
 
+	/**
+	 * 
+	 */
 	@Override
 	protected void interrupted() {
 		// TODO Auto-generated method stub
 
 	}
 
+	/**
+	 * 
+	 * @param message
+	 */
 	private void writeLog(String message) {
 
 		Scanner sc = null;
@@ -157,7 +178,7 @@ public class EjectTotesCommand extends Command {
 
 		PrintWriter pw = null;
 		try {
-			// pw = new PrintWriter(log.getOutputStream());
+			//pw = new PrintWriter(log.getOutputStream());
 			pw.write(old + "\n" + Robot.getElapsedTime() + " | " + message);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -167,6 +188,10 @@ public class EjectTotesCommand extends Command {
 		pw.close();
 	}
 
+	/**
+	 * 
+	 * @param message
+	 */
 	public void writeLog2(String message) {
 		FileWriter fw = null;
 
@@ -182,9 +207,12 @@ public class EjectTotesCommand extends Command {
 		}
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public String getButtons() {
 		OI oi = Robot.oi;
-
 		String s = "";
 
 		for (Field f : oi.getClass().getDeclaredFields()) {
@@ -199,8 +227,6 @@ public class EjectTotesCommand extends Command {
 				}
 			}
 		}
-
 		return s;
 	}
-
 }

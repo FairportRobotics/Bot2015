@@ -9,9 +9,6 @@ import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-/**
- *
- */
 public class DriveSubsystem extends Subsystem {
 
 	// Put methods for controlling this subsystem
@@ -22,17 +19,22 @@ public class DriveSubsystem extends Subsystem {
 	CANTalon backRightTalon = initializeTalon(RobotMap.BACK_RIGHT_TALON);
 	RobotDrive robotDrive;
 
-	public DriveSubsystem() {
-		// robotDrive = new RobotDrive(frontLeftTalon, backLeftTalon,
-		// frontRightTalon, backRightTalon);
-	}
-
+	/**
+	 * 
+	 */
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
 		// setDefaultCommand(new MySpecialCommand());
 		setDefaultCommand(new DriveCommand());
 	}
 
+	/**
+	 * 
+	 * @param leftX
+	 * @param leftY
+	 * @param rightX
+	 * @param rightY
+	 */
 	public void drive(double leftX, double leftY, double rightX, double rightY) {
 		if (leftX < 0.3 && leftX > -0.3) {
 			frontLeftTalon.set(-leftY);
@@ -51,14 +53,17 @@ public class DriveSubsystem extends Subsystem {
 		}
 	}
 
+	/**
+	 * 
+	 * @param channel
+	 * @return
+	 */
 	public CANTalon initializeTalon(int channel) {
 		CANTalon talon = new CANTalon(channel);
-
 		talon.changeControlMode(ControlMode.Speed);
 		talon.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		talon.setPID(2, 0, 0, 0, 0, 10, 0);
 		talon.enableControl();
-
 		return talon;
 	}
 }
