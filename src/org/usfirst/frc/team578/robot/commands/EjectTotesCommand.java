@@ -85,7 +85,7 @@ public class EjectTotesCommand extends Command {
 		
 		if(running == true)
 		{
-			if(Robot.fibinacciSubsystem.readSwitch() == false)
+			if(Robot.fibinacciSubsystem.readSwitch() == true)
 			{
 				if(fibWasFalse == true)
 				{
@@ -93,7 +93,7 @@ public class EjectTotesCommand extends Command {
 						offSwitch = true;
 				}
 			}
-			else if(Robot.fibinacciSubsystem.readSwitch() == true)
+			else
 			{
 				fibWasFalse = true;
 			}
