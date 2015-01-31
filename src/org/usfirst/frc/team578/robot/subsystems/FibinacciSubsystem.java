@@ -7,7 +7,6 @@ import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class FibinacciSubsystem extends Subsystem {
-	
 
 	private DigitalInput fibinacciSwitch = new DigitalInput(RobotMap.FIBINACCI_SWITCH);
 	private Relay fibinacci = new Relay(RobotMap.FIBINACCI_WHEEL);

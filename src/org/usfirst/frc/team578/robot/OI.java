@@ -7,7 +7,6 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
-
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
@@ -61,7 +60,7 @@ public class OI {
     	buttonFOUR.whenPressed(new ElevatorCommand(4));
     	
     	buttonNine.whenPressed(new EjectTotesCommand());
-    	
+    	//SmartDashboard.putString("ADA", "AODUA");
     }
 	
 	public double getLeftStickY()
@@ -84,30 +83,28 @@ public class OI {
 		return rightJoystick.getX();
 	}
 	
-	public Button getButtonSix()
+	public boolean getButtonSix()
 	{
-		return buttonSix;
+		return buttonSix.get();
 	}
 	
-	public Button getButtonEight()
+	public boolean getButtonEight()
 	{
-		return buttonEight;
+		return buttonEight.get();
 	}
 	
-	public Button getButtonNine()
+	public boolean getButtonNine()
 	{
-		return buttonNine;
+		return buttonNine.get();
 	}
 	
-	public Button getLeftTrigger()
+	public boolean getLeftTrigger()
 	{
-		return leftTrigger;
+		return leftTrigger.get();
 	}
 	
-	public Button getRightTrigger()
+	public boolean getRightTrigger()
 	{
-		return rightTrigger;
+		return rightTrigger.get();
 	}
-	
 }
-

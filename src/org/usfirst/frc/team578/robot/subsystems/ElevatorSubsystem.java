@@ -26,8 +26,8 @@ public class ElevatorSubsystem extends Subsystem {
 		return currLevel;
 	}
 	
-	public void setLevel(int level) {
-
+	public void setLevel(int level) 
+	{
 		int offset = currLevel - level;
 
 		if (offset > 0) {

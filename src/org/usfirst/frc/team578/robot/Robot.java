@@ -1,11 +1,10 @@
 package org.usfirst.frc.team578.robot;
 
-import net.chrono7.messenger.Messenger;
-
 import org.usfirst.frc.team578.robot.commands.DriveCommand;
 import org.usfirst.frc.team578.robot.subsystems.DriveSubsystem;
 import org.usfirst.frc.team578.robot.subsystems.ElevatorSubsystem;
 import org.usfirst.frc.team578.robot.subsystems.FibinacciSubsystem;
+import org.usfirst.frc.team578.robot.subsystems.IntakeSubsystem;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -23,10 +22,11 @@ public class Robot extends IterativeRobot {
 
 	public static final DriveSubsystem driveSubsystem = new DriveSubsystem();
 	public static final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
+	public static final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
 	public static final FibinacciSubsystem fibinacciSubsystem = new FibinacciSubsystem();
 	public static OI oi;
 	private static long startTime;
-	public static Messenger messenger;
+	//public static Messenger messenger;
 	
     Command autonomousCommand;
 
@@ -42,8 +42,6 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
 		oi = new OI();
         // instantiate the command used for the autonomous period
-		messenger = new Messenger();
-		messenger.setSender("172.22.11.1", 9017);
         autonomousCommand = new DriveCommand();
         startTime = System.currentTimeMillis();
     }

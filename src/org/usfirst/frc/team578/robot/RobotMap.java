@@ -34,7 +34,7 @@ public class RobotMap {
 	public static final int CONTROLLER_B6 = 6;
 	public static final int CONTROLLER_B8 = 8;
 	public static final int CONTROLLER_B9 = 9;
-	public static final int GAMEPAD = 3;
+	public static final int GAMEPAD = 0;
 	
 	//Elevator ID's
 	public static final int ELEVATOR_TALON = 1;

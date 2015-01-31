@@ -24,7 +24,6 @@ public class EjectTotesCommand extends Command {
 	public EjectTotesCommand() {
 		requires(Robot.fibinacciSubsystem);
 		// SmartDashboard.putString("Eject", "true!");
-		Robot.messenger.sendMessage("Eject!");
 		writeLog2("START");
 	}
 
@@ -39,6 +38,19 @@ public class EjectTotesCommand extends Command {
 	protected void execute() {
 		// TODO Auto-generated method stub
 
+		if (!running)
+		{
+			OI o = Robot.oi;
+			boolean start = o.getButtonNine() && (o.getButtonEight() || o.getButtonSix()) && (o.getLeftTrigger() || o.getRightTrigger());
+			
+			if (start)
+			{
+				running = true;
+				Robot.fibinacciSubsystem.extendFibinacci();
+			}
+		}
+		
+		
 		// writeLog2("readSwitch: " + Robot.fibinacciSubsystem.readSwitch() +
 		// " offSwitch: " + offSwitch + " running: " + running);
 		/*
@@ -69,9 +81,11 @@ public class EjectTotesCommand extends Command {
 		 * }
 		 */
 
-		if (!Robot.fibinacciSubsystem.readSwitch()) {
-			Robot.fibinacciSubsystem.extendFibinacci();
-		}
+//		SmartDashboard.putString("ADOIA", "AOIHDA");
+//		
+//		if (Robot.fibinacciSubsystem.readSwitch()) {
+//			Robot.fibinacciSubsystem.extendFibinacci();
+//		}
 	}
 
 	@Override
@@ -83,7 +97,7 @@ public class EjectTotesCommand extends Command {
 		 * false; } return ret;
 		 */
 
-		return Robot.fibinacciSubsystem.readSwitch();
+		return !Robot.fibinacciSubsystem.readSwitch();
 	}
 
 	@Override

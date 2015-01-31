@@ -5,7 +5,6 @@ import org.usfirst.frc.team578.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class ElevatorCommand extends Command {
-
 	
 	private int desiredPosition;
 
@@ -24,13 +23,14 @@ public class ElevatorCommand extends Command {
 	@Override
 	protected void execute() {
 		// TODO Auto-generated method stud
-		Robot.elevatorSubsystem.setLevel(desiredPosition);
+		//Robot.elevatorSubsystem.setLevel(desiredPosition);
 	}
 
 	@Override
 	protected boolean isFinished() {
 		// TODO Auto-generated method stub
-		return Robot.elevatorSubsystem.getCurrentLevel() == desiredPosition;
+		//return Robot.elevatorSubsystem.getCurrentLevel() == desiredPosition;
+		return true; //TODO: GET RID OF DIS
 	}
 
 	@Override
