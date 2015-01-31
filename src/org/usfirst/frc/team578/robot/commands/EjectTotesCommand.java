@@ -85,7 +85,7 @@ public class EjectTotesCommand extends Command {
 		
 		if(running == true)
 		{
-			if(Robot.fibinacciSubsystem.readSwitch() == true)
+			if(Robot.fibinacciSubsystem.readSwitch() == false)
 			{
 				if(fibWasFalse == true)
 				{
