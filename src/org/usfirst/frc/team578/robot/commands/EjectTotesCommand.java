@@ -16,8 +16,9 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class EjectTotesCommand extends Command {
-
-	private boolean running;
+	
+	private boolean fibWasFalse;
+	private boolean running = false;
 	private boolean offSwitch;
 	private static File log = new File("/log.txt");
 
@@ -38,7 +39,7 @@ public class EjectTotesCommand extends Command {
 	protected void execute() {
 		// TODO Auto-generated method stub
 
-		if (!running)
+		/*if (!running)
 		{
 			OI o = Robot.oi;
 			boolean start = o.getButtonNine() && (o.getButtonEight() || o.getButtonSix()) && (o.getLeftTrigger() || o.getRightTrigger());
@@ -48,7 +49,7 @@ public class EjectTotesCommand extends Command {
 				running = true;
 				Robot.fibinacciSubsystem.extendFibinacci();
 			}
-		}
+		}*/
 		
 		
 		// writeLog2("readSwitch: " + Robot.fibinacciSubsystem.readSwitch() +
@@ -80,6 +81,27 @@ public class EjectTotesCommand extends Command {
 		 * 
 		 * }
 		 */
+		
+		if(running == true)
+		{
+			if(Robot.fibinacciSubsystem.readSwitch() == false)
+			{
+				if(fibWasFalse == true)
+				{
+						Robot.fibinacciSubsystem.stopFibinacci();
+						offSwitch = true;
+				}
+			}
+			else if(Robot.fibinacciSubsystem.readSwitch() == true)
+			{
+				fibWasFalse = true;
+			}
+		}
+		else
+		{
+			Robot.fibinacciSubsystem.extendFibinacci();
+			running = true;
+		}
 
 //		SmartDashboard.putString("ADOIA", "AOIHDA");
 //		
@@ -97,13 +119,16 @@ public class EjectTotesCommand extends Command {
 		 * false; } return ret;
 		 */
 
-		return !Robot.fibinacciSubsystem.readSwitch();
+		return offSwitch;
+
 	}
 
 	@Override
 	protected void end() {
 		// TODO Auto-generated method stub
-		Robot.fibinacciSubsystem.stopFibinacci();
+		///////////////Robot.fibinacciSubsystem.stopFibinacci();
+		fibWasFalse = false;
+		offSwitch = false;
 	}
 
 	@Override
