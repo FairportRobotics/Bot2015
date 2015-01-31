@@ -11,26 +11,25 @@ public class ElevatorCommand extends Command {
 	public ElevatorCommand(int desiredPosition) {
 		// TODO Auto-generated constructor stub
 		this.desiredPosition = desiredPosition;
-		requires(Robot.elevatorSubsystem);
 	}
 	
 	@Override
 	protected void initialize() {
 		// TODO Auto-generated method stub
-        //requires(Robot.elevatorSubsystem);
+        requires(Robot.elevatorSubsystem);
 	}
 
 	@Override
 	protected void execute() {
 		// TODO Auto-generated method stud
-		//Robot.elevatorSubsystem.setLevel(desiredPosition);
+		Robot.elevatorSubsystem.setLevel(desiredPosition);
 	}
 
 	@Override
 	protected boolean isFinished() {
 		// TODO Auto-generated method stub
-		//return Robot.elevatorSubsystem.getCurrentLevel() == desiredPosition;
-		return true; //TODO: GET RID OF DIS
+		return Robot.elevatorSubsystem.getCurrentLevel() == desiredPosition;
+		//TODO: GET RID OF DIS
 	}
 
 	@Override
