@@ -32,6 +32,7 @@ public class ElevatorCommand extends Command {
 	@Override
 	protected void execute() {
 		// TODO Auto-generated method stud
+		Robot.elevatorSubsystem.writeStatus();
 		Robot.elevatorSubsystem.setLevel(desiredPosition);
 	}
 
@@ -41,6 +42,7 @@ public class ElevatorCommand extends Command {
 	@Override
 	protected boolean isFinished() {
 		// TODO Auto-generated method stub
+		SmartDashboard.putBoolean("isFinished", Robot.elevatorSubsystem.getCurrentLevel() == desiredPosition);
 		return Robot.elevatorSubsystem.getCurrentLevel() == desiredPosition;
 		//TODO: GET RID OF DIS
 	}

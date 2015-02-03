@@ -10,7 +10,7 @@ public class DriveCommand extends Command {
 	 */
     public DriveCommand() {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.driveSubsystem);
+        requires(Robot.pidDrive);
     }
 
     /**
@@ -28,6 +28,7 @@ public class DriveCommand extends Command {
 	@Override
     protected void execute() {
     	//Robot.driveSubsystem.drive(Robot.oi.getLeftStickY(), Robot.oi.getRightStickY(), Robot.oi.getLeftStickX(), Robot.oi.getRightStickX());
+		Robot.pidDrive.drive(Robot.oi.getLeftStickY());
     }
 
     /**

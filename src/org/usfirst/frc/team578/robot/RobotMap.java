@@ -39,8 +39,8 @@ public class RobotMap {
 	//Elevator ID's
 	public static final int ELEVATOR_TALON = 1;
 	public static final int ELEVATOR_LEVEL_ONE_SWITCH = 1;
-	public static final int ELEVATOR_LEVEL_TWO_SWITCH = 2;
-	public static final int ELEVATOR_LEVEL_THREE_SWITCH = 3;
+	public static final int ELEVATOR_LEVEL_TWO_SWITCH = 1;
+	public static final int ELEVATOR_LEVEL_THREE_SWITCH = 2;
 	public static final int ELEVATOR_LEVEL_FOUR_SWITCH = 4;
 	
 	//Fibinacci Wheel ID's
