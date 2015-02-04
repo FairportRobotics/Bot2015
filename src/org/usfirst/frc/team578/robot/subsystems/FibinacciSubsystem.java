@@ -12,7 +12,7 @@ public class FibinacciSubsystem extends Subsystem {
 	private boolean extending = false;
 	
 	/**
-	 * 
+	 * Constructor for the subsystem.
 	 */
 	public FibinacciSubsystem() {
 		setDirection();
@@ -28,7 +28,8 @@ public class FibinacciSubsystem extends Subsystem {
 	}
 	
 	/**
-	 * 
+	 * Extends the fibinacci. Sets the relay value to on and sets the value of 
+	 * extending to true.
 	 */
 	public void extendFibinacci() {
 		fibinacci.set(Relay.Value.kOn);
@@ -36,7 +37,7 @@ public class FibinacciSubsystem extends Subsystem {
 	}
 	
 	/**
-	 * 
+	 * Returns the fibinacciSwitch.
 	 * @return
 	 */
 	public boolean readSwitch() {
@@ -44,14 +45,14 @@ public class FibinacciSubsystem extends Subsystem {
 	}
 	
 	/**
-	 * 
+	 * Has the direction set to forward.
 	 */
 	public void setDirection() {
 		fibinacci.setDirection(Relay.Direction.kForward);
 	}
 	
 	/**
-	 * 
+	 * Sets the fibinacci to off and extending to false.
 	 */
 	public void stopFibinacci() {
 		//MAY STOP IMMEDIATELY BE PREPARED TO ADD A DELAY

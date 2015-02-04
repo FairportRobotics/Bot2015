@@ -23,7 +23,7 @@ public class EjectTotesCommand extends Command {
 	private static File log = new File("/log.txt");
 
 	/**
-	 * 
+	 * Gets the fibinacci subsystem and writes a log.
 	 */
 	public EjectTotesCommand() {
 		requires(Robot.fibinacciSubsystem);
@@ -32,7 +32,7 @@ public class EjectTotesCommand extends Command {
 	}
 
 	/**
-	 * 
+	 * Returns the variables as false when the program is initialized.
 	 */
 	@Override
 	protected void initialize() {
@@ -46,6 +46,13 @@ public class EjectTotesCommand extends Command {
 	 */
 	@Override
 	protected void execute() {
+		// TODO Auto-generated method stub
+
+		/*
+		 * 
+		 * Has the fibinacci wheel stop after the beam from the sensor has been 
+		 * broken twice.
+		 */
 		
 		if(running == true)
 		{
@@ -77,7 +84,7 @@ public class EjectTotesCommand extends Command {
 	}
 
 	/**
-	 * 
+	 * Returns the off switch as false when the code is finished.
 	 */
 	@Override
 	protected boolean isFinished() {
@@ -93,7 +100,7 @@ public class EjectTotesCommand extends Command {
 	}
 
 	/**
-	 * 
+	 * Has the fibWasFalse and offSwitch set to false when the command is ended.
 	 */
 	@Override
 	protected void end() {
@@ -113,7 +120,7 @@ public class EjectTotesCommand extends Command {
 	}
 
 	/**
-	 * 
+	 * Writes a log so that we know what is wrong with the command.
 	 * @param message
 	 */
 	private void writeLog(String message) {
@@ -145,7 +152,7 @@ public class EjectTotesCommand extends Command {
 	}
 
 	/**
-	 * 
+	 * Writes a message on the file.
 	 * @param message
 	 */
 	public void writeLog2(String message) {
@@ -164,7 +171,8 @@ public class EjectTotesCommand extends Command {
 	}
 
 	/**
-	 * 
+	 * It will look at all the buttons and say whether
+	 * the button is true are false and return it in a string.
 	 * @return
 	 */
 	public String getButtons() {
