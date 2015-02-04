@@ -25,7 +25,7 @@ public class DriveSubsystem extends Subsystem {
 	}
 	
 	/**
-	 * 
+	 *  Beings the driving of the robot.
 	 */
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
@@ -35,10 +35,10 @@ public class DriveSubsystem extends Subsystem {
 
 	/**
 	 * 
-	 * @param leftX
-	 * @param leftY
-	 * @param rightX
-	 * @param rightY
+	 * @param leftX		left joystick's x value
+	 * @param leftY 	left joystick's y value
+	 * @param rightX 	right joystick's x value
+	 * @param rightY 	right joystick's y value
 	 */
 	public void drive(double leftX, double leftY, double rightX, double rightY) {
 //		if (leftX < 0.3 && leftX > -0.3) {
@@ -60,8 +60,8 @@ public class DriveSubsystem extends Subsystem {
 
 	/**
 	 * 
-	 * @param channel
-	 * @return
+	 * @param channel 	The channel that the Talon will be running on.
+	 * @return 		Returns the newly created Talon object.
 	 */
 	public CANTalon initializeTalon(int channel) {
 		CANTalon talon = new CANTalon(channel);
