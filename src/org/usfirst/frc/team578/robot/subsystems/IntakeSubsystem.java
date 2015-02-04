@@ -6,8 +6,14 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class IntakeSubsystem extends Subsystem {
 	
-	private CANTalon leftIntakeTalon = new CANTalon(RobotMap.LEFT_INTAKE_TALON);
-	private CANTalon rightIntakeTalon = new CANTalon(RobotMap.RIGHT_INTAKE_TALON);
+	private CANTalon leftIntakeTalon;
+	private CANTalon rightIntakeTalon;
+	
+	public IntakeSubsystem()
+	{
+		//leftIntakeTalon = new CANTalon(RobotMap.LEFT_INTAKE_TALON);
+		//rightIntakeTalon = new CANTalon(RobotMap.RIGHT_INTAKE_TALON);
+	}
 	
 	/**
 	 * Nothing Happening Here!

@@ -49,7 +49,7 @@ public class RobotMap {
 	public static final int FIBINACCI_SWITCH = 0;
 
 	//Intake ID's
-	public static final int LEFT_INTAKE_TALON = 69;
-	public static final int RIGHT_INTAKE_TALON = 96;
+	public static final int LEFT_INTAKE_TALON = 6;
+	public static final int RIGHT_INTAKE_TALON = 2;
 	
 }

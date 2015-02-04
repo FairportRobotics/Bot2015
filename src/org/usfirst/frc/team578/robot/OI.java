@@ -39,21 +39,36 @@ public class OI {
     // until it is finished as determined by it's isFinished method.
     // button.whenReleased(new ExampleCommand());
 	
-	Joystick leftJoystick = new Joystick(RobotMap.LEFT_JOYSTICK);
-	Joystick rightJoystick = new Joystick(RobotMap.RIGHT_JOYSTICK);
-    Joystick gamePad = new Joystick(RobotMap.GAMEPAD);
-    Button buttonONE = new JoystickButton(gamePad, 1);
-    Button buttonTWO = new JoystickButton(gamePad, 2);
-    Button buttonTHREE = new JoystickButton(gamePad, 3);
-    Button buttonFOUR = new JoystickButton(gamePad, 4);
-    Button buttonSix = new JoystickButton(gamePad, RobotMap.CONTROLLER_B6);
-    Button buttonEight = new JoystickButton(gamePad, RobotMap.CONTROLLER_B8);
-    Button buttonNine = new JoystickButton(gamePad, RobotMap.CONTROLLER_B9);
-    Button leftTrigger = new JoystickButton(leftJoystick, RobotMap.TRIGGER_LEFT_JOYSTICK);
-    Button rightTrigger = new JoystickButton(rightJoystick, RobotMap.TRIGGER_RIGHT_JOYSTICK);
+	private Joystick leftJoystick;
+	private Joystick rightJoystick;
+	private Joystick gamePad;
+	private Button buttonONE;
+	private Button buttonTWO;
+	private Button buttonTHREE;
+	private Button buttonFOUR;
+	private Button buttonSix;
+	private Button buttonEight;
+	private Button buttonNine;
+	private Button leftTrigger;
+	private Button rightTrigger;
     
     public OI()
     {
+    	
+    	leftJoystick = new Joystick(RobotMap.LEFT_JOYSTICK);
+    	rightJoystick = new Joystick(RobotMap.RIGHT_JOYSTICK);
+    	gamePad = new Joystick(RobotMap.GAMEPAD);
+    	buttonONE = new JoystickButton(gamePad, 1);
+    	buttonTWO = new JoystickButton(gamePad, 2);
+    	buttonTHREE = new JoystickButton(gamePad, 3);
+    	buttonFOUR = new JoystickButton(gamePad, 4);
+    	buttonSix = new JoystickButton(gamePad, RobotMap.CONTROLLER_B6);
+    	buttonEight = new JoystickButton(gamePad, RobotMap.CONTROLLER_B8);
+    	buttonNine = new JoystickButton(gamePad, RobotMap.CONTROLLER_B9);
+    	leftTrigger = new JoystickButton(leftJoystick, RobotMap.TRIGGER_LEFT_JOYSTICK);
+    	rightTrigger = new JoystickButton(rightJoystick, RobotMap.TRIGGER_RIGHT_JOYSTICK);
+
+    	
     	buttonONE.whenPressed(new ElevatorCommand(1));
     	buttonTWO.whenPressed(new ElevatorCommand(2));
     	buttonTHREE.whenPressed(new ElevatorCommand(3));

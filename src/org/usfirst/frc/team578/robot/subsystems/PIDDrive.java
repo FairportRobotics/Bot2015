@@ -4,8 +4,6 @@ import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.ControlMode;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.livewindow.LiveWindowSendable;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class PIDDrive extends Subsystem {
@@ -15,7 +13,7 @@ public class PIDDrive extends Subsystem {
 	public PIDDrive()
 	{
 		talon = initializeTalon(1);
-		LiveWindow.addActuator("PIDDrive", "Talon", (LiveWindowSendable) talon);
+		//LiveWindow.addActuator("PIDDrive", "Talon", (LiveWindowSendable) talon);
 	}
 	
 	public void drive(double val)

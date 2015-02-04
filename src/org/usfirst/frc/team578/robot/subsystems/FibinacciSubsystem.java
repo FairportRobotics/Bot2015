@@ -7,14 +7,18 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class FibinacciSubsystem extends Subsystem {
 
-	private DigitalInput fibinacciSwitch = new DigitalInput(RobotMap.FIBINACCI_SWITCH);
-	private Relay fibinacci = new Relay(RobotMap.FIBINACCI_WHEEL);
+	private DigitalInput fibinacciSwitch;
+	private Relay fibinacciRelay;
 	private boolean extending = false;
 	
 	/**
 	 * Constructor for the subsystem.
 	 */
 	public FibinacciSubsystem() {
+		
+		fibinacciSwitch = new DigitalInput(RobotMap.FIBINACCI_SWITCH);
+		fibinacciRelay = new Relay(RobotMap.FIBINACCI_WHEEL);
+		
 		setDirection();
 	}
 	
@@ -32,7 +36,7 @@ public class FibinacciSubsystem extends Subsystem {
 	 * extending to true.
 	 */
 	public void extendFibinacci() {
-		fibinacci.set(Relay.Value.kOn);
+		fibinacciRelay.set(Relay.Value.kOn);
 		extending = true;
 	}
 	
@@ -48,7 +52,7 @@ public class FibinacciSubsystem extends Subsystem {
 	 * Has the direction set to forward.
 	 */
 	public void setDirection() {
-		fibinacci.setDirection(Relay.Direction.kForward);
+		fibinacciRelay.setDirection(Relay.Direction.kForward);
 	}
 	
 	/**
@@ -56,7 +60,7 @@ public class FibinacciSubsystem extends Subsystem {
 	 */
 	public void stopFibinacci() {
 		//MAY STOP IMMEDIATELY BE PREPARED TO ADD A DELAY
-		fibinacci.set(Relay.Value.kOff);
+		fibinacciRelay.set(Relay.Value.kOff);
 		extending = false;
 	}
 }

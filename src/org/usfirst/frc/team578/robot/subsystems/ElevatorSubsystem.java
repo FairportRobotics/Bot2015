@@ -11,20 +11,26 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class ElevatorSubsystem extends Subsystem {
 
 	//	DigitalInput levelOne = new DigitalInput(RobotMap.ELEVATOR_LEVEL_ONE_SWITCH);
-	DigitalInput levelTwo = new DigitalInput(RobotMap.ELEVATOR_LEVEL_TWO_SWITCH);
+	DigitalInput levelTwo;
 	//DigitalInput levelThree = new DigitalInput(RobotMap.ELEVATOR_LEVEL_THREE_SWITCH);
-	DigitalInput levelThree = levelTwo;
+	DigitalInput levelThree;
 	//	DigitalInput levelFour = new DigitalInput(RobotMap.ELEVATOR_LEVEL_FOUR_SWITCH);
-
+	
 	//Reverse limit switch is the top
 	//Forward limit switch is the bottom
 
-	CANTalon elevatorTalon = new CANTalon(RobotMap.ELEVATOR_TALON);
+	CANTalon elevatorTalon;
 
 	int currLevel = 1;
 
 	public ElevatorSubsystem() {
 		// TODO Auto-generated constructor stub
+		
+		levelTwo = new DigitalInput(RobotMap.ELEVATOR_LEVEL_TWO_SWITCH);
+		levelThree = levelTwo;
+		
+		elevatorTalon = new CANTalon(RobotMap.ELEVATOR_TALON);
+		
 		elevatorTalon.ConfigFwdLimitSwitchNormallyOpen(false);
 		elevatorTalon.ConfigRevLimitSwitchNormallyOpen(false);
 		elevatorTalon.changeControlMode(ControlMode.PercentVbus);

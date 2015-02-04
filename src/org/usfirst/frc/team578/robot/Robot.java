@@ -1,12 +1,12 @@
 package org.usfirst.frc.team578.robot;
 
 import org.usfirst.frc.team578.robot.commands.DriveCommand;
-import org.usfirst.frc.team578.robot.subsystems.DriveSubsystem;
 import org.usfirst.frc.team578.robot.subsystems.ElevatorSubsystem;
 import org.usfirst.frc.team578.robot.subsystems.FibinacciSubsystem;
 import org.usfirst.frc.team578.robot.subsystems.IntakeSubsystem;
 import org.usfirst.frc.team578.robot.subsystems.PIDDrive;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -45,6 +45,10 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
         autonomousCommand = new DriveCommand();
         startTime = System.currentTimeMillis();
+        
+        CameraServer server = CameraServer.getInstance();
+        server.setQuality(50);
+        server.startAutomaticCapture("cam0");
     }
 	
 	public void disabledPeriodic() {

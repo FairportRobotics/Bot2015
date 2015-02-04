@@ -5,19 +5,25 @@ import org.usfirst.frc.team578.robot.commands.DriveCommand;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.ControlMode;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
-import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class DriveSubsystem extends Subsystem {
 
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
-//	CANTalon frontLeftTalon = initializeTalon(RobotMap.FRONT_LEFT_TALON);
-//	CANTalon frontRightTalon = initializeTalon(RobotMap.FRONT_RIGHT_TALON);
-//	CANTalon backLeftTalon = initializeTalon(RobotMap.BACK_LEFT_TALON);
-//	CANTalon backRightTalon = initializeTalon(RobotMap.BACK_RIGHT_TALON);
-	RobotDrive robotDrive;
+//	CANTalon frontLeftTalon;
+//	CANTalon frontRightTalon;
+//	CANTalon backLeftTalon;
+//	CANTalon backRightTalon;
 
+	public DriveSubsystem()
+	{
+//		frontLeftTalon = initializeTalon(RobotMap.FRONT_LEFT_TALON);
+//		frontRightTalon = initializeTalon(RobotMap.FRONT_RIGHT_TALON);
+//		backLeftTalon = initializeTalon(RobotMap.BACK_LEFT_TALON);
+//		backRightTalon = initializeTalon(RobotMap.BACK_RIGHT_TALON);
+	}
+	
 	/**
 	 * 
 	 */
