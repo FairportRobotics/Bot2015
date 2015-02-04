@@ -10,7 +10,7 @@ public class IntakeSubsystem extends Subsystem {
 	private CANTalon rightIntakeTalon = new CANTalon(RobotMap.RIGHT_INTAKE_TALON);
 	
 	/**
-	 * 
+	 * Nothing Happening Here!
 	 */
 	@Override
 	protected void initDefaultCommand() {
@@ -18,7 +18,7 @@ public class IntakeSubsystem extends Subsystem {
 	}
 	
 	/**
-	 * 
+	 * The Speed of the intake Talons / wheels is being set!
 	 */
 	public void spinIntake() {
 		leftIntakeTalon.set(0.5);
@@ -26,7 +26,7 @@ public class IntakeSubsystem extends Subsystem {
 	}
 	
 	/**
-	 * 
+	 * The Speed of the output Talons / wheels is being set!
 	 */
 	public void spinOutput() {
 		leftIntakeTalon.set(-0.5);
@@ -34,10 +34,11 @@ public class IntakeSubsystem extends Subsystem {
 	}
 	
 	/**
-	 * 
+	 * Stops the Talons / wheels from spinning!
 	 */
 	public void spinStop() {
 		leftIntakeTalon.set(0);
 		rightIntakeTalon.set(0);
+		
 	}
 }

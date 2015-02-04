@@ -46,50 +46,6 @@ public class EjectTotesCommand extends Command {
 	 */
 	@Override
 	protected void execute() {
-		// TODO Auto-generated method stub
-
-		/*if (!running)
-		{
-			OI o = Robot.oi;
-			boolean start = o.getButtonNine() && (o.getButtonEight() || o.getButtonSix()) && (o.getLeftTrigger() || o.getRightTrigger());
-			
-			if (start)
-			{
-				running = true;
-				Robot.fibinacciSubsystem.extendFibinacci();
-			}
-		}*/
-		
-		
-		// writeLog2("readSwitch: " + Robot.fibinacciSubsystem.readSwitch() +
-		// " offSwitch: " + offSwitch + " running: " + running);
-		/*
-		 * writeLog2(getButtons());
-		 * 
-		 * if(running) { if(offSwitch&&Robot.fibinacciSubsystem.readSwitch()) {
-		 * Robot.fibinacciSubsystem.stopFibinacci(); offSwitch=false;
-		 * running=false; }else{
-		 * offSwitch=Robot.fibinacciSubsystem.readSwitch(); }
-		 * 
-		 * }else{ Robot.oi.getButtonSix().get();
-		 * Robot.oi.getButtonEight().get(); Robot.oi.getButtonNine().get();
-		 * Robot.oi.getRightTrigger().get(); Robot.oi.getLeftTrigger().get();
-		 * 
-		 * Robot.messenger.sendMessage(" 6: " + Robot.oi.getButtonSix().get() +
-		 * " 8: " + Robot.oi.getButtonEight().get() + " 9: " +
-		 * Robot.oi.getButtonNine().get() + " LTrigg: " +
-		 * Robot.oi.getLeftTrigger().get() + " RightTrigg: " +
-		 * Robot.oi.getRightTrigger().get());
-		 * 
-		 * if((Robot.oi.getButtonSix().get()||Robot.oi.getButtonEight().get())&&(
-		 * Robot
-		 * .oi.getRightTrigger().get()||Robot.oi.getLeftTrigger().get())&&Robot
-		 * .oi.getButtonNine().get()) {
-		 * Robot.fibinacciSubsystem.extendFibinacci(); offSwitch = false;
-		 * running = true; Robot.messenger.sendMessage("Extend"); }
-		 * 
-		 * }
-		 */
 		
 		if(running == true)
 		{

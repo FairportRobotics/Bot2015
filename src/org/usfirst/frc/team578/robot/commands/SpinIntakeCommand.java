@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class SpinIntakeCommand extends Command {
 
 	/**
-	 * 
+	 * Nothing Happening Here!
 	 */
 	@Override
 	protected void initialize() {
@@ -13,7 +13,7 @@ public class SpinIntakeCommand extends Command {
 	}
 
 	/**
-	 * 
+	 * The Class calls the subsystem and makes the wheels start spinning!
 	 */
 	@Override
 	protected void execute() {
@@ -21,7 +21,7 @@ public class SpinIntakeCommand extends Command {
 	}
 
 	/**
-	 * 
+	 * Returns true!
 	 */
 	@Override
 	protected boolean isFinished() {
@@ -30,7 +30,7 @@ public class SpinIntakeCommand extends Command {
 	}
 
 	/**
-	 * 
+	 * Stops the wheels from spinning!
 	 */
 	@Override
 	protected void end() {
@@ -38,7 +38,7 @@ public class SpinIntakeCommand extends Command {
 	}
 
 	/**
-	 * 
+	 * Nothing Happening Here!
 	 */
 	@Override
 	protected void interrupted() {
