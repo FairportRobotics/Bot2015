@@ -1,13 +1,16 @@
 package org.usfirst.frc.team578.robot;
 
-import edu.wpi.first.wpilibj.IterativeRobot; 
+import org.usfirst.frc.team578.robot.commands.DriveCommand;
+import org.usfirst.frc.team578.robot.subsystems.ElevatorSubsystem;
+import org.usfirst.frc.team578.robot.subsystems.FibinacciSubsystem;
+import org.usfirst.frc.team578.robot.subsystems.IntakeSubsystem;
+import org.usfirst.frc.team578.robot.subsystems.PIDDrive;
+
+import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-
-import org.usfirst.frc.team578.robot.commands.DriveCommand;
-import org.usfirst.frc.team578.robot.subsystems.DriveSubsystem;
-import org.usfirst.frc.team578.robot.subsystems.ElevatorSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -18,20 +21,34 @@ import org.usfirst.frc.team578.robot.subsystems.ElevatorSubsystem;
  */
 public class Robot extends IterativeRobot {
 
-	public static final DriveSubsystem driveSubsystem = new DriveSubsystem();
+	//public static final DriveSubsystem driveSubsystem = new DriveSubsystem();
+	public static final PIDDrive pidDrive = new PIDDrive();
 	public static final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
+	public static final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
+	public static final FibinacciSubsystem fibinacciSubsystem = new FibinacciSubsystem();
 	public static OI oi;
-
+	private static long startTime;
+	//public static Messenger messenger;
+	
     Command autonomousCommand;
 
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
+    public static long getElapsedTime()
+    {
+    	return (System.currentTimeMillis() - startTime) / 1000;
+    }
+    
     public void robotInit() {
 		oi = new OI();
-        // instantiate the command used for the autonomous period
         autonomousCommand = new DriveCommand();
+        startTime = System.currentTimeMillis();
+        
+        CameraServer server = CameraServer.getInstance();
+        server.setQuality(50);
+        server.startAutomaticCapture("cam0");
     }
 	
 	public void disabledPeriodic() {
