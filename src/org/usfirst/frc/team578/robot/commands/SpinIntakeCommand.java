@@ -34,7 +34,7 @@ public class SpinIntakeCommand extends Command {
 	 */
 	@Override
 	protected void end() {
-		Robot.intakeSubsystem.spinStop();
+
 	}
 
 	/**

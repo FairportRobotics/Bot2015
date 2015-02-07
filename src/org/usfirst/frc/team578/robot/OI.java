@@ -2,6 +2,8 @@ package org.usfirst.frc.team578.robot;
 
 import org.usfirst.frc.team578.robot.commands.EjectTotesCommand;
 import org.usfirst.frc.team578.robot.commands.ElevatorCommand;
+import org.usfirst.frc.team578.robot.commands.SpinIntakeCommand;
+import org.usfirst.frc.team578.robot.commands.SpinStopCommand;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -46,9 +48,11 @@ public class OI {
 	private Button buttonTWO;
 	private Button buttonTHREE;
 	private Button buttonFOUR;
-	private Button buttonSix;
-	private Button buttonEight;
-	private Button buttonNine;
+	private Button buttonFIVE;
+	private Button buttonSEVEN;
+	private Button buttonSIX;
+	private Button buttonEIGHT;
+	private Button buttonNINE;
 	private Button leftTrigger;
 	private Button rightTrigger;
     
@@ -62,19 +66,32 @@ public class OI {
     	buttonTWO = new JoystickButton(gamePad, 2);
     	buttonTHREE = new JoystickButton(gamePad, 3);
     	buttonFOUR = new JoystickButton(gamePad, 4);
-    	buttonSix = new JoystickButton(gamePad, RobotMap.CONTROLLER_B6);
-    	buttonEight = new JoystickButton(gamePad, RobotMap.CONTROLLER_B8);
-    	buttonNine = new JoystickButton(gamePad, RobotMap.CONTROLLER_B9);
+    	buttonFIVE = new JoystickButton(gamePad, 5);
+    	buttonSEVEN = new JoystickButton(gamePad, 7);
+    	buttonSIX = new JoystickButton(gamePad, RobotMap.CONTROLLER_B6);
+    	buttonEIGHT = new JoystickButton(gamePad, RobotMap.CONTROLLER_B8);
+    	buttonNINE = new JoystickButton(gamePad, RobotMap.CONTROLLER_B9);
     	leftTrigger = new JoystickButton(leftJoystick, RobotMap.TRIGGER_LEFT_JOYSTICK);
     	rightTrigger = new JoystickButton(rightJoystick, RobotMap.TRIGGER_RIGHT_JOYSTICK);
 
-    	
     	buttonONE.whenPressed(new ElevatorCommand(1));
     	buttonTWO.whenPressed(new ElevatorCommand(2));
     	buttonTHREE.whenPressed(new ElevatorCommand(3));
     	buttonFOUR.whenPressed(new ElevatorCommand(4));
     	
-    	buttonNine.whenPressed(new EjectTotesCommand());
+    	buttonFIVE.whenPressed(new SpinIntakeCommand());
+    	buttonSEVEN.whenPressed(new SpinIntakeCommand());
+    	
+    	buttonFIVE.whenReleased(new SpinStopCommand());
+    	buttonSEVEN.whenReleased(new SpinStopCommand());
+    	
+    	buttonSIX.whenPressed(new SpinIntakeCommand());
+    	buttonEIGHT.whenPressed(new SpinIntakeCommand());
+    	
+    	buttonSIX.whenPressed(new SpinIntakeCommand());
+    	buttonEIGHT.whenPressed(new SpinIntakeCommand());
+    	
+    	buttonNINE.whenPressed(new EjectTotesCommand());
     	//SmartDashboard.putString("ADA", "AODUA");
     }
 	
@@ -100,17 +117,17 @@ public class OI {
 	
 	public boolean getButtonSix()
 	{
-		return buttonSix.get();
+		return buttonSIX.get();
 	}
 	
 	public boolean getButtonEight()
 	{
-		return buttonEight.get();
+		return buttonEIGHT.get();
 	}
 	
 	public boolean getButtonNine()
 	{
-		return buttonNine.get();
+		return buttonNINE.get();
 	}
 	
 	public boolean getLeftTrigger()

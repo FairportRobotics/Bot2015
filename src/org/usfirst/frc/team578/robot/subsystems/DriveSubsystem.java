@@ -11,10 +11,10 @@ public class DriveSubsystem extends Subsystem {
 
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
-//	CANTalon frontLeftTalon;
-//	CANTalon frontRightTalon;
-//	CANTalon backLeftTalon;
-//	CANTalon backRightTalon;
+	CANTalon frontLeftTalon;
+	CANTalon frontRightTalon;
+	CANTalon backLeftTalon;
+	CANTalon backRightTalon;
 
 	public DriveSubsystem()
 	{
@@ -40,7 +40,7 @@ public class DriveSubsystem extends Subsystem {
 	 * @param rightX 	right joystick's x value
 	 * @param rightY 	right joystick's y value
 	 */
-	public void drive(double leftX, double leftY, double rightX, double rightY) {
+	public void driveJoysticks(double leftX, double leftY, double rightX, double rightY) {
 //		if (leftX < 0.3 && leftX > -0.3) {
 //			frontLeftTalon.set(-leftY);
 //			backLeftTalon.set(-leftY);
@@ -70,5 +70,12 @@ public class DriveSubsystem extends Subsystem {
 		talon.setPID(2, 0, 0, 0, 0, 10, 0);
 		talon.enableControl();
 		return talon;
+	}
+
+	public void driveMotors(double fr, double fl, double br, double bl) {
+		backLeftTalon.set(bl);
+		backRightTalon.set(br);
+		frontLeftTalon.set(fl);
+		frontRightTalon.set(fr);
 	}
 }
