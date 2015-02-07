@@ -9,7 +9,7 @@ public class SpinIntakeCommand extends Command {
 	 */
 	@Override
 	protected void initialize() {
-		// TODO Auto-generated method stub
+		
 	}
 
 	/**
@@ -25,7 +25,7 @@ public class SpinIntakeCommand extends Command {
 	 */
 	@Override
 	protected boolean isFinished() {
-		// TODO Auto-generated method stub
+		
 		return true;
 	}
 
@@ -42,6 +42,6 @@ public class SpinIntakeCommand extends Command {
 	 */
 	@Override
 	protected void interrupted() {
-		// TODO Auto-generated method stub
+		
 	}
 }

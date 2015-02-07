@@ -11,16 +11,26 @@ public class IntakeSubsystem extends Subsystem {
 	
 	public IntakeSubsystem()
 	{
-		//leftIntakeTalon = new CANTalon(RobotMap.LEFT_INTAKE_TALON);
-		//rightIntakeTalon = new CANTalon(RobotMap.RIGHT_INTAKE_TALON);
+		leftIntakeTalon = new CANTalon(RobotMap.LEFT_INTAKE_TALON);
+		rightIntakeTalon = new CANTalon(RobotMap.RIGHT_INTAKE_TALON);
 	}
+
 	
 	/**
 	 * Nothing Happening Here!
 	 */
 	@Override
 	protected void initDefaultCommand() {
-		// TODO Auto-generated method stub
+		
+	}
+	
+	/**
+	 * Gets the speed setting of the left intake Talon
+	 * @return the speed setting
+	 */
+	public double getSpeed()
+	{
+		return leftIntakeTalon.get();
 	}
 	
 	/**
@@ -45,6 +55,5 @@ public class IntakeSubsystem extends Subsystem {
 	public void spinStop() {
 		leftIntakeTalon.set(0);
 		rightIntakeTalon.set(0);
-		
 	}
 }

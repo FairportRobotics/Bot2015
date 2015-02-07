@@ -11,23 +11,26 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class ElevatorSubsystem extends Subsystem {
 
 	//	DigitalInput levelOne = new DigitalInput(RobotMap.ELEVATOR_LEVEL_ONE_SWITCH);
-	DigitalInput levelTwo;
+	private DigitalInput levelTwo;
 	//DigitalInput levelThree = new DigitalInput(RobotMap.ELEVATOR_LEVEL_THREE_SWITCH);
-	DigitalInput levelThree;
+	private DigitalInput levelThree;
 	//	DigitalInput levelFour = new DigitalInput(RobotMap.ELEVATOR_LEVEL_FOUR_SWITCH);
 
 	//Reverse limit switch is the top
 	//Forward limit switch is the bottom
 
-	CANTalon elevatorTalon;
+	private CANTalon elevatorTalon;
 
-	int currLevel = 1;
+	private int currLevel = 1;
 
-	public ElevatorSubsystem() {
-		// TODO Auto-generated constructor stub
-
+	/**
+	 * Constructs the subsystem, including 2 digital inputs for switches,
+	 * and the Talon for the elevator. 
+	 */
+	public ElevatorSubsystem() 
+	{
 		levelTwo = new DigitalInput(RobotMap.ELEVATOR_LEVEL_TWO_SWITCH);
-		levelThree = levelTwo;
+		levelThree = new DigitalInput(RobotMap.ELEVATOR_LEVEL_THREE_SWITCH);
 
 		elevatorTalon = new CANTalon(RobotMap.ELEVATOR_TALON);
 
@@ -36,6 +39,9 @@ public class ElevatorSubsystem extends Subsystem {
 		elevatorTalon.changeControlMode(ControlMode.PercentVbus);
 	}
 
+	/**
+	 * Writes the position of the elevator to the SmartDashboard
+	 */
 	public void writeStatus()
 	{
 		//		SmartDashboard.putBoolean("Fwd Closed", elevatorTalon.isFwdLimitSwitchClosed());
@@ -56,10 +62,18 @@ public class ElevatorSubsystem extends Subsystem {
 
 	}
 
+	/**
+	 * Gets the current position of the elevator (At switches)
+	 * @return
+	 */
 	public int getCurrentLevel(){
 		return currLevel;
 	}
 
+	/**
+	 * Sets the level of the elevator to a specific position (1-4)
+	 * @param level
+	 */
 	public void setLevel(int level) 
 	{
 		SmartDashboard.putNumber("Desired Level: ", level);

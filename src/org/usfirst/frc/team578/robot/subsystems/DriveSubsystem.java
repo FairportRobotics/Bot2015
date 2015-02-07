@@ -1,5 +1,6 @@
 package org.usfirst.frc.team578.robot.subsystems;
 
+import org.usfirst.frc.team578.robot.RobotMap;
 import org.usfirst.frc.team578.robot.commands.DriveCommand;
 
 import edu.wpi.first.wpilibj.CANTalon;
@@ -18,10 +19,10 @@ public class DriveSubsystem extends Subsystem {
 
 	public DriveSubsystem()
 	{
-//		frontLeftTalon = initializeTalon(RobotMap.FRONT_LEFT_TALON);
-//		frontRightTalon = initializeTalon(RobotMap.FRONT_RIGHT_TALON);
-//		backLeftTalon = initializeTalon(RobotMap.BACK_LEFT_TALON);
-//		backRightTalon = initializeTalon(RobotMap.BACK_RIGHT_TALON);
+		frontLeftTalon = initializeTalon(RobotMap.FRONT_LEFT_TALON);
+		frontRightTalon = initializeTalon(RobotMap.FRONT_RIGHT_TALON);
+		backLeftTalon = initializeTalon(RobotMap.BACK_LEFT_TALON);
+		backRightTalon = initializeTalon(RobotMap.BACK_RIGHT_TALON);
 	}
 	
 	/**
@@ -41,21 +42,21 @@ public class DriveSubsystem extends Subsystem {
 	 * @param rightY 	right joystick's y value
 	 */
 	public void driveJoysticks(double leftX, double leftY, double rightX, double rightY) {
-//		if (leftX < 0.3 && leftX > -0.3) {
-//			frontLeftTalon.set(-leftY);
-//			backLeftTalon.set(-leftY);
-//		} else {
-//			frontLeftTalon.set(leftX);
-//			backLeftTalon.set(-leftX);
-//		}
-//
-//		if (rightX < 0.3 && rightX > -0.3) {
-//			frontRightTalon.set(rightY);
-//			backRightTalon.set(rightY);
-//		} else {
-//			frontRightTalon.set(rightX);
-//			backRightTalon.set(-rightX);
-//		}
+		if (leftX < 0.3 && leftX > -0.3) {
+			frontLeftTalon.set(-leftY);
+			backLeftTalon.set(-leftY);
+		} else {
+			frontLeftTalon.set(leftX);
+			backLeftTalon.set(-leftX);
+		}
+
+		if (rightX < 0.3 && rightX > -0.3) {
+			frontRightTalon.set(rightY);
+			backRightTalon.set(rightY);
+		} else {
+			frontRightTalon.set(rightX);
+			backRightTalon.set(-rightX);
+		}
 	}
 
 	/**

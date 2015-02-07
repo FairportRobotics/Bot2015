@@ -36,7 +36,7 @@ public class EjectTotesCommand extends Command {
 	 */
 	@Override
 	protected void initialize() {
-		// TODO Auto-generated method stub
+		
 		running = false;
 		offSwitch = false;
 	}
@@ -46,7 +46,7 @@ public class EjectTotesCommand extends Command {
 	 */
 	@Override
 	protected void execute() {
-		// TODO Auto-generated method stub
+		
 
 		/*
 		 * 
@@ -88,7 +88,7 @@ public class EjectTotesCommand extends Command {
 	 */
 	@Override
 	protected boolean isFinished() {
-		// TODO Auto-generated method stub
+		
 		/*
 		 * boolean ret; if((!running)&&(!Robot.oi.getButtonNine().get())) { ret
 		 * = true; Robot.messenger.sendMessage("finish: true"); }else{ ret =
@@ -104,7 +104,7 @@ public class EjectTotesCommand extends Command {
 	 */
 	@Override
 	protected void end() {
-		// TODO Auto-generated method stub
+		
 		///////////////Robot.fibinacciSubsystem.stopFibinacci();
 		fibWasFalse = false;
 		offSwitch = false;
@@ -115,7 +115,7 @@ public class EjectTotesCommand extends Command {
 	 */
 	@Override
 	protected void interrupted() {
-		// TODO Auto-generated method stub
+		
 
 	}
 
@@ -130,7 +130,6 @@ public class EjectTotesCommand extends Command {
 		try {
 			sc = new Scanner(log);
 		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 
@@ -165,7 +164,6 @@ public class EjectTotesCommand extends Command {
 			fw.flush();
 			fw.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -186,7 +184,6 @@ public class EjectTotesCommand extends Command {
 					s += f.getName() + ": "
 							+ ((JoystickButton) f.get(oi)).get() + " ";
 				} catch (IllegalArgumentException | IllegalAccessException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}

@@ -17,6 +17,9 @@ public class RobotMap {
 	// public static int rangefinderPort = 1;
 	// public static int rangefinderModule = 1;
 
+	
+	//TODO: Remap and double check ALL values
+	
 	//DriveTrain talon ID's
 	public static final int BACK_LEFT_TALON = 5;
 	public static final int FRONT_LEFT_TALON = 7;

@@ -6,11 +6,11 @@ import edu.wpi.first.wpilibj.command.Command;
 public class DriveCommand extends Command {
 	
 	/**
-	 * 
+	 * Drives the robot based on inputs from the joysticks
 	 */
     public DriveCommand() {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.pidDrive);
+        requires(Robot.driveSubsystem);
     }
 
     /**
@@ -21,14 +21,11 @@ public class DriveCommand extends Command {
     protected void initialize() {
     }
 
-    /**
-     * 
-     */
     // Called repeatedly when this Command is scheduled to run
 	@Override
     protected void execute() {
-    	//Robot.driveSubsystem.drive(Robot.oi.getLeftStickY(), Robot.oi.getRightStickY(), Robot.oi.getLeftStickX(), Robot.oi.getRightStickX());
-		Robot.pidDrive.drive(Robot.oi.getLeftStickY());
+    	Robot.driveSubsystem.driveJoysticks(Robot.oi.getLeftStickY(), Robot.oi.getRightStickY(), Robot.oi.getLeftStickX(), Robot.oi.getRightStickX());
+		//Robot.pidDrive.drive(Robot.oi.getLeftStickY());
     }
 
     /**

@@ -9,6 +9,14 @@ public class AutonomousDriveCommand extends Command {
 	public final double fr,fl,br,bl;
 	private final double time;
 	
+	/**
+	 * Drives with the specified values for the specified period of time
+	 * @param fr
+	 * @param fl
+	 * @param br
+	 * @param bl
+	 * @param time drive time in seconds
+	 */
 	public AutonomousDriveCommand(double fr, double fl, double br, double bl, double time)
 	{
 		this.fr = fr;
@@ -20,13 +28,12 @@ public class AutonomousDriveCommand extends Command {
 
 	@Override
 	protected void initialize() {
-		// TODO Auto-generated method stub
+		
 
 	}
 
 	@Override
 	protected void execute() {
-		// TODO Auto-generated method stub
 		
 		Robot.driveSubsystem.driveMotors(fr,fl,br,bl);
 	}
@@ -43,7 +50,7 @@ public class AutonomousDriveCommand extends Command {
 
 	@Override
 	protected void interrupted() {
-		// TODO Auto-generated method stub
+		
 
 	}
 

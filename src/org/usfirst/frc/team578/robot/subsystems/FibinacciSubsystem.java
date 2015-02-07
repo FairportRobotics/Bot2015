@@ -3,13 +3,14 @@ import org.usfirst.frc.team578.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Relay;
+import edu.wpi.first.wpilibj.Relay.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class FibinacciSubsystem extends Subsystem {
 
 	private DigitalInput fibinacciSwitch;
 	private Relay fibinacciRelay;
-	private boolean extending = false;
+	//private boolean extending = false;
 	
 	/**
 	 * Constructor for the subsystem.
@@ -27,7 +28,6 @@ public class FibinacciSubsystem extends Subsystem {
 	 */
 	@Override
 	protected void initDefaultCommand() {
-		// TODO Auto-generated method stub
 
 	}
 	
@@ -37,7 +37,15 @@ public class FibinacciSubsystem extends Subsystem {
 	 */
 	public void extendFibinacci() {
 		fibinacciRelay.set(Relay.Value.kOn);
-		extending = true;
+	}
+	
+	/**
+	 * Gets the state of the fibinacci relay
+	 * @return current state
+	 */
+	public Value getFibinacciStatus()
+	{
+		return fibinacciRelay.get();
 	}
 	
 	/**
@@ -61,6 +69,5 @@ public class FibinacciSubsystem extends Subsystem {
 	public void stopFibinacci() {
 		//MAY STOP IMMEDIATELY BE PREPARED TO ADD A DELAY
 		fibinacciRelay.set(Relay.Value.kOff);
-		extending = false;
 	}
 }
