@@ -1,4 +1,4 @@
-package org.usfirst.frc.team578.robot.commands;
+package org.usfirst.frc.team578.robot.commands.autonomous;
 
 import org.usfirst.frc.team578.robot.Robot;
 
@@ -7,13 +7,15 @@ import edu.wpi.first.wpilibj.command.Command;
 public class AutonomousDriveCommand extends Command {
 	
 	public final double fr,fl,br,bl;
+	private final double time;
 	
-	public AutonomousDriveCommand(double fr, double fl, double br, double bl)
+	public AutonomousDriveCommand(double fr, double fl, double br, double bl, double time)
 	{
 		this.fr = fr;
 		this.fl = fl;
 		this.br = br;
 		this.bl = bl;
+		this.time = time;
 	}
 
 	@Override
@@ -31,14 +33,12 @@ public class AutonomousDriveCommand extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		// TODO Auto-generated method stub
-		return false;
+		return (timeSinceInitialized() >= time);
 	}
 
 	@Override
 	protected void end() {
-		// TODO Auto-generated method stub
-
+		Robot.driveSubsystem.driveMotors(0,0,0,0);
 	}
 
 	@Override
