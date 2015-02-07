@@ -15,7 +15,7 @@ public class ElevatorSubsystem extends Subsystem {
 	//DigitalInput levelThree = new DigitalInput(RobotMap.ELEVATOR_LEVEL_THREE_SWITCH);
 	DigitalInput levelThree;
 	//	DigitalInput levelFour = new DigitalInput(RobotMap.ELEVATOR_LEVEL_FOUR_SWITCH);
-	
+
 	//Reverse limit switch is the top
 	//Forward limit switch is the bottom
 
@@ -25,12 +25,12 @@ public class ElevatorSubsystem extends Subsystem {
 
 	public ElevatorSubsystem() {
 		// TODO Auto-generated constructor stub
-		
+
 		levelTwo = new DigitalInput(RobotMap.ELEVATOR_LEVEL_TWO_SWITCH);
 		levelThree = levelTwo;
-		
+
 		elevatorTalon = new CANTalon(RobotMap.ELEVATOR_TALON);
-		
+
 		elevatorTalon.ConfigFwdLimitSwitchNormallyOpen(false);
 		elevatorTalon.ConfigRevLimitSwitchNormallyOpen(false);
 		elevatorTalon.changeControlMode(ControlMode.PercentVbus);
@@ -38,9 +38,17 @@ public class ElevatorSubsystem extends Subsystem {
 
 	public void writeStatus()
 	{
-		SmartDashboard.putBoolean("Fwd Closed", elevatorTalon.isFwdLimitSwitchClosed());
-		SmartDashboard.putBoolean("Rev Closed", elevatorTalon.isRevLimitSwitchClosed());
-		SmartDashboard.putNumber("curr level", currLevel);
+		//		SmartDashboard.putBoolean("Fwd Closed", elevatorTalon.isFwdLimitSwitchClosed());
+		//		SmartDashboard.putBoolean("Rev Closed", elevatorTalon.isRevLimitSwitchClosed());
+		//		SmartDashboard.putNumber("curr level", currLevel);
+
+		switch (currLevel)
+		{
+		case 1: SmartDashboard.putString("Elevator Level", "1: BOTTOM"); break;
+		case 2: SmartDashboard.putString("Elevator Level", "2: LOW"); break;
+		case 3: SmartDashboard.putString("Elevator Level", "0: HIGH"); break;
+		case 4: SmartDashboard.putString("Elevator Level", "0: TOP"); break;
+		}
 	}
 
 	@Override

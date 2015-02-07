@@ -1,6 +1,9 @@
 package org.usfirst.frc.team578.robot;
 
-import org.usfirst.frc.team578.robot.commands.DriveCommand;
+import org.usfirst.frc.team578.robot.commands.autonomous.AutonomousCanGroup;
+import org.usfirst.frc.team578.robot.commands.autonomous.AutonomousDriveStraightGroup;
+import org.usfirst.frc.team578.robot.commands.autonomous.AutonomousStackGroup;
+import org.usfirst.frc.team578.robot.commands.autonomous.AutonomousToteGroup;
 import org.usfirst.frc.team578.robot.subsystems.DriveSubsystem;
 import org.usfirst.frc.team578.robot.subsystems.ElevatorSubsystem;
 import org.usfirst.frc.team578.robot.subsystems.FibinacciSubsystem;
@@ -12,6 +15,8 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -29,28 +34,39 @@ public class Robot extends IterativeRobot {
 	public static final FibinacciSubsystem fibinacciSubsystem = new FibinacciSubsystem();
 	public static OI oi;
 	private static long startTime;
-	//public static Messenger messenger;
 	
     Command autonomousCommand;
+    SendableChooser autonomousChooser;
 
-    /**
-     * This function is run when the robot is first started up and should be
-     * used for any initialization code.
-     */
+   
     public static long getElapsedTime()
     {
     	return (System.currentTimeMillis() - startTime) / 1000;
     }
     
+    /**
+     * This function is run when the robot is first started up and should be
+     * used for any initialization code.
+     */
     public void robotInit() {
 		oi = new OI();
-        autonomousCommand = new DriveCommand();
+		initializeAutonomousChooser();
+        
         startTime = System.currentTimeMillis();
         
         CameraServer server = CameraServer.getInstance();
         server.setQuality(50);
         server.startAutomaticCapture("cam0");
     }
+
+	private void initializeAutonomousChooser() {
+		autonomousChooser = new SendableChooser();
+        autonomousChooser.addDefault("Drive Straight", new AutonomousDriveStraightGroup());
+        autonomousChooser.addObject("Triple Stack", new AutonomousStackGroup());
+        autonomousChooser.addObject("Single Tote", new AutonomousToteGroup());
+        autonomousChooser.addObject("Single Can", new AutonomousCanGroup());
+        SmartDashboard.putData("Autonomous Strategy", autonomousChooser);
+	}
 	
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
@@ -58,6 +74,7 @@ public class Robot extends IterativeRobot {
 
     public void autonomousInit() {
         // schedule the autonomous command (example)
+    	autonomousCommand = (Command) autonomousChooser.getSelected();
         if (autonomousCommand != null) autonomousCommand.start();
     }
 
