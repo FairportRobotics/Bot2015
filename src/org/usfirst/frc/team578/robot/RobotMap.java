@@ -51,5 +51,5 @@ public class RobotMap {
 	//Intake ID's
 	public static final int LEFT_INTAKE_TALON = 6;
 	public static final int RIGHT_INTAKE_TALON = 2;
-	
+	public static final int TOTE_DETECTION_SENSOR = 1;
 }

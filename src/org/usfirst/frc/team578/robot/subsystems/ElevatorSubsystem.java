@@ -18,9 +18,10 @@ public class ElevatorSubsystem extends Subsystem {
 
 	//Reverse limit switch is the top
 	//Forward limit switch is the bottom
-
+	
 	CANTalon elevatorTalon;
-
+	
+	
 	int currLevel = 1;
 
 	public ElevatorSubsystem() {
@@ -34,6 +35,8 @@ public class ElevatorSubsystem extends Subsystem {
 		elevatorTalon.ConfigFwdLimitSwitchNormallyOpen(false);
 		elevatorTalon.ConfigRevLimitSwitchNormallyOpen(false);
 		elevatorTalon.changeControlMode(ControlMode.PercentVbus);
+		
+		
 	}
 
 	public void writeStatus()
@@ -65,7 +68,7 @@ public class ElevatorSubsystem extends Subsystem {
 		SmartDashboard.putNumber("Desired Level: ", level);
 
 		int offset = currLevel - level;
-
+		
 		if (offset > 0) {
 			elevatorTalon.set(0.5);
 		} else if (offset < 0) {

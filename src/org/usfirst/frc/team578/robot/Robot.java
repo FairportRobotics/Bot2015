@@ -9,6 +9,7 @@ import org.usfirst.frc.team578.robot.subsystems.ElevatorSubsystem;
 import org.usfirst.frc.team578.robot.subsystems.FibinacciSubsystem;
 import org.usfirst.frc.team578.robot.subsystems.IntakeSubsystem;
 import org.usfirst.frc.team578.robot.subsystems.PIDDrive;
+import org.usfirst.frc.team578.robot.subsystems.ToteDetectionSubsystem;
 
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -32,8 +33,10 @@ public class Robot extends IterativeRobot {
 	public static final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
 	public static final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
 	public static final FibinacciSubsystem fibinacciSubsystem = new FibinacciSubsystem();
+	public static final ToteDetectionSubsystem toteDetectionSubsystem = new ToteDetectionSubsystem();
 	public static OI oi;
 	private static long startTime;
+	
 	
     Command autonomousCommand;
     SendableChooser autonomousChooser;
