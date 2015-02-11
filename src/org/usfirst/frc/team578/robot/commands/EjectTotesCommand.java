@@ -1,26 +1,15 @@
 package org.usfirst.frc.team578.robot.commands;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.lang.reflect.Field;
-import java.util.Scanner;
 
-import org.usfirst.frc.team578.robot.OI;
 import org.usfirst.frc.team578.robot.Robot;
 
-import edu.wpi.first.wpilibj.buttons.Button;
-import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class EjectTotesCommand extends Command {
-	
-	private boolean fibWasFalse;
+
+	private boolean fibWasFalse = false;
 	private boolean running = false;
-	private boolean offSwitch;
-	private static File log = new File("/log.txt");
+	private boolean offSwitch = false;
 
 	/**
 	 * Gets the fibinacci subsystem and writes a log.
@@ -28,7 +17,6 @@ public class EjectTotesCommand extends Command {
 	public EjectTotesCommand() {
 		requires(Robot.fibinacciSubsystem);
 		// SmartDashboard.putString("Eject", "true!");
-		writeLog2("START");
 	}
 
 	/**
@@ -36,51 +24,48 @@ public class EjectTotesCommand extends Command {
 	 */
 	@Override
 	protected void initialize() {
-		
+
 		running = false;
 		offSwitch = false;
 	}
 
 	/**
-	 * 
+	 * Ejects the totes
 	 */
 	@Override
 	protected void execute() {
-		
 
 		/*
-		 * 
-		 * Has the fibinacci wheel stop after the beam from the sensor has been 
+		 * Has the fibinacci wheel stop after the beam from the sensor has been
 		 * broken twice.
 		 */
-		
-		if(running == true)
-		{
-			if(Robot.fibinacciSubsystem.readSwitch() == false)
-			{
-				if(fibWasFalse == true)
-				{
-						Robot.fibinacciSubsystem.stopFibinacci();
-						offSwitch = true;
+
+		SmartDashboard.putString("FIB SWITCH",
+				Robot.fibinacciSubsystem.readSwitch() + "");
+
+		// TYLER CODE
+		// if(!Robot.fibinacciSubsystem.readSwitch()){
+		// Robot.fibinacciSubsystem.extendFibinacci();
+		// }else{
+		// Robot.fibinacciSubsystem.stopFibinacci();
+		// }
+
+		if (running == true) {
+			if (Robot.fibinacciSubsystem.readSwitch() == false) {
+				if (fibWasFalse == true) {
+					Robot.fibinacciSubsystem.stopFibinacci();
+					running=false;
+					offSwitch = true;
 				}
-			}
-			else
-			{
+			} else {
 				fibWasFalse = true;
 			}
-		}
-		else
-		{
+		} else {
 			Robot.fibinacciSubsystem.extendFibinacci();
 			running = true;
 		}
 
-		SmartDashboard.putBoolean("Fibinacci Value", fibWasFalse);
-//		SmartDashboard.putString("ADOIA", "AOIHDA");
-//		
-//		if (Robot.fibinacciSubsystem.readSwitch()) {
-//			Robot.fibinacciSubsystem.extendFibinacci();
-//		}
+		// SmartDashboard.putBoolean("Fibinacci Value", fibWasFalse);
 	}
 
 	/**
@@ -88,15 +73,17 @@ public class EjectTotesCommand extends Command {
 	 */
 	@Override
 	protected boolean isFinished() {
-		
-		/*
-		 * boolean ret; if((!running)&&(!Robot.oi.getButtonNine().get())) { ret
-		 * = true; Robot.messenger.sendMessage("finish: true"); }else{ ret =
-		 * false; } return ret;
-		 */
 
-		return offSwitch;
+		boolean ret;
+		if ((!running) && (!Robot.oi.getButtonNine())) {
+			ret = true;
+			//Robot.messenger.sendMessage("finish: true");
+		} else {
+			ret = false;
+		}
+		return ret;
 
+		// return Robot.fibinacciSubsystem.readSwitch();
 	}
 
 	/**
@@ -104,8 +91,8 @@ public class EjectTotesCommand extends Command {
 	 */
 	@Override
 	protected void end() {
-		
-		///////////////Robot.fibinacciSubsystem.stopFibinacci();
+
+		// /////////////Robot.fibinacciSubsystem.stopFibinacci();
 		fibWasFalse = false;
 		offSwitch = false;
 	}
@@ -115,79 +102,78 @@ public class EjectTotesCommand extends Command {
 	 */
 	@Override
 	protected void interrupted() {
-		
 
 	}
 
-	/**
-	 * Writes a log so that we know what is wrong with the command.
-	 * @param message
-	 */
-	private void writeLog(String message) {
+	// /**
+	// * Writes a log so that we know what is wrong with the command.
+	// * @param message
+	// */
+	// private void writeLog(String message) {
+	//
+	// Scanner sc = null;
+	//
+	// try {
+	// sc = new Scanner(log);
+	// } catch (FileNotFoundException e1) {
+	// e1.printStackTrace();
+	// }
+	//
+	// String old = "";
+	// while (sc.hasNextLine()) {
+	// old += sc.nextLine() + "\n";
+	// }
+	//
+	// PrintWriter pw = null;
+	// try {
+	// //pw = new PrintWriter(log.getOutputStream());
+	// pw.write(old + "\n" + Robot.getElapsedTime() + " | " + message);
+	// } catch (Exception e) {
+	// e.printStackTrace();
+	// }
+	//
+	// pw.flush();
+	// pw.close();
+	// }
 
-		Scanner sc = null;
+	// /**
+	// * Writes a message on the file.
+	// * @param message
+	// */
+	// public void writeLog2(String message) {
+	// FileWriter fw = null;
+	//
+	// try {
+	// fw = new FileWriter("/log.txt", true);
+	//
+	// fw.write(Robot.getElapsedTime() + " | " + message + "\n");
+	// fw.flush();
+	// fw.close();
+	// } catch (IOException e) {
+	// e.printStackTrace();
+	// }
+	// }
 
-		try {
-			sc = new Scanner(log);
-		} catch (FileNotFoundException e1) {
-			e1.printStackTrace();
-		}
-
-		String old = "";
-		while (sc.hasNextLine()) {
-			old += sc.nextLine() + "\n";
-		}
-
-		PrintWriter pw = null;
-		try {
-			//pw = new PrintWriter(log.getOutputStream());
-			pw.write(old + "\n" + Robot.getElapsedTime() + " | " + message);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		pw.flush();
-		pw.close();
-	}
-
-	/**
-	 * Writes a message on the file.
-	 * @param message
-	 */
-	public void writeLog2(String message) {
-		FileWriter fw = null;
-
-		try {
-			fw = new FileWriter("/log.txt", true);
-
-			fw.write(Robot.getElapsedTime() + " | " + message + "\n");
-			fw.flush();
-			fw.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * It will look at all the buttons and say whether
-	 * the button is true are false and return it in a string.
-	 * @return
-	 */
-	public String getButtons() {
-		OI oi = Robot.oi;
-		String s = "";
-
-		for (Field f : oi.getClass().getDeclaredFields()) {
-			if (f.getType().equals(Button.class)) {
-				f.setAccessible(true);
-				try {
-					s += f.getName() + ": "
-							+ ((JoystickButton) f.get(oi)).get() + " ";
-				} catch (IllegalArgumentException | IllegalAccessException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		return s;
-	}
+	// /**
+	// * It will look at all the buttons and say whether
+	// * the button is true are false and return it in a string.
+	// * @return
+	// */
+	// public String getButtons() {
+	// OI oi = Robot.oi;
+	// String s = "";
+	//
+	// for (Field f : oi.getClass().getDeclaredFields()) {
+	// if (f.getType().equals(Button.class)) {
+	// f.setAccessible(true);
+	// try {
+	// s += f.getName() + ": "
+	// + ((JoystickButton) f.get(oi)).get() + " ";
+	// } catch (IllegalArgumentException | IllegalAccessException e) {
+	// e.printStackTrace();
+	// }
+	// }
+	// }
+	// return s;
+	// }
 }

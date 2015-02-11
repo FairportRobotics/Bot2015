@@ -35,7 +35,7 @@ public class AutonomousDriveCommand extends Command {
 	@Override
 	protected void execute() {
 		
-		Robot.driveSubsystem.driveMotors(fr,fl,br,bl);
+		//Robot.driveSubsystem.driveMotors(fr,fl,br,bl);
 	}
 
 	@Override
@@ -45,7 +45,7 @@ public class AutonomousDriveCommand extends Command {
 
 	@Override
 	protected void end() {
-		Robot.driveSubsystem.driveMotors(0,0,0,0);
+		//Robot.driveSubsystem.driveMotors(0,0,0,0);
 	}
 
 	@Override

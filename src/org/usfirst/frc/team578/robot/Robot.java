@@ -1,5 +1,8 @@
 package org.usfirst.frc.team578.robot;
 
+import java.io.File;
+import java.util.logging.Level;
+
 import org.usfirst.frc.team578.robot.commands.autonomous.AutonomousCanGroup;
 import org.usfirst.frc.team578.robot.commands.autonomous.AutonomousDriveStraightGroup;
 import org.usfirst.frc.team578.robot.commands.autonomous.AutonomousStackGroup;
@@ -8,6 +11,7 @@ import org.usfirst.frc.team578.robot.subsystems.DriveSubsystem;
 import org.usfirst.frc.team578.robot.subsystems.ElevatorSubsystem;
 import org.usfirst.frc.team578.robot.subsystems.FibinacciSubsystem;
 import org.usfirst.frc.team578.robot.subsystems.IntakeSubsystem;
+import org.usfirst.frc.team578.robot.subsystems.LoggingSubsystem;
 import org.usfirst.frc.team578.robot.subsystems.PIDDrive;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -26,17 +30,18 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends IterativeRobot {
 
-	public static final DriveSubsystem driveSubsystem = new DriveSubsystem();
-	public static final PIDDrive pidDrive = new PIDDrive();
-	public static final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
-	public static final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
-	public static final FibinacciSubsystem fibinacciSubsystem = new FibinacciSubsystem();
+	//public static DriveSubsystem driveSubsystem;
+	//public static PIDDrive pidDrive;
+	public static ElevatorSubsystem elevatorSubsystem;
+	public static IntakeSubsystem intakeSubsystem;
+	public static FibinacciSubsystem fibinacciSubsystem;
+	//public static LoggingSubsystem log;
 	public static OI oi;
 	private static long startTime;
 
-	Command autonomousCommand;
-	SendableChooser autonomousChooser;
-
+	private Command autonomousCommand;
+	private SendableChooser autonomousChooser;
+	private SendableChooser loggingLevelChooser;
 
 	public static long getElapsedTime()
 	{
@@ -48,18 +53,41 @@ public class Robot extends IterativeRobot {
 	 * used for any initialization code.
 	 */
 	public void robotInit() {
+		//log = new LoggingSubsystem(new File("/log.txt"));
+		
+		//log.write(Level.INFO, "ROBOT INITIALIZING...");	
+
+		//INIT SUBSYSTEMS
+		//driveSubsystem = new DriveSubsystem();
+		//pidDrive = new PIDDrive();
+		elevatorSubsystem = new ElevatorSubsystem();
+		intakeSubsystem = new IntakeSubsystem();
+		fibinacciSubsystem = new FibinacciSubsystem();
+		
 		oi = new OI();
 		initializeAutonomousChooser();
+		initializeDebugChooser();
 
 		startTime = System.currentTimeMillis();
 
+		//log.write(Level.INFO, "ROBOT INITIALIZATION COMPLETE!");
+
 		//Use for USB camera (maybe)
 		//CameraServer server = CameraServer.getInstance();
-//		if (server != null)
-//		{
-//			server.setQuality(50);
-//			server.startAutomaticCapture("cam0");
-//		}
+		//		if (server != null)
+		//		{
+		//			server.setQuality(50);
+		//			server.startAutomaticCapture("cam0");
+		//		}
+	}
+
+	private void initializeDebugChooser() {
+		loggingLevelChooser = new SendableChooser();
+		loggingLevelChooser.addDefault(Level.SEVERE.getName(), Level.SEVERE);
+		loggingLevelChooser.addObject(Level.WARNING.getName(), Level.WARNING);
+		loggingLevelChooser.addObject(Level.INFO.getName(), Level.INFO);
+		loggingLevelChooser.addObject(Level.CONFIG.getName(), Level.CONFIG);
+		SmartDashboard.putData("Logging Level", loggingLevelChooser);
 	}
 
 	private void initializeAutonomousChooser() {
@@ -69,6 +97,11 @@ public class Robot extends IterativeRobot {
 		autonomousChooser.addObject("Single Tote", new AutonomousToteGroup());
 		autonomousChooser.addObject("Single Can", new AutonomousCanGroup());
 		SmartDashboard.putData("Autonomous Strategy", autonomousChooser);
+	}
+	
+	public Level getLoggingLevel()
+	{
+		return (Level) loggingLevelChooser.getSelected();
 	}
 
 	public void disabledPeriodic() {

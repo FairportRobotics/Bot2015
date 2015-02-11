@@ -12,10 +12,10 @@ public class DriveSubsystem extends Subsystem {
 
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
-	CANTalon frontLeftTalon;
-	CANTalon frontRightTalon;
-	CANTalon backLeftTalon;
-	CANTalon backRightTalon;
+	private CANTalon frontLeftTalon;
+	private CANTalon frontRightTalon;
+	private CANTalon backLeftTalon;
+	private CANTalon backRightTalon;
 
 	public DriveSubsystem()
 	{
@@ -69,7 +69,7 @@ public class DriveSubsystem extends Subsystem {
 		talon.changeControlMode(ControlMode.Speed);
 		talon.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		talon.setPID(2, 0, 0, 0, 0, 10, 0);
-		talon.enableControl();
+		//talon.enableControl();
 		return talon;
 	}
 

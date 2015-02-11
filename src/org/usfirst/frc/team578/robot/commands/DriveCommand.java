@@ -1,6 +1,4 @@
 package org.usfirst.frc.team578.robot.commands;
-import org.usfirst.frc.team578.robot.Robot;
-
 import edu.wpi.first.wpilibj.command.Command;
 
 public class DriveCommand extends Command {
@@ -10,7 +8,7 @@ public class DriveCommand extends Command {
 	 */
     public DriveCommand() {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.driveSubsystem);
+        //requires(Robot.driveSubsystem);
     }
 
     /**
@@ -24,7 +22,7 @@ public class DriveCommand extends Command {
     // Called repeatedly when this Command is scheduled to run
 	@Override
     protected void execute() {
-    	Robot.driveSubsystem.driveJoysticks(Robot.oi.getLeftStickY(), Robot.oi.getRightStickY(), Robot.oi.getLeftStickX(), Robot.oi.getRightStickX());
+    	//Robot.driveSubsystem.driveJoysticks(Robot.oi.getLeftStickY(), Robot.oi.getRightStickY(), Robot.oi.getLeftStickX(), Robot.oi.getRightStickX());
 		//Robot.pidDrive.drive(Robot.oi.getLeftStickY());
     }
 

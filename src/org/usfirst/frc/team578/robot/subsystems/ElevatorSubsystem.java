@@ -34,8 +34,8 @@ public class ElevatorSubsystem extends Subsystem {
 
 		elevatorTalon = new CANTalon(RobotMap.ELEVATOR_TALON);
 
-		elevatorTalon.ConfigFwdLimitSwitchNormallyOpen(false);
-		elevatorTalon.ConfigRevLimitSwitchNormallyOpen(false);
+		//elevatorTalon.ConfigFwdLimitSwitchNormallyOpen(false);
+		//elevatorTalon.ConfigRevLimitSwitchNormallyOpen(false);
 		elevatorTalon.changeControlMode(ControlMode.PercentVbus);
 	}
 
@@ -48,12 +48,14 @@ public class ElevatorSubsystem extends Subsystem {
 		//		SmartDashboard.putBoolean("Rev Closed", elevatorTalon.isRevLimitSwitchClosed());
 		//		SmartDashboard.putNumber("curr level", currLevel);
 
+		SmartDashboard.putString("Limit", "Three:" + levelThree.get() + " Two:" + levelTwo.get());
+		
 		switch (currLevel)
 		{
 		case 1: SmartDashboard.putString("Elevator Level", "1: BOTTOM"); break;
 		case 2: SmartDashboard.putString("Elevator Level", "2: LOW"); break;
-		case 3: SmartDashboard.putString("Elevator Level", "0: HIGH"); break;
-		case 4: SmartDashboard.putString("Elevator Level", "0: TOP"); break;
+		case 3: SmartDashboard.putString("Elevator Level", "3: HIGH"); break;
+		case 4: SmartDashboard.putString("Elevator Level", "4: TOP"); break;
 		}
 	}
 
@@ -68,6 +70,22 @@ public class ElevatorSubsystem extends Subsystem {
 	 */
 	public int getCurrentLevel(){
 		return currLevel;
+	}
+
+	public void setLevelTest(int level)
+	{
+		if (level == 4)
+		{
+			elevatorTalon.set(0.5);
+		}
+		else if (level == 1)
+		{
+			elevatorTalon.set(-0.5);
+		}
+		else if (level == 2)
+		{
+			elevatorTalon.set(0);
+		}
 	}
 
 	/**
@@ -86,42 +104,66 @@ public class ElevatorSubsystem extends Subsystem {
 			elevatorTalon.set(-0.5);
 		}
 
-		if (!elevatorTalon.isFwdLimitSwitchClosed())
-		{
-			currLevel = 1;
-
-			if (level == 1)
-			{
+//		if (elevatorTalon.isFwdLimitSwitchClosed())
+//		{
+//			if (level == 1)
+//			{
+//				elevatorTalon.set(0);
+//				currLevel = 1;
+//			}
+//		}
+//		else if (!levelTwo.get()) 
+//		{
+//			
+//			if (level == 2) 
+//			{
+//				elevatorTalon.set(0);
+//				currLevel = 2;
+//			}
+//		} 
+//		else if (!levelThree.get()) 
+//		{
+//			
+//
+//			if (level == 3) 
+//			{
+//				elevatorTalon.set(0);
+//				currLevel = 3;
+//			}
+//		} 
+//		else if (elevatorTalon.isRevLimitSwitchClosed())
+//		{
+//
+//			if (level == 4)
+//			{
+//				elevatorTalon.set(0);
+//				currLevel = 4;
+//			}
+//		}
+		
+		if(level == 1){
+			if(!elevatorTalon.isRevLimitSwitchClosed()){
 				elevatorTalon.set(0);
+				currLevel = 1;
+			}
+		}else if(level == 2){
+			if(levelTwo.get()){
+				elevatorTalon.set(0);
+				currLevel = 2;
+			}
+		}else if(level == 3){
+			if(levelThree.get()){
+				elevatorTalon.set(0);
+				currLevel = 3;
+			}
+		}else if(level == 4){
+			if(!elevatorTalon.isFwdLimitSwitchClosed()){
+				elevatorTalon.set(0);
+				currLevel = 4;
 			}
 		}
-		else if (!levelTwo.get()) 
-		{
-			currLevel = 2;
-
-			if (level == 2) 
-			{
-				elevatorTalon.set(0);
-			}
-		} 
-		else if (!levelThree.get()) 
-		{
-			currLevel = 3;
-
-			if (level == 3) 
-			{
-				elevatorTalon.set(0);
-			}
-		} 
-		else if (!elevatorTalon.isRevLimitSwitchClosed())
-		{
-			currLevel = 4;
-
-			if (level == 4)
-			{
-				elevatorTalon.set(0);
-			}
-		}
+		
+		
 	}
 
 }

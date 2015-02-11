@@ -21,12 +21,11 @@ public class RobotMap {
 	//TODO: Remap and double check ALL values
 	
 	//DriveTrain talon ID's
-	public static final int BACK_LEFT_TALON = 5;
-	public static final int FRONT_LEFT_TALON = 7;
+	public static final int BACK_LEFT_TALON = 16;
+	public static final int FRONT_LEFT_TALON = 13;
 	public static final int BACK_RIGHT_TALON = 1;
-	public static final int FRONT_RIGHT_TALON = 4;
+	public static final int FRONT_RIGHT_TALON = 3;
 	// public static final int JOYSTICK=0;
-	
 	
 	//Driver Input ID's
 	public static final int LEFT_JOYSTICK = 1;
@@ -40,19 +39,18 @@ public class RobotMap {
 	public static final int GAMEPAD = 0;
 	
 	//Elevator ID's
-	public static final int ELEVATOR_TALON = 1;
-	public static final int ELEVATOR_LEVEL_ONE_SWITCH = 1;
-	public static final int ELEVATOR_LEVEL_TWO_SWITCH = 1;
-	public static final int ELEVATOR_LEVEL_THREE_SWITCH = 2;
-	public static final int ELEVATOR_LEVEL_FOUR_SWITCH = 4;
+	public static final int ELEVATOR_TALON = 15; //<---- Correct
+	public static final int ELEVATOR_LEVEL_TWO_SWITCH = 8;
+	public static final int ELEVATOR_LEVEL_THREE_SWITCH = 9;
 	
 	//Fibinacci Wheel ID's
 	public static final int FIBINACCI_WHEEL = 0;
 	
-	public static final int FIBINACCI_SWITCH = 0;
+	public static final int FIBINACCI_SWITCH = 1;
 
 	//Intake ID's
-	public static final int LEFT_INTAKE_TALON = 6;
-	public static final int RIGHT_INTAKE_TALON = 2;
+	public static final int LEFT_INTAKE_TALON = 14;
+	public static final int RIGHT_INTAKE_TALON = 2;	
 	
+	public static final int TOTE_SENSOR = 0;
 }

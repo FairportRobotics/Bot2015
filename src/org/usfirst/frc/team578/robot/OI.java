@@ -2,6 +2,7 @@ package org.usfirst.frc.team578.robot;
 
 import org.usfirst.frc.team578.robot.commands.EjectTotesCommand;
 import org.usfirst.frc.team578.robot.commands.ElevatorCommand;
+import org.usfirst.frc.team578.robot.commands.SpinEjectCommand;
 import org.usfirst.frc.team578.robot.commands.SpinIntakeCommand;
 import org.usfirst.frc.team578.robot.commands.SpinStopCommand;
 
@@ -85,11 +86,11 @@ public class OI {
     	buttonFIVE.whenReleased(new SpinStopCommand());
     	buttonSEVEN.whenReleased(new SpinStopCommand());
     	
-    	buttonSIX.whenPressed(new SpinIntakeCommand());
-    	buttonEIGHT.whenPressed(new SpinIntakeCommand());
+    	buttonSIX.whenPressed(new SpinEjectCommand());
+    	buttonEIGHT.whenPressed(new SpinEjectCommand());
     	
-    	buttonSIX.whenPressed(new SpinIntakeCommand());
-    	buttonEIGHT.whenPressed(new SpinIntakeCommand());
+    	buttonSIX.whenReleased(new SpinStopCommand());
+    	buttonEIGHT.whenReleased(new SpinStopCommand());
     	
     	buttonNINE.whenPressed(new EjectTotesCommand());
     	//SmartDashboard.putString("ADA", "AODUA");

@@ -41,7 +41,8 @@ public class ElevatorCommand extends Command {
 	protected boolean isFinished() {
 		
 		//SmartDashboard.putBoolean("isFinished", Robot.elevatorSubsystem.getCurrentLevel() == desiredPosition);
-		return Robot.elevatorSubsystem.getCurrentLevel() == desiredPosition;
+		//return Robot.elevatorSubsystem.getCurrentLevel() == desiredPosition;
+		return false;
 	}
 
 	/**
@@ -50,7 +51,7 @@ public class ElevatorCommand extends Command {
 	@Override
 	protected void end() {
 		
-		Robot.elevatorSubsystem.writeStatus();
+		//Robot.elevatorSubsystem.writeStatus();
 
 	}
 

@@ -1,9 +1,13 @@
-package org.usfirst.frc.team578.robot.commands.autonomous;
+package org.usfirst.frc.team578.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class AutonomousIntakeCommand extends Command {
+public class LogCommand extends Command{
 
+	public LogCommand() {
+		
+	}
+	
 	@Override
 	protected void initialize() {
 		
@@ -11,7 +15,7 @@ public class AutonomousIntakeCommand extends Command {
 
 	@Override
 	protected void execute() {
-		//Robot.intakeSubsystem.spinIntake();
+		
 	}
 
 	@Override
@@ -26,7 +30,7 @@ public class AutonomousIntakeCommand extends Command {
 
 	@Override
 	protected void interrupted() {
-
+		
 	}
 
 }

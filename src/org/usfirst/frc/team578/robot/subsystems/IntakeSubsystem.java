@@ -37,16 +37,16 @@ public class IntakeSubsystem extends Subsystem {
 	 * The Speed of the intake Talons / wheels is being set!
 	 */
 	public void spinIntake() {
-		leftIntakeTalon.set(0.5);
-		rightIntakeTalon.set(0.5);
+		leftIntakeTalon.set(1);
+		rightIntakeTalon.set(-1);
 	}
 	
 	/**
 	 * The Speed of the output Talons / wheels is being set!
 	 */
 	public void spinOutput() {
-		leftIntakeTalon.set(-0.5);
-		rightIntakeTalon.set(-0.5);
+		leftIntakeTalon.set(-1);
+		rightIntakeTalon.set(1);
 	}
 	
 	/**

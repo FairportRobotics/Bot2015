@@ -1,5 +1,6 @@
 package org.usfirst.frc.team578.robot.commands;
 import org.usfirst.frc.team578.robot.Robot;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 public class SpinIntakeCommand extends Command {
@@ -25,7 +26,6 @@ public class SpinIntakeCommand extends Command {
 	 */
 	@Override
 	protected boolean isFinished() {
-		
 		return true;
 	}
 
