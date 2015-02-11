@@ -56,6 +56,14 @@ public class OI {
 	private Button buttonNINE;
 	private Button leftTrigger;
 	private Button rightTrigger;
+	private Button rightButtonSIX;
+	private Button rightButtonFOUR;
+	private Button leftButtonSIX;
+	private Button leftButtonFOUR;
+	private Button rightButtonFIVE;
+	private Button rightButtonTHREE;
+	private Button leftButtonFIVE;
+	private Button leftButtonTHREE;
     
     public OI()
     {
@@ -74,11 +82,20 @@ public class OI {
     	buttonNINE = new JoystickButton(gamePad, RobotMap.CONTROLLER_B9);
     	leftTrigger = new JoystickButton(leftJoystick, RobotMap.TRIGGER_LEFT_JOYSTICK);
     	rightTrigger = new JoystickButton(rightJoystick, RobotMap.TRIGGER_RIGHT_JOYSTICK);
-
+    	rightButtonSIX = new JoystickButton(rightJoystick, RobotMap.JOG_RIGHT_UPPER_JOYSTICK);
+    	rightButtonFOUR = new JoystickButton(rightJoystick, RobotMap.JOG_RIGHT_LOWER_JOYSTICK);
+    	leftButtonSIX = new JoystickButton(leftJoystick, RobotMap.JOG_RIGHT_UPPER_JOYSTICK);
+    	leftButtonFOUR = new JoystickButton(leftJoystick, RobotMap.JOG_RIGHT_LOWER_JOYSTICK);
+    	rightButtonFIVE = new JoystickButton(rightJoystick, RobotMap.JOG_LEFT_UPPER_JOYSTICK);
+    	rightButtonTHREE = new JoystickButton(rightJoystick, RobotMap.JOG_LEFT_LOWER_JOYSTICK);
+    	leftButtonFIVE = new JoystickButton(leftJoystick, RobotMap.JOG_LEFT_UPPER_JOYSTICK);
+    	leftButtonTHREE = new JoystickButton(leftJoystick, RobotMap.JOG_LEFT_LOWER_JOYSTICK);
+    	
     	buttonONE.whenPressed(new ElevatorCommand(1));
     	buttonTWO.whenPressed(new ElevatorCommand(2));
     	buttonTHREE.whenPressed(new ElevatorCommand(3));
     	buttonFOUR.whenPressed(new ElevatorCommand(4));
+    	
     	
     	buttonFIVE.whenPressed(new SpinIntakeCommand());
     	buttonSEVEN.whenPressed(new SpinIntakeCommand());

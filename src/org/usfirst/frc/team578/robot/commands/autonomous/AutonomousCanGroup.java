@@ -14,7 +14,9 @@ public class AutonomousCanGroup extends CommandGroup {
 		addSequential(new SpinStopCommand());
 		addSequential(new ElevatorCommand(4));
 		addSequential(new ElevatorCommand(1));
-		addSequential(new AutonomousDriveCommand( .5, .5, .5, .5, 4));
+		addSequential(new AutonomousDriveCommand( -.5, -.5, -.5, -.5, 1));
+		addSequential(new AutonomousDriveCommand( .5, -.5, .5, -.5, 1));
+		addSequential(new AutonomousDriveCommand(.5, .5, .5, .5, 4));
 	}
 
 }
