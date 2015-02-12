@@ -1,5 +1,8 @@
 package org.usfirst.frc.team578.robot;
 
+import java.io.File;
+import java.util.logging.Level;
+
 import org.usfirst.frc.team578.robot.commands.autonomous.AutonomousCanGroup;
 import org.usfirst.frc.team578.robot.commands.autonomous.AutonomousDriveStraightGroup;
 import org.usfirst.frc.team578.robot.commands.autonomous.AutonomousStackGroup;
@@ -8,7 +11,9 @@ import org.usfirst.frc.team578.robot.subsystems.DriveSubsystem;
 import org.usfirst.frc.team578.robot.subsystems.ElevatorSubsystem;
 import org.usfirst.frc.team578.robot.subsystems.FibinacciSubsystem;
 import org.usfirst.frc.team578.robot.subsystems.IntakeSubsystem;
+import org.usfirst.frc.team578.robot.subsystems.LoggingSubsystem;
 import org.usfirst.frc.team578.robot.subsystems.PIDDrive;
+import org.usfirst.frc.team578.robot.subsystems.ToteDetectionSubsystem;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -26,17 +31,22 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends IterativeRobot {
 
-	public static final DriveSubsystem driveSubsystem = new DriveSubsystem();
-	public static final PIDDrive pidDrive = new PIDDrive();
-	public static final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
-	public static final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
-	public static final FibinacciSubsystem fibinacciSubsystem = new FibinacciSubsystem();
+	//Read about disabling a subsystem in the robotInit() method! You
+	//likely do not need to comment out a subsystem here.
+	public static DriveSubsystem driveSubsystem;
+	public static ElevatorSubsystem elevatorSubsystem;
+	public static IntakeSubsystem intakeSubsystem;
+	public static FibinacciSubsystem fibinacciSubsystem;
+	public static LoggingSubsystem log;
+	public static ToteDetectionSubsystem toteDetectionSubsystem;
+	public static PIDDrive pid;
+	//
 	public static OI oi;
 	private static long startTime;
 
-	Command autonomousCommand;
-	SendableChooser autonomousChooser;
-
+	private Command autonomousCommand;
+	private SendableChooser autonomousChooser;
+	private SendableChooser loggingLevelChooser;
 
 	public static long getElapsedTime()
 	{
@@ -45,23 +55,62 @@ public class Robot extends IterativeRobot {
 
 	/**
 	 * This function is run when the robot is first started up and should be
-	 * used for any initialization code.
+	 * used for any initialization code. 
+	 * 
+	 * Initializes subsystems and SmartDashboard SendableChoosers.
 	 */
 	public void robotInit() {
+		//Log has no robot references, no need to disable currently. (As of 2/11/15)
+		log = new LoggingSubsystem(new File("/log.txt"));
+		log.write(Level.INFO, "ROBOT INITIALIZING...");	
+
+		//INIT ROBOT SUBSYSTEMS
+
+		/*
+		 * **** READ: IMPORTANT NOTICE! ****
+		 * 
+		 * TO DISABLE A SUBSYSTEM, SET  false  IN THE CONSTRUCTOR.
+		 * YOU NO LONGER NEED TO COMMENT OUT ALL USAGES!
+		 * A DISABLED SUBSYSTEM WILL NOT INITIALIZE COMPONENTS.
+		 * SUBSYSTEM METHODS WILL RETURN EARLY IF NOT ENABLED.
+		 * SEE SUBSYSTEM METHOD JAVADOCS FOR SPECIFIC INSTANCE IMPLICATIONS.
+		 *	
+		 */
+		driveSubsystem = new DriveSubsystem(false);
+		elevatorSubsystem = new ElevatorSubsystem(true);
+		intakeSubsystem = new IntakeSubsystem(true);
+		fibinacciSubsystem = new FibinacciSubsystem(true);
+		toteDetectionSubsystem = new ToteDetectionSubsystem(true);
+		
+		pid = new PIDDrive();
+
+		//END SUBSYSTEMS
+		//OTHER INIT
+		
 		oi = new OI();
 		initializeAutonomousChooser();
+		initializeDebugChooser();
 
 		startTime = System.currentTimeMillis();
 
-		System.out.println("TEST");
-		
+		log.write(Level.INFO, "ROBOT INITIALIZATION COMPLETE!");
+
 		//Use for USB camera (maybe)
 		//CameraServer server = CameraServer.getInstance();
-//		if (server != null)
-//		{
-//			server.setQuality(50);
-//			server.startAutomaticCapture("cam0");
-//		}
+		//		if (server != null)
+		//		{
+		//			server.setQuality(50);
+		//			server.startAutomaticCapture("cam0");
+		//		}
+	}
+
+	private void initializeDebugChooser() {
+		loggingLevelChooser = new SendableChooser();
+		loggingLevelChooser.addDefault(Level.SEVERE.getName(), Level.SEVERE);
+		loggingLevelChooser.addObject(Level.WARNING.getName(), Level.WARNING);
+		loggingLevelChooser.addObject(Level.INFO.getName(), Level.INFO);
+		loggingLevelChooser.addObject(Level.CONFIG.getName(), Level.CONFIG);
+		SmartDashboard.putData("Logging Level", loggingLevelChooser);
 	}
 
 	private void initializeAutonomousChooser() {
@@ -71,6 +120,11 @@ public class Robot extends IterativeRobot {
 		autonomousChooser.addObject("Single Tote", new AutonomousToteGroup());
 		autonomousChooser.addObject("Single Can", new AutonomousCanGroup());
 		SmartDashboard.putData("Autonomous Strategy", autonomousChooser);
+	}
+
+	public Level getLoggingLevel()
+	{
+		return (Level) loggingLevelChooser.getSelected();
 	}
 
 	public void disabledPeriodic() {

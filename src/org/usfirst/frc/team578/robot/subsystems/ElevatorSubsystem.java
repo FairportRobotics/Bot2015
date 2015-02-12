@@ -10,11 +10,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class ElevatorSubsystem extends Subsystem {
 
-	//	DigitalInput levelOne = new DigitalInput(RobotMap.ELEVATOR_LEVEL_ONE_SWITCH);
+	//	DigitalInput levelOne
 	private DigitalInput levelTwo;
-	//DigitalInput levelThree = new DigitalInput(RobotMap.ELEVATOR_LEVEL_THREE_SWITCH);
+	//DigitalInput levelThree
 	private DigitalInput levelThree;
-	//	DigitalInput levelFour = new DigitalInput(RobotMap.ELEVATOR_LEVEL_FOUR_SWITCH);
+	//	DigitalInput levelFour
 
 	//Reverse limit switch is the top
 	//Forward limit switch is the bottom
@@ -23,12 +23,19 @@ public class ElevatorSubsystem extends Subsystem {
 
 	private int currLevel = 1;
 
+	public final boolean enabled;
+
 	/**
 	 * Constructs the subsystem, including 2 digital inputs for switches,
 	 * and the Talon for the elevator. 
 	 */
-	public ElevatorSubsystem() 
+	public ElevatorSubsystem(boolean enable) 
 	{
+		this.enabled = enable;
+
+		if (!enabled)
+			return;
+
 		levelTwo = new DigitalInput(RobotMap.ELEVATOR_LEVEL_TWO_SWITCH);
 		levelThree = new DigitalInput(RobotMap.ELEVATOR_LEVEL_THREE_SWITCH);
 
@@ -44,12 +51,15 @@ public class ElevatorSubsystem extends Subsystem {
 	 */
 	public void writeStatus()
 	{
+		if (!enabled)
+			return;
+
 		//		SmartDashboard.putBoolean("Fwd Closed", elevatorTalon.isFwdLimitSwitchClosed());
 		//		SmartDashboard.putBoolean("Rev Closed", elevatorTalon.isRevLimitSwitchClosed());
 		//		SmartDashboard.putNumber("curr level", currLevel);
 
 		SmartDashboard.putString("Limit", "Three:" + levelThree.get() + " Two:" + levelTwo.get());
-		
+
 		switch (currLevel)
 		{
 		case 1: SmartDashboard.putString("Elevator Level", "1: BOTTOM"); break;
@@ -74,6 +84,9 @@ public class ElevatorSubsystem extends Subsystem {
 
 	public void setLevelTest(int level)
 	{
+		if (!enabled)
+			return;
+
 		if (level == 4)
 		{
 			elevatorTalon.set(0.5);
@@ -94,6 +107,9 @@ public class ElevatorSubsystem extends Subsystem {
 	 */
 	public void setLevel(int level) 
 	{
+		if (!enabled)
+			return;
+
 		SmartDashboard.putNumber("Desired Level: ", level);
 
 		int offset = currLevel - level;
@@ -104,45 +120,45 @@ public class ElevatorSubsystem extends Subsystem {
 			elevatorTalon.set(-0.5);
 		}
 
-//		if (elevatorTalon.isFwdLimitSwitchClosed())
-//		{
-//			if (level == 1)
-//			{
-//				elevatorTalon.set(0);
-//				currLevel = 1;
-//			}
-//		}
-//		else if (!levelTwo.get()) 
-//		{
-//			
-//			if (level == 2) 
-//			{
-//				elevatorTalon.set(0);
-//				currLevel = 2;
-//			}
-//		} 
-//		else if (!levelThree.get()) 
-//		{
-//			
-//
-//			if (level == 3) 
-//			{
-//				elevatorTalon.set(0);
-//				currLevel = 3;
-//			}
-//		} 
-//		else if (elevatorTalon.isRevLimitSwitchClosed())
-//		{
-//
-//			if (level == 4)
-//			{
-//				elevatorTalon.set(0);
-//				currLevel = 4;
-//			}
-//		}
-		
+		//		if (elevatorTalon.isFwdLimitSwitchClosed())
+		//		{
+		//			if (level == 1)
+		//			{
+		//				elevatorTalon.set(0);
+		//				currLevel = 1;
+		//			}
+		//		}
+		//		else if (!levelTwo.get()) 
+		//		{
+		//			
+		//			if (level == 2) 
+		//			{
+		//				elevatorTalon.set(0);
+		//				currLevel = 2;
+		//			}
+		//		} 
+		//		else if (!levelThree.get()) 
+		//		{
+		//			
+		//
+		//			if (level == 3) 
+		//			{
+		//				elevatorTalon.set(0);
+		//				currLevel = 3;
+		//			}
+		//		} 
+		//		else if (elevatorTalon.isRevLimitSwitchClosed())
+		//		{
+		//
+		//			if (level == 4)
+		//			{
+		//				elevatorTalon.set(0);
+		//				currLevel = 4;
+		//			}
+		//		}
+
 		if(level == 1){
-			if(!elevatorTalon.isRevLimitSwitchClosed()){
+			if(!elevatorTalon.isFwdLimitSwitchClosed()){
 				elevatorTalon.set(0);
 				currLevel = 1;
 			}
@@ -157,13 +173,10 @@ public class ElevatorSubsystem extends Subsystem {
 				currLevel = 3;
 			}
 		}else if(level == 4){
-			if(!elevatorTalon.isFwdLimitSwitchClosed()){
+			if(!elevatorTalon.isRevLimitSwitchClosed()){
 				elevatorTalon.set(0);
 				currLevel = 4;
 			}
 		}
-		
-		
 	}
-
 }

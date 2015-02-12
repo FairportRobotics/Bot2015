@@ -7,26 +7,32 @@ import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.ControlMode;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DriveSubsystem extends Subsystem {
 
-	// Put methods for controlling this subsystem
-	// here. Call these from Commands.
 	private CANTalon frontLeftTalon;
 	private CANTalon frontRightTalon;
 	private CANTalon backLeftTalon;
 	private CANTalon backRightTalon;
+	public final boolean enabled;
 
-	public DriveSubsystem()
+	public DriveSubsystem(boolean enable)
 	{
+		this.enabled = enable;
+
+		if (!enabled)
+			return;
+
 		frontLeftTalon = initializeTalon(RobotMap.FRONT_LEFT_TALON);
 		frontRightTalon = initializeTalon(RobotMap.FRONT_RIGHT_TALON);
 		backLeftTalon = initializeTalon(RobotMap.BACK_LEFT_TALON);
 		backRightTalon = initializeTalon(RobotMap.BACK_RIGHT_TALON);
 	}
-	
+
 	/**
-	 *  Beings the driving of the robot.
+	 *  Sets the default command to the DriveCommand, so that it will respond
+	 *  to joystick input at any time during Teleop.
 	 */
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
@@ -34,7 +40,29 @@ public class DriveSubsystem extends Subsystem {
 		setDefaultCommand(new DriveCommand());
 	}
 
+	public void writeStatus()
+	{
+		if (!enabled)
+			return;
+
+		SmartDashboard.putString("BackLeft", backLeftTalon.getSpeed() + " " + backLeftTalon.getEncVelocity());
+		SmartDashboard.putString("BackRight", backRightTalon.getSpeed() + " " + backRightTalon.getEncVelocity());
+		SmartDashboard.putString("FrontLeft", frontLeftTalon.getSpeed() + " " + frontLeftTalon.getEncVelocity());
+		SmartDashboard.putString("FrontRight", frontRightTalon.getSpeed() + " " + frontRightTalon.getEncVelocity());
+
+	}
+
 	/**
+	 * <p>
+	 * Drives the robot using joystick input values, and is designed for mecanum drive.
+	 *  Values will be scaled before being assigned as motor speeds. Use 
+	 * {@link #driveMotors(double, double, double, double)}
+	 * to set actual motor values. 
+	 * </p>
+	 * 
+	 * <p>
+	 * Accepts double values -1 to 1.
+	 * </p>
 	 * 
 	 * @param leftX		left joystick's x value
 	 * @param leftY 	left joystick's y value
@@ -42,20 +70,24 @@ public class DriveSubsystem extends Subsystem {
 	 * @param rightY 	right joystick's y value
 	 */
 	public void driveJoysticks(double leftX, double leftY, double rightX, double rightY) {
+
+		if (!enabled)
+			return;
+
 		if (leftX < 0.3 && leftX > -0.3) {
-			frontLeftTalon.set(-leftY);
-			backLeftTalon.set(-leftY);
+			frontLeftTalon.set(-leftY * 10);
+			backLeftTalon.set(-leftY * 10);
 		} else {
-			frontLeftTalon.set(leftX);
-			backLeftTalon.set(-leftX);
+			frontLeftTalon.set(leftX * 10);
+			backLeftTalon.set(-leftX * 10);
 		}
 
 		if (rightX < 0.3 && rightX > -0.3) {
-			frontRightTalon.set(rightY);
-			backRightTalon.set(rightY);
+			frontRightTalon.set(rightY * 10);
+			backRightTalon.set(rightY * 10);
 		} else {
-			frontRightTalon.set(rightX);
-			backRightTalon.set(-rightX);
+			frontRightTalon.set(rightX * 10);
+			backRightTalon.set(-rightX * 10);
 		}
 	}
 
@@ -64,19 +96,38 @@ public class DriveSubsystem extends Subsystem {
 	 * @param channel 	The channel that the Talon will be running on.
 	 * @return 		Returns the newly created Talon object.
 	 */
-	public CANTalon initializeTalon(int channel) {
+	private CANTalon initializeTalon(int channel) {
 		CANTalon talon = new CANTalon(channel);
 		talon.changeControlMode(ControlMode.Speed);
 		talon.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		talon.setPID(2, 0, 0, 0, 0, 10, 0);
-		//talon.enableControl();
+		talon.enableControl();
 		return talon;
 	}
 
+
+	/**
+	 * <p>
+	 * Sets drive train motor speeds after scaling the values. Use
+	 * {@link #driveJoysticks(double, double, double, double)} for joysticks.
+	 * </p>
+	 * <p>
+	 * Accepts double values from -1 to 1.
+	 * </p>
+	 * 
+	 * @param fr
+	 * @param fl
+	 * @param br
+	 * @param bl
+	 */
 	public void driveMotors(double fr, double fl, double br, double bl) {
-		backLeftTalon.set(bl);
-		backRightTalon.set(br);
-		frontLeftTalon.set(fl);
-		frontRightTalon.set(fr);
+
+		if (!enabled)
+			return;
+
+		backLeftTalon.set(bl * 100);
+		backRightTalon.set(br * 100);
+		frontLeftTalon.set(fl * 100);
+		frontRightTalon.set(fr * 100);
 	}
 }

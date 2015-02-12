@@ -10,7 +10,9 @@ public class AutonomousDriveCommand extends Command {
 	private final double time;
 	
 	/**
-	 * Drives with the specified values for the specified period of time
+	 * Drives with the specified values for the specified period of time.
+	 * Note that the drive values are not altered after the timeout, this is
+	 * simply the amount of time before the command finishes.
 	 * @param fr
 	 * @param fl
 	 * @param br
@@ -26,6 +28,22 @@ public class AutonomousDriveCommand extends Command {
 		this.time = time;
 	}
 
+	/**
+	 * Drives with the specified values. Ends immediately after execution.
+	 * @param fr
+	 * @param fl
+	 * @param br
+	 * @param bl
+	 */
+	public AutonomousDriveCommand(double fr, double fl, double br, double bl)
+	{
+		this.fr = fr;
+		this.fl = fl;
+		this.br = br;
+		this.bl = bl;
+		this.time = 0;
+	}
+
 	@Override
 	protected void initialize() {
 		
@@ -35,17 +53,21 @@ public class AutonomousDriveCommand extends Command {
 	@Override
 	protected void execute() {
 		
-		//Robot.driveSubsystem.driveMotors(fr,fl,br,bl);
+		Robot.driveSubsystem.driveMotors(fr,fl,br,bl);
 	}
 
+	/**
+	 * Is finished once the time elapsed since command initialization has exceeded the 
+	 * specified time setting in the constructor
+	 */
 	@Override
 	protected boolean isFinished() {
-		return (timeSinceInitialized() >= time);
+		return (timeSinceInitialized() >= time || time == 0);
 	}
 
 	@Override
 	protected void end() {
-		//Robot.driveSubsystem.driveMotors(0,0,0,0);
+
 	}
 
 	@Override

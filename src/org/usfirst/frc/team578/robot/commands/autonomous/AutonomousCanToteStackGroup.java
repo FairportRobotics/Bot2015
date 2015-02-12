@@ -13,7 +13,7 @@ public class AutonomousCanToteStackGroup extends CommandGroup {
     public AutonomousCanToteStackGroup() {
     	
     	addSequential(new AutonomousDriveCommand( .5, .5, .5, .5, 1));
-    	addSequential(new AutonomousIntakeCommand(),2);
+    	addSequential(new AutonomousIntakeCommand(), 2);
     	addSequential(new SpinStopCommand());
     	addSequential(new ElevatorCommand(4));
     	addSequential(new ElevatorCommand(1));

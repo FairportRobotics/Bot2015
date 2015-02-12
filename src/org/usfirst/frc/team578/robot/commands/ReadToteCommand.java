@@ -3,31 +3,33 @@ package org.usfirst.frc.team578.robot.commands;
 import org.usfirst.frc.team578.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class SpinStopCommand extends Command {
+public class ReadToteCommand extends Command {
 
+	public ReadToteCommand() {
+		requires(Robot.toteDetectionSubsystem);
+	}
+	
 	@Override
 	protected void initialize() {
+
 	}
 
 	/**
-	 * Sets the spin speeds to zero once the fibinacci wheel speed setting is
-	 * verified to be zero.
+	 * Writes whether or not a tote is detected in the robot to the SmartDashboard
 	 */
 	@Override
 	protected void execute() {
-		Robot.intakeSubsystem.spinStop();
+		SmartDashboard.putBoolean("Tote Sensor", Robot.toteDetectionSubsystem.get());
 	}
 
 	/**
-	 * Is finished once the intake speed is set to zero, which is only set after
-	 * the fibinacci wheel has stopped
+	 * Is never finished
 	 */
 	@Override
 	protected boolean isFinished() {
-		// TODO Does this work? FIX
-		// return Robot.intakeSubsystem.getSpeed() == 0;
-		return true;
+		return false;
 	}
 
 	@Override

@@ -1,44 +1,56 @@
 package org.usfirst.frc.team578.robot.subsystems;
 
+import org.usfirst.frc.team578.robot.RobotMap;
+import org.usfirst.frc.team578.robot.commands.PIDDriveCommand;
+
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.ControlMode;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+/**
+ * For use with PID / encoder testing. Not for production use.
+ *
+ */
 public class PIDDrive extends Subsystem {
 
 	private CANTalon talon;
 	
 	public PIDDrive()
 	{
-		talon = initializeTalon(1);
+		talon = initializeTalon(RobotMap.FRONT_RIGHT_TALON);
 		//LiveWindow.addActuator("PIDDrive", "Talon", (LiveWindowSendable) talon);
 	}
 	
 	public void drive(double val)
 	{
-		talon.set(val);
+		talon.set(val * 500);
 	}
 	
 	public void writeStatus()
 	{
 		SmartDashboard.putString("TalonStatus: ", "P: " + talon.getP() 
-				+ " I: " + talon.getI() 
-				+ " D: " + talon.getD() 
-				+ " Speed" + talon.getEncVelocity());
+				+ " I: " + talon.getI()
+				+ " D: " + talon.getD()
+				+ " Speed:" + talon.getSpeed()
+				+ " EncVelocity:" + talon.getEncVelocity()
+				+ " VVelocity:" + talon.getAnalogInVelocity()
+				+ " Set: " + talon.getSetpoint());
+
 	}
 	
 	@Override
 	protected void initDefaultCommand() {
-
+		setDefaultCommand(new PIDDriveCommand());
 	}
 	
-	public CANTalon initializeTalon(int channel) {
+	private CANTalon initializeTalon(int channel) {
 		CANTalon talon = new CANTalon(channel);
 		talon.changeControlMode(ControlMode.Speed);
 		talon.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		talon.setPID(2, 0, 0, 0, 0, 10, 0);
+		//talon.setPID(1.23, 0, 0, 1.33, 0, 10, 0);
+		//talon.setPID(1.23, 0, 0, 1.33, 0, 10, 0); EXACT VALUES FOR PID DO NOT CHANGE
 		talon.enableControl();
 		return talon;
 	}

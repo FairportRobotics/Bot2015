@@ -16,16 +16,13 @@ public class ElevatorCommand extends Command {
 		this.desiredPosition = desiredPosition;
 	}
 	
-	/**
-	 * 
-	 */
 	@Override
 	protected void initialize() {
 		
 	}
 
 	/**
-	 * 
+	 * Sets the desired position of the elevator
 	 */
 	@Override
 	protected void execute() {
@@ -45,19 +42,11 @@ public class ElevatorCommand extends Command {
 		return false;
 	}
 
-	/**
-	 * 
-	 */
 	@Override
 	protected void end() {
 		
-		//Robot.elevatorSubsystem.writeStatus();
-
 	}
 
-	/**
-	 * 
-	 */
 	@Override
 	protected void interrupted() {
 		

@@ -21,8 +21,8 @@ public class RobotMap {
 	//TODO: Remap and double check ALL values
 	
 	//DriveTrain talon ID's
-	public static final int BACK_LEFT_TALON = 16;
-	public static final int FRONT_LEFT_TALON = 13;
+	public static final int FRONT_LEFT_TALON = 16;
+	public static final int BACK_LEFT_TALON = 13;
 	public static final int BACK_RIGHT_TALON = 1;
 	public static final int FRONT_RIGHT_TALON = 3;
 	// public static final int JOYSTICK=0;
