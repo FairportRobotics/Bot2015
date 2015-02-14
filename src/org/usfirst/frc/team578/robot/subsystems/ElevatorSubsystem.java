@@ -25,6 +25,7 @@ public class ElevatorSubsystem extends Subsystem {
 	private CANTalon elevatorTalon;
 
 	private int currLevel = 1;
+	private int desiredLevel = 1;
 
 	private long talonStartTime;
 
@@ -93,6 +94,8 @@ public class ElevatorSubsystem extends Subsystem {
 		if (!enabled)
 			return;
 
+		desiredLevel = level;
+		
 		if (level == 4)
 		{
 			elevatorTalon.set(0.5);
@@ -247,5 +250,9 @@ public class ElevatorSubsystem extends Subsystem {
 	public void start() {
 		timedOut = false;
 		talonStartTime = System.currentTimeMillis();
+	}
+
+	public int getDesiredLevel() {
+		return desiredLevel;
 	}
 }

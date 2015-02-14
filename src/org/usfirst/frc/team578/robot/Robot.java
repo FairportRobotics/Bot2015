@@ -1,6 +1,5 @@
 package org.usfirst.frc.team578.robot;
 
-import java.io.File;
 import java.util.logging.Level;
 
 import org.usfirst.frc.team578.robot.commands.autonomous.AutonomousCanGroup;

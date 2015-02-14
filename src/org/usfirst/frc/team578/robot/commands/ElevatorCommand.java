@@ -21,7 +21,7 @@ public class ElevatorCommand extends Command {
 	@Override
 	protected void initialize() {
 		Robot.elevatorSubsystem.start();
-		Robot.log.write(Level.WARNING, "Desired elevator position: " + desiredPosition);
+		Robot.log.write(Level.WARNING, "Desired elevator position set to " + desiredPosition + "!");
 	}
 
 	/**

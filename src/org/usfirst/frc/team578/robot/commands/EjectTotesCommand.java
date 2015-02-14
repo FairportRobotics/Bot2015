@@ -57,7 +57,12 @@ public class EjectTotesCommand extends Command {
 				fibWasFalse = true;
 			}
 		} else {
-			Robot.fibinacciSubsystem.extendFibinacci();
+			int currLevel = Robot.elevatorSubsystem.getCurrentLevel();
+			int desired = Robot.elevatorSubsystem.getDesiredLevel();
+			if ((currLevel == 1 || currLevel == 2) && (desired == 1 || desired == 2))
+			{
+				Robot.fibinacciSubsystem.extendFibinacci();
+			}
 			running = true;
 		}
 
