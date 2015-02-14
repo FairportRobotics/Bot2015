@@ -1,5 +1,8 @@
 package org.usfirst.frc.team578.robot.subsystems;
 
+import java.util.logging.Level;
+
+import org.usfirst.frc.team578.robot.Robot;
 import org.usfirst.frc.team578.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.CANTalon;
@@ -183,21 +186,25 @@ public class ElevatorSubsystem extends Subsystem {
 		if (elevatorTalon.isFwdLimitSwitchClosed())
 		{
 			currLevel = 1;
+			Robot.log.write(Level.INFO, "Elevator detected at level #1");
 		}
 		
 		if (levelTwo.get())
 		{
 			currLevel = 2;
+			Robot.log.write(Level.INFO, "Elevator detected at level #2");
 		}
 		
 		if (levelThree.get())
 		{
 			currLevel = 3;
+			Robot.log.write(Level.INFO, "Elevator detected at level #3");
 		}
 		
 		if (elevatorTalon.isRevLimitSwitchClosed())
 		{
 			currLevel = 4;
+			Robot.log.write(Level.INFO, "Elevator detected at level #4");
 		}
 		
 		if(level == 1){
@@ -233,6 +240,7 @@ public class ElevatorSubsystem extends Subsystem {
 		{
 			timedOut = true;
 			elevatorTalon.set(0);
+			Robot.log.write(Level.SEVERE, "Elevator talon has ran for >5 seconds and has timed out");
 		}
 	}
 

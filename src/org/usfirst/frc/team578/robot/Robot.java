@@ -137,6 +137,8 @@ public class Robot extends IterativeRobot {
 	public void autonomousInit() {
 		// schedule the autonomous command (example)
 		autonomousCommand = (Command) autonomousChooser.getSelected();
+		Robot.log.write(Level.INFO, "Initializing Autonomous mode: " + autonomousCommand.getName());
+		
 		if (autonomousCommand != null) autonomousCommand.start();
 	}
 
@@ -153,6 +155,8 @@ public class Robot extends IterativeRobot {
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
 		if (autonomousCommand != null) autonomousCommand.cancel();
+		
+		Robot.log.write(Level.INFO, "Autonomous mode finished, beginning Teleop!");
 	}
 
 	/**
@@ -160,7 +164,7 @@ public class Robot extends IterativeRobot {
 	 * You can use it to reset subsystems before shutting down.
 	 */
 	public void disabledInit(){
-
+		Robot.log.write(Level.INFO, "Robot disabled");
 	}
 
 	/**

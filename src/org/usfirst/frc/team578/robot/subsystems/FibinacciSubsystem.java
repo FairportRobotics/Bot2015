@@ -1,4 +1,7 @@
 package org.usfirst.frc.team578.robot.subsystems;
+import java.util.logging.Level;
+
+import org.usfirst.frc.team578.robot.Robot;
 import org.usfirst.frc.team578.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -43,6 +46,7 @@ public class FibinacciSubsystem extends Subsystem {
 		if (!enabled)
 			return;
 		
+		Robot.log.write(Level.WARNING, "Extending Fibinacci");
 		fibinacciRelay.set(Relay.Value.kOn);
 	}
 
@@ -87,6 +91,7 @@ public class FibinacciSubsystem extends Subsystem {
 		if (!enabled)
 			return;
 		
+		Robot.log.write(Level.WARNING, "Stopping Fibinacci");
 		//MAY STOP IMMEDIATELY BE PREPARED TO ADD A DELAY
 		fibinacciRelay.set(Relay.Value.kOff);
 	}

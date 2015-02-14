@@ -1,4 +1,7 @@
 package org.usfirst.frc.team578.robot.subsystems;
+import java.util.logging.Level;
+
+import org.usfirst.frc.team578.robot.Robot;
 import org.usfirst.frc.team578.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.CANTalon;
@@ -50,6 +53,7 @@ public class IntakeSubsystem extends Subsystem {
 		if (!enabled)
 			return;
 		
+		Robot.log.write(Level.INFO, "Spinning the wheels for intake");
 		leftIntakeTalon.set(1);
 		rightIntakeTalon.set(-1);
 	}
@@ -61,6 +65,7 @@ public class IntakeSubsystem extends Subsystem {
 		if (!enabled)
 			return;
 		
+		Robot.log.write(Level.INFO, "Spinning the wheels for output");
 		leftIntakeTalon.set(-1);
 		rightIntakeTalon.set(1);
 	}
@@ -72,6 +77,7 @@ public class IntakeSubsystem extends Subsystem {
 		if (!enabled)
 			return;
 		
+		Robot.log.write(Level.INFO, "Stopping the wheels");
 		leftIntakeTalon.set(0);
 		rightIntakeTalon.set(0);
 	}
