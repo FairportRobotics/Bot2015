@@ -5,22 +5,21 @@ import org.usfirst.frc.team578.robot.commands.DriveCommand;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.ControlMode;
-import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
-import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class DriveSubsystem extends Subsystem {
+public class DriveSubsystem extends SubsystemBase {
 
 	private CANTalon frontLeftTalon;
 	private CANTalon frontRightTalon;
 	private CANTalon backLeftTalon;
 	private CANTalon backRightTalon;
-	public final boolean enabled;
+	
+	private static final int DRIVE_SCALING_FACTOR = 1;
 	
 	public DriveSubsystem(boolean enable)
 	{
-		this.enabled = enable;
-
+		super(enable);
+		
 		if (!enabled)
 			return;
 
@@ -49,7 +48,6 @@ public class DriveSubsystem extends Subsystem {
 		SmartDashboard.putString("BackRight", backRightTalon.getSpeed() + " " + backRightTalon.getEncVelocity());
 		SmartDashboard.putString("FrontLeft", frontLeftTalon.getSpeed() + " " + frontLeftTalon.getEncVelocity());
 		SmartDashboard.putString("FrontRight", frontRightTalon.getSpeed() + " " + frontRightTalon.getEncVelocity());
-
 	}
 
 	/**
@@ -71,24 +69,23 @@ public class DriveSubsystem extends Subsystem {
 	 */
 	public void driveMecanumJoysticks(double leftX, double leftY, double rightX, double rightY) 
 	{
-
 		if (!enabled)
 			return;
 		
 		if (leftX < 0.3 && leftX > -0.3) {
-			frontLeftTalon.set(-leftY * 500);
-			backLeftTalon.set(-leftY * 500);
+			frontLeftTalon.set(-leftY * DRIVE_SCALING_FACTOR);
+			backLeftTalon.set(-leftY * DRIVE_SCALING_FACTOR);
 		} else {
-			frontLeftTalon.set(-leftX * 500);
-			backLeftTalon.set(leftX * 500);
+			frontLeftTalon.set(-leftX * DRIVE_SCALING_FACTOR);
+			backLeftTalon.set(leftX * DRIVE_SCALING_FACTOR);
 		}
 
 		if (rightX < 0.3 && rightX > -0.3) {
-			frontRightTalon.set(rightY * 500);
-			backRightTalon.set(rightY * 500);
+			frontRightTalon.set(rightY * DRIVE_SCALING_FACTOR);
+			backRightTalon.set(rightY * DRIVE_SCALING_FACTOR);
 		} else {
-			frontRightTalon.set(-rightX * 500);
-			backRightTalon.set(rightX * 500);
+			frontRightTalon.set(-rightX * DRIVE_SCALING_FACTOR);
+			backRightTalon.set(rightX * DRIVE_SCALING_FACTOR);
 		}
 	}
 	
@@ -97,10 +94,10 @@ public class DriveSubsystem extends Subsystem {
 		if(!enabled)
 			return;
 		
-		frontLeftTalon.set(leftY * RobotMap.DRIVE_SCALING_FACTOR);
-		backLeftTalon.set(leftY * RobotMap.DRIVE_SCALING_FACTOR);
-		frontRightTalon.set(rightY * RobotMap.DRIVE_SCALING_FACTOR);
-		backRightTalon.set(rightY * RobotMap.DRIVE_SCALING_FACTOR);
+		frontLeftTalon.set(-leftY * DRIVE_SCALING_FACTOR);
+		backLeftTalon.set(-leftY * DRIVE_SCALING_FACTOR);
+		frontRightTalon.set(rightY * DRIVE_SCALING_FACTOR);
+		backRightTalon.set(rightY * DRIVE_SCALING_FACTOR);
 	}
 
 	/**
@@ -110,10 +107,10 @@ public class DriveSubsystem extends Subsystem {
 	 */
 	private CANTalon initializeTalon(int channel) {
 		CANTalon talon = new CANTalon(channel);
-		//talon.changeControlMode(ControlMode.PercentVbus);
-		talon.changeControlMode(ControlMode.Speed);
-		talon.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		talon.setPID(1, 0.01, 0.85, 1.5, 0, 0, 0);
+		talon.changeControlMode(ControlMode.PercentVbus);
+		//talon.changeControlMode(ControlMode.Speed);
+		//talon.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+		//talon.setPID(1, 0.01, 0.85, 1.5, 0, 0, 0);
 		talon.enableControl();
 		return talon;
 	}
@@ -138,9 +135,9 @@ public class DriveSubsystem extends Subsystem {
 		if (!enabled)
 			return;
 
-		backLeftTalon.set(bl * 100);
-		backRightTalon.set(br * 100);
-		frontLeftTalon.set(fl * 100);
-		frontRightTalon.set(fr * 100);
+		backLeftTalon.set(bl * DRIVE_SCALING_FACTOR);
+		backRightTalon.set(br * DRIVE_SCALING_FACTOR);
+		frontLeftTalon.set(fl * DRIVE_SCALING_FACTOR);
+		frontRightTalon.set(fr * DRIVE_SCALING_FACTOR);
 	}
 }

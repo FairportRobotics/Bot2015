@@ -8,10 +8,9 @@ import org.usfirst.frc.team578.robot.RobotMap;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.ControlMode;
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class ElevatorSubsystem extends Subsystem {
+public class ElevatorSubsystem extends SubsystemBase {
 
 	//	DigitalInput levelOne
 	private DigitalInput levelTwo;
@@ -29,10 +28,9 @@ public class ElevatorSubsystem extends Subsystem {
 
 	private long talonStartTime;
 
-	public final boolean enabled;
 	private boolean timedOut = false;
 	
-	private static final double ELEVATOR_SPEED = 0.75;
+	private static final double ELEVATOR_SPEED = 0.5;
 
 	/**
 	 * Constructs the subsystem, including 2 digital inputs for switches,
@@ -40,8 +38,8 @@ public class ElevatorSubsystem extends Subsystem {
 	 */
 	public ElevatorSubsystem(boolean enable) 
 	{
-		this.enabled = enable;
-
+		super(enable);
+		
 		if (!enabled)
 			return;
 
@@ -188,7 +186,7 @@ public class ElevatorSubsystem extends Subsystem {
 		//			}
 		//		}
 
-		if (elevatorTalon.isFwdLimitSwitchClosed())
+		if (!elevatorTalon.isFwdLimitSwitchClosed())
 		{
 			currLevel = 1;
 			Robot.log.write(Level.INFO, "Elevator detected at level #1");
@@ -206,7 +204,7 @@ public class ElevatorSubsystem extends Subsystem {
 			Robot.log.write(Level.INFO, "Elevator detected at level #3");
 		}
 		
-		if (elevatorTalon.isRevLimitSwitchClosed())
+		if (!elevatorTalon.isRevLimitSwitchClosed())
 		{
 			currLevel = 4;
 			Robot.log.write(Level.INFO, "Elevator detected at level #4");

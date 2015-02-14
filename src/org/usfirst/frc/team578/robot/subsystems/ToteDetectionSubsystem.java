@@ -4,19 +4,17 @@ import org.usfirst.frc.team578.robot.RobotMap;
 import org.usfirst.frc.team578.robot.commands.ReadToteCommand;
 
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.command.Subsystem;
 
-public class ToteDetectionSubsystem extends Subsystem {
+public class ToteDetectionSubsystem extends SubsystemBase {
 
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
 
 	private DigitalInput dio;
-	public final boolean enabled;
 
 	public ToteDetectionSubsystem(boolean enable)
 	{
-		this.enabled = enable;
+		super(enable);
 
 		if(!enabled)
 			return;

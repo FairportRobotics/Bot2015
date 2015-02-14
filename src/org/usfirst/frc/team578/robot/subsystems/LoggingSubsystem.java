@@ -10,23 +10,41 @@ import java.util.logging.Level;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class LoggingSubsystem extends Subsystem {
-	
-	public LoggingSubsystem(){
 
-		File logFile = new File("/578-logs/" + getTimestamp() + ".log");
-		
-		PrintStream p;
-		try {
-			p = new PrintStream(logFile);
-			System.setOut(p);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+	private PrintStream p;
+	private boolean closed = true;
+
+	public void openStream()
+	{
+		if (closed)
+		{
+			File logDir = new File("/578-logs/");
+
+			logDir.mkdirs();
+
+			File logFile = new File(logDir + "/" + getTimestamp() + ".log");
+
+			try {
+				p = new PrintStream(logFile);
+				System.setOut(p);
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
 		}
+	}
+
+	public void closeStream()
+	{
+		if (p != null)
+		{
+			p.flush();
+		}
+		closed = true;
 	}
 
 	@Override
 	protected void initDefaultCommand() {
-		
+
 	}
 
 	public void write(Level logLevel, String message) {

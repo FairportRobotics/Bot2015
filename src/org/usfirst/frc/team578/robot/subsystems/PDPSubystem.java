@@ -3,15 +3,13 @@ package org.usfirst.frc.team578.robot.subsystems;
 import org.usfirst.frc.team578.robot.commands.LogPDPStatusCommand;
 
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
-import edu.wpi.first.wpilibj.command.Subsystem;
 
-public class PDPSubystem extends Subsystem {
+public class PDPSubystem extends SubsystemBase {
 
 	private PowerDistributionPanel pdp;
-	public final boolean enabled;
 
 	public PDPSubystem(boolean enable) {
-		this.enabled = enable;
+		super(enable);
 
 		if (!enabled)
 			return;

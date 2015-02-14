@@ -5,18 +5,15 @@ import org.usfirst.frc.team578.robot.Robot;
 import org.usfirst.frc.team578.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.CANTalon;
-import edu.wpi.first.wpilibj.command.Subsystem;
 
-public class IntakeSubsystem extends Subsystem {
+public class IntakeSubsystem extends SubsystemBase {
 	
 	private CANTalon leftIntakeTalon;
 	private CANTalon rightIntakeTalon;
 	
-	public final boolean enabled;
-	
 	public IntakeSubsystem(boolean enable)
 	{
-		this.enabled = enable;
+		super(enable);
 		
 		if(!enabled)
 			return;

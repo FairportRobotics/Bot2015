@@ -7,23 +7,19 @@ import org.usfirst.frc.team578.robot.RobotMap;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.Relay.Value;
-import edu.wpi.first.wpilibj.command.Subsystem;
 
-public class FibinacciSubsystem extends Subsystem {
+public class FibinacciSubsystem extends SubsystemBase {
 
 	private DigitalInput fibinacciSwitch;
 	private Relay fibinacciRelay;
 	//private boolean extending = false;
 
-	public final boolean enabled;
-
 	/**
 	 * Constructor for the subsystem.
 	 */
 	public FibinacciSubsystem(boolean enable) {
-
-		this.enabled = enable;
-
+		super(enable);
+		
 		if (!enabled)
 			return;
 

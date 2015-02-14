@@ -1,5 +1,6 @@
 package org.usfirst.frc.team578.robot;
 
+import java.lang.reflect.Field;
 import java.util.logging.Level;
 
 import org.usfirst.frc.team578.robot.commands.autonomous.AutonomousCanGroup;
@@ -13,6 +14,7 @@ import org.usfirst.frc.team578.robot.subsystems.IntakeSubsystem;
 import org.usfirst.frc.team578.robot.subsystems.LoggingSubsystem;
 import org.usfirst.frc.team578.robot.subsystems.PDPSubystem;
 import org.usfirst.frc.team578.robot.subsystems.PIDDrive;
+import org.usfirst.frc.team578.robot.subsystems.SubsystemBase;
 import org.usfirst.frc.team578.robot.subsystems.ToteDetectionSubsystem;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -41,7 +43,7 @@ public class Robot extends IterativeRobot {
 	public static ToteDetectionSubsystem toteDetectionSubsystem;
 	public static PDPSubystem pdpSubystem;
 	public static PIDDrive pid;
-	//
+
 	public static OI oi;
 	private static long startTime;
 
@@ -77,26 +79,26 @@ public class Robot extends IterativeRobot {
 		// SEE SUBSYSTEM METHOD JAVADOCS FOR SPECIFIC INSTANCE IMPLICATIONS.
 		//	
 		//
-		
+
 		driveSubsystem = new DriveSubsystem(true);
 		elevatorSubsystem = new ElevatorSubsystem(true);
 		intakeSubsystem = new IntakeSubsystem(true);
 		fibinacciSubsystem = new FibinacciSubsystem(true);
 		toteDetectionSubsystem = new ToteDetectionSubsystem(true);
-		
 		pid = new PIDDrive(false);
-		
+
 		//END SUBSYSTEMS
 		//OTHER INIT
-		
+
 		oi = new OI();
 		initializeAutonomousChooser();
 		initializeDebugChooser();
 
 		startTime = System.currentTimeMillis();
 
+		logSubsystems();
 		log.write(Level.INFO, "ROBOT INITIALIZATION COMPLETE!");
-
+		log.closeStream();
 		//Use for USB camera (maybe)
 		//CameraServer server = CameraServer.getInstance();
 		//		if (server != null)
@@ -104,6 +106,22 @@ public class Robot extends IterativeRobot {
 		//			server.setQuality(50);
 		//			server.startAutomaticCapture("cam0");
 		//		}
+	}
+
+	private void logSubsystems() {
+
+		for (Field f : getClass().getDeclaredFields())
+		{
+			if (f.getType() == SubsystemBase.class)
+			{
+				try {
+					log.write(Level.INFO, f.getClass().getName() + " initialized: " 
+							+ ((SubsystemBase) f.get(this)).enabled);
+				} catch (IllegalArgumentException | IllegalAccessException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 
 	private void initializeDebugChooser() {
@@ -136,8 +154,9 @@ public class Robot extends IterativeRobot {
 	public void autonomousInit() {
 		// schedule the autonomous command (example)
 		autonomousCommand = (Command) autonomousChooser.getSelected();
+		log.openStream();
 		Robot.log.write(Level.INFO, "Initializing Autonomous mode: " + autonomousCommand.getName());
-		
+
 		if (autonomousCommand != null) autonomousCommand.start();
 	}
 
@@ -154,7 +173,8 @@ public class Robot extends IterativeRobot {
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
 		if (autonomousCommand != null) autonomousCommand.cancel();
-		
+
+		log.openStream();
 		Robot.log.write(Level.INFO, "Autonomous mode finished, beginning Teleop!");
 	}
 
@@ -164,6 +184,7 @@ public class Robot extends IterativeRobot {
 	 */
 	public void disabledInit(){
 		Robot.log.write(Level.INFO, "Robot disabled");
+		Robot.log.closeStream();
 	}
 
 	/**

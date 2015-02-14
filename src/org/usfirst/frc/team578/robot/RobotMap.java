@@ -61,8 +61,4 @@ public class RobotMap {
 	//Misc
 	public static final int TOTE_SENSOR = 0;
 	
-	//Other vars
-	public static final int LOG_VOLTAGE_INTERVAL = 1000; //milliseconds
-	public static final int DRIVE_SCALING_FACTOR = 1;
-	
 }

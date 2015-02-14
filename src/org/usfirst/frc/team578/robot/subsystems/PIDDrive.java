@@ -6,21 +6,19 @@ import org.usfirst.frc.team578.robot.commands.PIDDriveCommand;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.ControlMode;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
-import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * For use with PID / encoder testing. Not for production use.
  *
  */
-public class PIDDrive extends Subsystem {
+public class PIDDrive extends SubsystemBase {
 
 	private CANTalon talon;
-	public final boolean enabled;
 
 	public PIDDrive(boolean enable)
 	{
-		this.enabled = enable;
+		super(enable);
 
 		if (!enable)
 			return;
