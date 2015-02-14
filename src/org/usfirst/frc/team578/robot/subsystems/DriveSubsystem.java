@@ -16,7 +16,6 @@ public class DriveSubsystem extends Subsystem {
 	private CANTalon backLeftTalon;
 	private CANTalon backRightTalon;
 	public final boolean enabled;
-
 	
 	public DriveSubsystem(boolean enable)
 	{

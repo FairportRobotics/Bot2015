@@ -63,7 +63,7 @@ public class Robot extends IterativeRobot {
 	 */
 	public void robotInit() {
 		//Log has no robot references, no need to disable currently. (As of 2/11/15)
-		log = new LoggingSubsystem(new File("/log.txt"));
+		log = new LoggingSubsystem();
 		log.write(Level.INFO, "ROBOT INITIALIZING...");	
 
 		//INIT ROBOT SUBSYSTEMS
