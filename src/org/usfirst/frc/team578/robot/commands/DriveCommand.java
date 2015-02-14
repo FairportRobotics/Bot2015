@@ -21,7 +21,7 @@ public class DriveCommand extends Command {
     // Called repeatedly when this Command is scheduled to run
 	@Override
     protected void execute() {
-    	Robot.driveSubsystem.driveJoysticks(Robot.oi.getLeftStickY(), Robot.oi.getRightStickY(), Robot.oi.getLeftStickX(), Robot.oi.getRightStickX());
+    	Robot.driveSubsystem.driveJoysticks(Robot.oi.getLeftStickX(), Robot.oi.getLeftStickY(), Robot.oi.getRightStickX(), Robot.oi.getRightStickY());
 		//Robot.pidDrive.drive(Robot.oi.getLeftStickY());
     }
 

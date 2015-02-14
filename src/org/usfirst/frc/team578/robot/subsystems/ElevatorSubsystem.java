@@ -23,7 +23,10 @@ public class ElevatorSubsystem extends Subsystem {
 
 	private int currLevel = 1;
 
+	private long talonStartTime;
+
 	public final boolean enabled;
+	private boolean timedOut = false;
 
 	/**
 	 * Constructs the subsystem, including 2 digital inputs for switches,
@@ -110,15 +113,35 @@ public class ElevatorSubsystem extends Subsystem {
 		if (!enabled)
 			return;
 
+		//DRIVING THE TALON WITH A NEGATIVE VALUE
+		//MAKES IT GO UP! POSITIVE GOES DOWN!
+
 		SmartDashboard.putNumber("Desired Level: ", level);
 
 		int offset = currLevel - level;
 
-		if (offset > 0) {
-			elevatorTalon.set(0.5);
-		} else if (offset < 0) {
-			elevatorTalon.set(-0.5);
+		if (!timedOut)
+		{
+			if (offset > 0) {
+				elevatorTalon.set(0.5);
+			} else if (offset < 0) {
+				elevatorTalon.set(-0.5);
+			}
+
+			if(level==4)
+			{
+				elevatorTalon.set(-0.5);
+			}
+			else if(level==1)
+			{
+				elevatorTalon.set(0.5);
+			}
 		}
+
+		//		if (talonStartTime == 0)
+		//		{
+		//			talonStartTime = System.currentTimeMillis();
+		//		}
 
 		//		if (elevatorTalon.isFwdLimitSwitchClosed())
 		//		{
@@ -166,17 +189,39 @@ public class ElevatorSubsystem extends Subsystem {
 			if(levelTwo.get()){
 				elevatorTalon.set(0);
 				currLevel = 2;
+			}else if(currLevel == level)
+			{
+				elevatorTalon.set(-0.5);
 			}
 		}else if(level == 3){
 			if(levelThree.get()){
 				elevatorTalon.set(0);
 				currLevel = 3;
+			}else if(currLevel == level)
+			{
+				elevatorTalon.set(-0.5);
 			}
 		}else if(level == 4){
 			if(!elevatorTalon.isRevLimitSwitchClosed()){
 				elevatorTalon.set(0);
 				currLevel = 4;
+			}else if(currLevel == level)
+			{
+				elevatorTalon.set(-0.5);
 			}
 		}
+	}
+
+	public void update() {
+		if(System.currentTimeMillis()-talonStartTime>5000)
+		{
+			timedOut = true;
+			elevatorTalon.set(0);
+		}
+	}
+
+	public void start() {
+		timedOut = false;
+		talonStartTime = System.currentTimeMillis();
 	}
 }

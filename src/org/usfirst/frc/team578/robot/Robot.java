@@ -12,6 +12,7 @@ import org.usfirst.frc.team578.robot.subsystems.ElevatorSubsystem;
 import org.usfirst.frc.team578.robot.subsystems.FibinacciSubsystem;
 import org.usfirst.frc.team578.robot.subsystems.IntakeSubsystem;
 import org.usfirst.frc.team578.robot.subsystems.LoggingSubsystem;
+import org.usfirst.frc.team578.robot.subsystems.PDPSubystem;
 import org.usfirst.frc.team578.robot.subsystems.PIDDrive;
 import org.usfirst.frc.team578.robot.subsystems.ToteDetectionSubsystem;
 
@@ -39,6 +40,7 @@ public class Robot extends IterativeRobot {
 	public static FibinacciSubsystem fibinacciSubsystem;
 	public static LoggingSubsystem log;
 	public static ToteDetectionSubsystem toteDetectionSubsystem;
+	public static PDPSubystem pdpSubystem;
 	public static PIDDrive pid;
 	//
 	public static OI oi;
@@ -66,16 +68,17 @@ public class Robot extends IterativeRobot {
 
 		//INIT ROBOT SUBSYSTEMS
 
-		/*
-		 * **** READ: IMPORTANT NOTICE! ****
-		 * 
-		 * TO DISABLE A SUBSYSTEM, SET  false  IN THE CONSTRUCTOR.
-		 * YOU NO LONGER NEED TO COMMENT OUT ALL USAGES!
-		 * A DISABLED SUBSYSTEM WILL NOT INITIALIZE COMPONENTS.
-		 * SUBSYSTEM METHODS WILL RETURN EARLY IF NOT ENABLED.
-		 * SEE SUBSYSTEM METHOD JAVADOCS FOR SPECIFIC INSTANCE IMPLICATIONS.
-		 *	
-		 */
+		//
+		// **** READ: IMPORTANT NOTICE! ****
+		// 
+		// TO DISABLE A SUBSYSTEM, SET  false  IN THE CONSTRUCTOR.
+		// YOU NO LONGER NEED TO COMMENT OUT ALL USAGES!
+		// A DISABLED SUBSYSTEM WILL NOT INITIALIZE COMPONENTS.
+		// SUBSYSTEM METHODS WILL RETURN EARLY IF NOT ENABLED.
+		// SEE SUBSYSTEM METHOD JAVADOCS FOR SPECIFIC INSTANCE IMPLICATIONS.
+		//	
+		//
+		
 		driveSubsystem = new DriveSubsystem(false);
 		elevatorSubsystem = new ElevatorSubsystem(true);
 		intakeSubsystem = new IntakeSubsystem(true);
@@ -83,7 +86,7 @@ public class Robot extends IterativeRobot {
 		toteDetectionSubsystem = new ToteDetectionSubsystem(true);
 		
 		pid = new PIDDrive();
-
+		
 		//END SUBSYSTEMS
 		//OTHER INIT
 		

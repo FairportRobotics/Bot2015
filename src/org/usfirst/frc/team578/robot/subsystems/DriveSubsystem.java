@@ -17,6 +17,7 @@ public class DriveSubsystem extends Subsystem {
 	private CANTalon backRightTalon;
 	public final boolean enabled;
 
+	
 	public DriveSubsystem(boolean enable)
 	{
 		this.enabled = enable;
@@ -69,25 +70,26 @@ public class DriveSubsystem extends Subsystem {
 	 * @param rightX 	right joystick's x value
 	 * @param rightY 	right joystick's y value
 	 */
-	public void driveJoysticks(double leftX, double leftY, double rightX, double rightY) {
+	public void driveJoysticks(double leftX, double leftY, double rightX, double rightY) 
+	{
 
 		if (!enabled)
 			return;
-
+		
 		if (leftX < 0.3 && leftX > -0.3) {
-			frontLeftTalon.set(-leftY * 10);
-			backLeftTalon.set(-leftY * 10);
+			frontLeftTalon.set(leftY * 500);
+			backLeftTalon.set(leftY * 500);
 		} else {
-			frontLeftTalon.set(leftX * 10);
-			backLeftTalon.set(-leftX * 10);
+			frontLeftTalon.set(leftX * 500);
+			backLeftTalon.set(-leftX * 500);
 		}
 
 		if (rightX < 0.3 && rightX > -0.3) {
-			frontRightTalon.set(rightY * 10);
-			backRightTalon.set(rightY * 10);
+			frontRightTalon.set(-rightY * 500);
+			backRightTalon.set(-rightY * 500);
 		} else {
-			frontRightTalon.set(rightX * 10);
-			backRightTalon.set(-rightX * 10);
+			frontRightTalon.set(rightX * 500);
+			backRightTalon.set(-rightX * 500);
 		}
 	}
 
@@ -98,9 +100,10 @@ public class DriveSubsystem extends Subsystem {
 	 */
 	private CANTalon initializeTalon(int channel) {
 		CANTalon talon = new CANTalon(channel);
+		//talon.changeControlMode(ControlMode.PercentVbus);
 		talon.changeControlMode(ControlMode.Speed);
 		talon.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		talon.setPID(2, 0, 0, 0, 0, 10, 0);
+		talon.setPID(1, 0.01, 0.85, 1.5, 0, 0, 0);
 		talon.enableControl();
 		return talon;
 	}

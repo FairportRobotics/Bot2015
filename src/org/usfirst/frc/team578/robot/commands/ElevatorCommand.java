@@ -18,7 +18,7 @@ public class ElevatorCommand extends Command {
 	
 	@Override
 	protected void initialize() {
-		
+		Robot.elevatorSubsystem.start();
 	}
 
 	/**
@@ -27,6 +27,7 @@ public class ElevatorCommand extends Command {
 	@Override
 	protected void execute() {
 		Robot.elevatorSubsystem.writeStatus();
+		Robot.elevatorSubsystem.update();
 		Robot.elevatorSubsystem.setLevel(desiredPosition);
 	}
 

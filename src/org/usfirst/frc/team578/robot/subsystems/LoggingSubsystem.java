@@ -24,7 +24,7 @@ public class LoggingSubsystem extends Subsystem {
 
 	@Override
 	protected void initDefaultCommand() {
-		//setDefaultCommand(new LogCommand());
+		
 	}
 
 	public void write(Level logLevel, String message) {

@@ -25,9 +25,10 @@ public class RobotMap {
 	public static final int BACK_LEFT_TALON = 13;
 	public static final int BACK_RIGHT_TALON = 1;
 	public static final int FRONT_RIGHT_TALON = 3;
-	// public static final int JOYSTICK=0;
 	
 	//Driver Input ID's
+	
+	//Joysticks
 	public static final int LEFT_JOYSTICK = 1;
 	public static final int RIGHT_JOYSTICK = 2;
 	public static final int TRIGGER_RIGHT_JOYSTICK = 1;
@@ -36,8 +37,8 @@ public class RobotMap {
 	public static final int JOG_RIGHT_LOWER_JOYSTICK = 4;
 	public static final int JOG_LEFT_UPPER_JOYSTICK = 5;
 	public static final int JOG_LEFT_LOWER_JOYSTICK = 3;
-	
-	
+
+	//Gamepad
 	public static final int CONTROLLER_B6 = 6;
 	public static final int CONTROLLER_B8 = 8;
 	public static final int CONTROLLER_B9 = 9;
@@ -57,5 +58,9 @@ public class RobotMap {
 	public static final int LEFT_INTAKE_TALON = 14;
 	public static final int RIGHT_INTAKE_TALON = 2;	
 	
+	//Misc
 	public static final int TOTE_SENSOR = 0;
+	
+	//Other vars
+	public static final int LOG_VOLTAGE_INTERVAL = 1000; //milliseconds
 }
