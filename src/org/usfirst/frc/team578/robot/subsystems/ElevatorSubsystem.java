@@ -31,6 +31,8 @@ public class ElevatorSubsystem extends Subsystem {
 
 	public final boolean enabled;
 	private boolean timedOut = false;
+	
+	private static final double ELEVATOR_SPEED = 0.75;
 
 	/**
 	 * Constructs the subsystem, including 2 digital inputs for switches,
@@ -98,11 +100,11 @@ public class ElevatorSubsystem extends Subsystem {
 		
 		if (level == 4)
 		{
-			elevatorTalon.set(0.5);
+			elevatorTalon.set(ELEVATOR_SPEED);
 		}
 		else if (level == 1)
 		{
-			elevatorTalon.set(-0.5);
+			elevatorTalon.set(-ELEVATOR_SPEED);
 		}
 		else if (level == 2)
 		{
@@ -129,18 +131,18 @@ public class ElevatorSubsystem extends Subsystem {
 		if (!timedOut)
 		{
 			if (offset > 0) {
-				elevatorTalon.set(0.5);
+				elevatorTalon.set(ELEVATOR_SPEED);
 			} else if (offset < 0) {
-				elevatorTalon.set(-0.5);
+				elevatorTalon.set(-ELEVATOR_SPEED);
 			}
 
 			if(level==4)
 			{
-				elevatorTalon.set(-0.5);
+				elevatorTalon.set(-ELEVATOR_SPEED);
 			}
 			else if(level==1)
 			{
-				elevatorTalon.set(0.5);
+				elevatorTalon.set(ELEVATOR_SPEED);
 			}
 		}
 
@@ -219,21 +221,21 @@ public class ElevatorSubsystem extends Subsystem {
 				elevatorTalon.set(0);
 			}else if(currLevel == level)
 			{
-				elevatorTalon.set(-0.5);
+				elevatorTalon.set(-ELEVATOR_SPEED);
 			}
 		}else if(level == 3){
 			if(levelThree.get()){
 				elevatorTalon.set(0);
 			}else if(currLevel == level)
 			{
-				elevatorTalon.set(-0.5);
+				elevatorTalon.set(-ELEVATOR_SPEED);
 			}
 		}else if(level == 4){
 			if(!elevatorTalon.isRevLimitSwitchClosed()){
 				elevatorTalon.set(0);
 			}else if(currLevel == level)
 			{
-				elevatorTalon.set(-0.5);
+				elevatorTalon.set(-ELEVATOR_SPEED);
 			}
 		}
 	}
