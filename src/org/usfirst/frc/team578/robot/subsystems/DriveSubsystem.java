@@ -70,27 +70,38 @@ public class DriveSubsystem extends Subsystem {
 	 * @param rightX 	right joystick's x value
 	 * @param rightY 	right joystick's y value
 	 */
-	public void driveJoysticks(double leftX, double leftY, double rightX, double rightY) 
+	public void driveMecanumJoysticks(double leftX, double leftY, double rightX, double rightY) 
 	{
 
 		if (!enabled)
 			return;
 		
 		if (leftX < 0.3 && leftX > -0.3) {
-			frontLeftTalon.set(leftY * 500);
-			backLeftTalon.set(leftY * 500);
+			frontLeftTalon.set(-leftY * 500);
+			backLeftTalon.set(-leftY * 500);
 		} else {
-			frontLeftTalon.set(leftX * 500);
-			backLeftTalon.set(-leftX * 500);
+			frontLeftTalon.set(-leftX * 500);
+			backLeftTalon.set(leftX * 500);
 		}
 
 		if (rightX < 0.3 && rightX > -0.3) {
-			frontRightTalon.set(-rightY * 500);
-			backRightTalon.set(-rightY * 500);
+			frontRightTalon.set(rightY * 500);
+			backRightTalon.set(rightY * 500);
 		} else {
-			frontRightTalon.set(rightX * 500);
-			backRightTalon.set(-rightX * 500);
+			frontRightTalon.set(-rightX * 500);
+			backRightTalon.set(rightX * 500);
 		}
+	}
+	
+	public void driveTankJoysticks(double leftX, double leftY, double rightX, double rightY)
+	{
+		if(!enabled)
+			return;
+		
+		frontLeftTalon.set(leftY * RobotMap.DRIVE_SCALING_FACTOR);
+		backLeftTalon.set(leftY * RobotMap.DRIVE_SCALING_FACTOR);
+		frontRightTalon.set(rightY * RobotMap.DRIVE_SCALING_FACTOR);
+		backRightTalon.set(rightY * RobotMap.DRIVE_SCALING_FACTOR);
 	}
 
 	/**
@@ -112,7 +123,7 @@ public class DriveSubsystem extends Subsystem {
 	/**
 	 * <p>
 	 * Sets drive train motor speeds after scaling the values. Use
-	 * {@link #driveJoysticks(double, double, double, double)} for joysticks.
+	 * {@link #driveMecanumJoysticks(double, double, double, double)} for joysticks.
 	 * </p>
 	 * <p>
 	 * Accepts double values from -1 to 1.

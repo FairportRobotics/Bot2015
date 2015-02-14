@@ -180,15 +180,33 @@ public class ElevatorSubsystem extends Subsystem {
 		//			}
 		//		}
 
+		if (elevatorTalon.isFwdLimitSwitchClosed())
+		{
+			currLevel = 1;
+		}
+		
+		if (levelTwo.get())
+		{
+			currLevel = 2;
+		}
+		
+		if (levelThree.get())
+		{
+			currLevel = 3;
+		}
+		
+		if (elevatorTalon.isRevLimitSwitchClosed())
+		{
+			currLevel = 4;
+		}
+		
 		if(level == 1){
 			if(!elevatorTalon.isFwdLimitSwitchClosed()){
 				elevatorTalon.set(0);
-				currLevel = 1;
 			}
 		}else if(level == 2){
 			if(levelTwo.get()){
 				elevatorTalon.set(0);
-				currLevel = 2;
 			}else if(currLevel == level)
 			{
 				elevatorTalon.set(-0.5);
@@ -196,7 +214,6 @@ public class ElevatorSubsystem extends Subsystem {
 		}else if(level == 3){
 			if(levelThree.get()){
 				elevatorTalon.set(0);
-				currLevel = 3;
 			}else if(currLevel == level)
 			{
 				elevatorTalon.set(-0.5);
@@ -204,7 +221,6 @@ public class ElevatorSubsystem extends Subsystem {
 		}else if(level == 4){
 			if(!elevatorTalon.isRevLimitSwitchClosed()){
 				elevatorTalon.set(0);
-				currLevel = 4;
 			}else if(currLevel == level)
 			{
 				elevatorTalon.set(-0.5);

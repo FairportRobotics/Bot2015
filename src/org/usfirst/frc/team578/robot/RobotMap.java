@@ -63,4 +63,6 @@ public class RobotMap {
 	
 	//Other vars
 	public static final int LOG_VOLTAGE_INTERVAL = 1000; //milliseconds
+	public static final int DRIVE_SCALING_FACTOR = 1;
+	
 }

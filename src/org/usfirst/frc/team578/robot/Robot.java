@@ -79,13 +79,13 @@ public class Robot extends IterativeRobot {
 		//	
 		//
 		
-		driveSubsystem = new DriveSubsystem(false);
+		driveSubsystem = new DriveSubsystem(true);
 		elevatorSubsystem = new ElevatorSubsystem(true);
 		intakeSubsystem = new IntakeSubsystem(true);
 		fibinacciSubsystem = new FibinacciSubsystem(true);
 		toteDetectionSubsystem = new ToteDetectionSubsystem(true);
 		
-		pid = new PIDDrive();
+		pid = new PIDDrive(false);
 		
 		//END SUBSYSTEMS
 		//OTHER INIT

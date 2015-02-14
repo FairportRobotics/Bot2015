@@ -16,20 +16,32 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class PIDDrive extends Subsystem {
 
 	private CANTalon talon;
-	
-	public PIDDrive()
+	public final boolean enabled;
+
+	public PIDDrive(boolean enable)
 	{
-		talon = initializeTalon(RobotMap.FRONT_RIGHT_TALON);
+		this.enabled = enable;
+
+		if (!enable)
+			return;
+
+		talon = initializeTalon(RobotMap.BACK_RIGHT_TALON);
 		//LiveWindow.addActuator("PIDDrive", "Talon", (LiveWindowSendable) talon);
 	}
-	
+
 	public void drive(double val)
 	{
+		if (!enabled)
+			return;
+		
 		talon.set(val * 500);
 	}
-	
+
 	public void writeStatus()
 	{
+		if (!enabled)
+			return;
+		
 		SmartDashboard.putString("TalonStatus: ", "P: " + talon.getP() 
 				+ " I: " + talon.getI()
 				+ " D: " + talon.getD()
@@ -39,12 +51,12 @@ public class PIDDrive extends Subsystem {
 				+ " Set: " + talon.getSetpoint());
 
 	}
-	
+
 	@Override
 	protected void initDefaultCommand() {
 		setDefaultCommand(new PIDDriveCommand());
 	}
-	
+
 	private CANTalon initializeTalon(int channel) {
 		CANTalon talon = new CANTalon(channel);
 		talon.changeControlMode(ControlMode.Speed);
