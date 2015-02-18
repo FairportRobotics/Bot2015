@@ -10,13 +10,15 @@ public class AutonomousToteGroup extends CommandGroup {
 	
 	public AutonomousToteGroup()
 	{
-		addSequential(new AutonomousDriveCommand( .5, .5, .5, .5, .25));
-		addSequential(new SpinIntakeCommand(), 2);
+		addSequential(new ElevatorCommand(1));
+		addSequential(new SpinIntakeCommand());
+		addParallel(new AutonomousDriveCommand(.5, .5, .5, .5, .25));
+		addParallel(new AutonomousDriveCommand(0, 0, 0, 0));
 		addSequential(new SpinStopCommand());
 		addSequential(new ElevatorCommand(4));
 		addSequential(new ElevatorCommand(1));
-		addSequential(new AutonomousDriveCommand( -.5, .5, -.5, .5, 1));
-		addSequential(new AutonomousDriveCommand( .5, .5, .5, .5, 4));
+		addSequential(new AutonomousDriveCommand( -.25, .25, -.25, .25, 1));
+		addSequential(new AutonomousDriveCommand( .5, .5, .5, .5, 3));
 	}
 
 }

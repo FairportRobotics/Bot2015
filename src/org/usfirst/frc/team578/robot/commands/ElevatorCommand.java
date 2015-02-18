@@ -6,7 +6,7 @@ import org.usfirst.frc.team578.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class ElevatorCommand extends Command {
-	
+
 	private int desiredPosition;
 
 	/**
@@ -17,7 +17,7 @@ public class ElevatorCommand extends Command {
 		requires(Robot.elevatorSubsystem);
 		this.desiredPosition = desiredPosition;
 	}
-	
+
 	@Override
 	protected void initialize() {
 		Robot.elevatorSubsystem.start();
@@ -29,9 +29,10 @@ public class ElevatorCommand extends Command {
 	 */
 	@Override
 	protected void execute() {
-		Robot.elevatorSubsystem.writeStatus();
-		Robot.elevatorSubsystem.update();
 		Robot.elevatorSubsystem.setLevel(desiredPosition);
+		Robot.elevatorSubsystem.update();
+		Robot.elevatorSubsystem.writeStatus();
+
 	}
 
 	/**
@@ -40,7 +41,7 @@ public class ElevatorCommand extends Command {
 	 */
 	@Override
 	protected boolean isFinished() {
-		
+
 		//SmartDashboard.putBoolean("isFinished", Robot.elevatorSubsystem.getCurrentLevel() == desiredPosition);
 		//return Robot.elevatorSubsystem.getCurrentLevel() == desiredPosition;
 		return false;
@@ -48,12 +49,12 @@ public class ElevatorCommand extends Command {
 
 	@Override
 	protected void end() {
-		
+
 	}
 
 	@Override
 	protected void interrupted() {
-		
+
 
 	}
 }

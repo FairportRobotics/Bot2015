@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.Relay.Value;
 
+//Known to the general public as the FibonacciSubsystem
 public class FibinacciSubsystem extends SubsystemBase {
 
 	private DigitalInput fibinacciSwitch;

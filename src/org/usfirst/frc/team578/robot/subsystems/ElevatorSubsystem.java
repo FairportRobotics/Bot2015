@@ -60,7 +60,7 @@ public class ElevatorSubsystem extends SubsystemBase {
 	{
 		if (!enabled)
 			return;
-
+		
 		//		SmartDashboard.putBoolean("Fwd Closed", elevatorTalon.isFwdLimitSwitchClosed());
 		//		SmartDashboard.putBoolean("Rev Closed", elevatorTalon.isRevLimitSwitchClosed());
 		//		SmartDashboard.putNumber("curr level", currLevel);
@@ -109,6 +109,15 @@ public class ElevatorSubsystem extends SubsystemBase {
 			elevatorTalon.set(0);
 		}
 	}
+	
+	public void stop()
+	{
+		if (!enabled)
+			return;
+		
+		elevatorTalon.set(0);
+		Robot.log.write(Level.WARNING, "Elevator manually stopped!");
+	}
 
 	/**
 	 * Sets the level of the elevator to a specific position (1-4)
@@ -121,7 +130,7 @@ public class ElevatorSubsystem extends SubsystemBase {
 
 		//DRIVING THE TALON WITH A NEGATIVE VALUE
 		//MAKES IT GO UP! POSITIVE GOES DOWN!
-
+		
 		SmartDashboard.putNumber("Desired Level: ", level);
 
 		int offset = currLevel - level;
@@ -239,6 +248,9 @@ public class ElevatorSubsystem extends SubsystemBase {
 	}
 
 	public void update() {
+		if (!enabled)
+			return;
+		
 		if(System.currentTimeMillis()-talonStartTime>5000)
 		{
 			timedOut = true;
@@ -248,6 +260,9 @@ public class ElevatorSubsystem extends SubsystemBase {
 	}
 
 	public void start() {
+		if (!enabled)
+			return;
+		
 		timedOut = false;
 		talonStartTime = System.currentTimeMillis();
 	}

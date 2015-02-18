@@ -59,7 +59,8 @@ public class EjectTotesCommand extends Command {
 		} else {
 			int currLevel = Robot.elevatorSubsystem.getCurrentLevel();
 			int desired = Robot.elevatorSubsystem.getDesiredLevel();
-			if ((currLevel == 1 || currLevel == 2) && (desired == 1 || desired == 2))
+			if ((currLevel == 1 || currLevel == 2 || currLevel == 3) 
+					&& (desired == 1 || desired == 2 || desired == 3))
 			{
 				Robot.fibinacciSubsystem.extendFibinacci();
 			}

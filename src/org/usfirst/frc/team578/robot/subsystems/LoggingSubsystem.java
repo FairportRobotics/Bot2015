@@ -1,8 +1,8 @@
 package org.usfirst.frc.team578.robot.subsystems;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintStream;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.TimeZone;
 import java.util.logging.Level;
@@ -11,23 +11,19 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class LoggingSubsystem extends Subsystem {
 
-	private PrintStream p;
-	private boolean closed = true;
+	private FileWriter p;
 
 	public void openStream()
 	{
-		if (closed)
+		if (p == null)
 		{
 			File logDir = new File("/578-logs/");
 
 			logDir.mkdirs();
 
-			File logFile = new File(logDir + "/" + getTimestamp() + ".log");
-
 			try {
-				p = new PrintStream(logFile);
-				System.setOut(p);
-			} catch (FileNotFoundException e) {
+				p = new FileWriter(new File(logDir + "/" + getTimestamp() + ".log"), true);
+			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
@@ -37,9 +33,14 @@ public class LoggingSubsystem extends Subsystem {
 	{
 		if (p != null)
 		{
-			p.flush();
+			try {
+				p.flush();
+				p.close();
+				p = null;
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
-		closed = true;
 	}
 
 	@Override
@@ -50,7 +51,15 @@ public class LoggingSubsystem extends Subsystem {
 	public void write(Level logLevel, String message) {
 		String timeStamp = getTimestamp();
 
-		System.out.println("[" + logLevel.getName() + "] "+ "[" + timeStamp + "]: " + message);
+		try {
+			
+			openStream();
+			
+			p.write("\n[" + logLevel.getName() + "] "+ "[" + timeStamp + "]: " + message);
+			p.flush();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private String getTimestamp() {

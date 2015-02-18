@@ -31,17 +31,13 @@ public class RobotMap {
 	//Joysticks
 	public static final int LEFT_JOYSTICK = 1;
 	public static final int RIGHT_JOYSTICK = 2;
-	public static final int TRIGGER_RIGHT_JOYSTICK = 1;
-	public static final int TRIGGER_LEFT_JOYSTICK = 1;
-	public static final int JOG_RIGHT_UPPER_JOYSTICK = 6;
-	public static final int JOG_RIGHT_LOWER_JOYSTICK = 4;
-	public static final int JOG_LEFT_UPPER_JOYSTICK = 5;
-	public static final int JOG_LEFT_LOWER_JOYSTICK = 3;
+	public static final int JOYSTICK_STOP_ELEVATOR = 7;
 
 	//Gamepad
 	public static final int CONTROLLER_B6 = 6;
 	public static final int CONTROLLER_B8 = 8;
 	public static final int CONTROLLER_B9 = 9;
+	public static final int CONTROLLER_B10 = 10;
 	public static final int GAMEPAD = 0;
 	
 	//Elevator ID's

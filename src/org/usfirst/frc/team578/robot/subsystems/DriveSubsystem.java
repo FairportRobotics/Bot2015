@@ -136,8 +136,8 @@ public class DriveSubsystem extends SubsystemBase {
 			return;
 
 		backLeftTalon.set(bl * DRIVE_SCALING_FACTOR);
-		backRightTalon.set(br * DRIVE_SCALING_FACTOR);
+		backRightTalon.set(-br * DRIVE_SCALING_FACTOR);
 		frontLeftTalon.set(fl * DRIVE_SCALING_FACTOR);
-		frontRightTalon.set(fr * DRIVE_SCALING_FACTOR);
+		frontRightTalon.set(-fr * DRIVE_SCALING_FACTOR);
 	}
 }

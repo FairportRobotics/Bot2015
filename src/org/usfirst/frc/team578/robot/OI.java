@@ -2,6 +2,7 @@ package org.usfirst.frc.team578.robot;
 
 import org.usfirst.frc.team578.robot.commands.EjectTotesCommand;
 import org.usfirst.frc.team578.robot.commands.ElevatorCommand;
+import org.usfirst.frc.team578.robot.commands.ElevatorStopCommand;
 import org.usfirst.frc.team578.robot.commands.SpinEjectCommand;
 import org.usfirst.frc.team578.robot.commands.SpinIntakeCommand;
 import org.usfirst.frc.team578.robot.commands.SpinStopCommand;
@@ -42,8 +43,13 @@ public class OI {
     // until it is finished as determined by it's isFinished method.
     // button.whenReleased(new ExampleCommand());
 	
+	//Joysticks
 	private Joystick leftJoystick;
 	private Joystick rightJoystick;
+	private Button leftJoystickButtonSEVEN;
+	private Button rightJoystickButtonSEVEN;
+	
+	//Gamepad
 	private Joystick gamePad;
 	private Button buttonONE;
 	private Button buttonTWO;
@@ -54,16 +60,7 @@ public class OI {
 	private Button buttonSIX;
 	private Button buttonEIGHT;
 	private Button buttonNINE;
-	private Button leftTrigger;
-	private Button rightTrigger;
-	private Button rightButtonSIX;
-	private Button rightButtonFOUR;
-	private Button leftButtonSIX;
-	private Button leftButtonFOUR;
-	private Button rightButtonFIVE;
-	private Button rightButtonTHREE;
-	private Button leftButtonFIVE;
-	private Button leftButtonTHREE;
+	private Button buttonTEN;
     
     public OI()
     {
@@ -80,22 +77,15 @@ public class OI {
     	buttonSIX = new JoystickButton(gamePad, RobotMap.CONTROLLER_B6);
     	buttonEIGHT = new JoystickButton(gamePad, RobotMap.CONTROLLER_B8);
     	buttonNINE = new JoystickButton(gamePad, RobotMap.CONTROLLER_B9);
-    	leftTrigger = new JoystickButton(leftJoystick, RobotMap.TRIGGER_LEFT_JOYSTICK);
-    	rightTrigger = new JoystickButton(rightJoystick, RobotMap.TRIGGER_RIGHT_JOYSTICK);
-    	rightButtonSIX = new JoystickButton(rightJoystick, RobotMap.JOG_RIGHT_UPPER_JOYSTICK);
-    	rightButtonFOUR = new JoystickButton(rightJoystick, RobotMap.JOG_RIGHT_LOWER_JOYSTICK);
-    	leftButtonSIX = new JoystickButton(leftJoystick, RobotMap.JOG_RIGHT_UPPER_JOYSTICK);
-    	leftButtonFOUR = new JoystickButton(leftJoystick, RobotMap.JOG_RIGHT_LOWER_JOYSTICK);
-    	rightButtonFIVE = new JoystickButton(rightJoystick, RobotMap.JOG_LEFT_UPPER_JOYSTICK);
-    	rightButtonTHREE = new JoystickButton(rightJoystick, RobotMap.JOG_LEFT_LOWER_JOYSTICK);
-    	leftButtonFIVE = new JoystickButton(leftJoystick, RobotMap.JOG_LEFT_UPPER_JOYSTICK);
-    	leftButtonTHREE = new JoystickButton(leftJoystick, RobotMap.JOG_LEFT_LOWER_JOYSTICK);
+    	buttonTEN = new JoystickButton(gamePad, RobotMap.CONTROLLER_B10);
+    	
+    	leftJoystickButtonSEVEN = new JoystickButton(leftJoystick, RobotMap.JOYSTICK_STOP_ELEVATOR);
+    	rightJoystickButtonSEVEN = new JoystickButton(rightJoystick, RobotMap.JOYSTICK_STOP_ELEVATOR);
     	
     	buttonONE.whenPressed(new ElevatorCommand(1));
     	buttonTWO.whenPressed(new ElevatorCommand(2));
     	buttonTHREE.whenPressed(new ElevatorCommand(3));
     	buttonFOUR.whenPressed(new ElevatorCommand(4));
-    	
     	
     	buttonFIVE.whenPressed(new SpinIntakeCommand());
     	buttonSEVEN.whenPressed(new SpinIntakeCommand());
@@ -110,6 +100,12 @@ public class OI {
     	buttonEIGHT.whenReleased(new SpinStopCommand());
     	
     	buttonNINE.whenPressed(new EjectTotesCommand());
+    	
+    	buttonTEN.whenPressed(new ElevatorStopCommand());
+    	
+    	leftJoystickButtonSEVEN.whenPressed(new ElevatorStopCommand());
+    	rightJoystickButtonSEVEN.whenPressed(new ElevatorStopCommand());
+
     	//SmartDashboard.putString("ADA", "AODUA");
     }
 	
@@ -148,13 +144,13 @@ public class OI {
 		return buttonNINE.get();
 	}
 	
-	public boolean getLeftTrigger()
-	{
-		return leftTrigger.get();
-	}
-	
-	public boolean getRightTrigger()
-	{
-		return rightTrigger.get();
-	}
+//	public boolean getLeftTrigger()
+//	{
+//		return leftTrigger.get();
+//	}
+//	
+//	public boolean getRightTrigger()
+//	{
+//		return rightTrigger.get();
+//	}
 }

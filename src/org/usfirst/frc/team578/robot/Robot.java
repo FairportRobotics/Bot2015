@@ -8,12 +8,13 @@ import org.usfirst.frc.team578.robot.commands.autonomous.AutonomousDriveStraight
 import org.usfirst.frc.team578.robot.commands.autonomous.AutonomousStackGroup;
 import org.usfirst.frc.team578.robot.commands.autonomous.AutonomousToteGroup;
 import org.usfirst.frc.team578.robot.subsystems.DriveSubsystem;
-import org.usfirst.frc.team578.robot.subsystems.ElevatorSubsystem;
+import org.usfirst.frc.team578.robot.subsystems.ElevatorEncoderSubsystem;
 import org.usfirst.frc.team578.robot.subsystems.FibinacciSubsystem;
 import org.usfirst.frc.team578.robot.subsystems.IntakeSubsystem;
 import org.usfirst.frc.team578.robot.subsystems.LoggingSubsystem;
 import org.usfirst.frc.team578.robot.subsystems.PDPSubystem;
 import org.usfirst.frc.team578.robot.subsystems.PIDDrive;
+import org.usfirst.frc.team578.robot.subsystems.POTTest;
 import org.usfirst.frc.team578.robot.subsystems.SubsystemBase;
 import org.usfirst.frc.team578.robot.subsystems.ToteDetectionSubsystem;
 
@@ -33,16 +34,17 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends IterativeRobot {
 
-	//Read about disabling a subsystem in the robotInit() method! You
+	//Read about disabling a subsystem in the robotInit() method! You	
 	//likely do not need to comment out a subsystem here.
 	public static DriveSubsystem driveSubsystem;
-	public static ElevatorSubsystem elevatorSubsystem;
+	public static ElevatorEncoderSubsystem elevatorSubsystem;
 	public static IntakeSubsystem intakeSubsystem;
 	public static FibinacciSubsystem fibinacciSubsystem;
 	public static LoggingSubsystem log;
 	public static ToteDetectionSubsystem toteDetectionSubsystem;
 	public static PDPSubystem pdpSubystem;
 	public static PIDDrive pid;
+	public static POTTest pot;
 
 	public static OI oi;
 	private static long startTime;
@@ -50,6 +52,7 @@ public class Robot extends IterativeRobot {
 	private Command autonomousCommand;
 	private SendableChooser autonomousChooser;
 	private SendableChooser loggingLevelChooser;
+	private boolean initial = true;
 
 	public static long getElapsedTime()
 	{
@@ -80,12 +83,16 @@ public class Robot extends IterativeRobot {
 		//	
 		//
 
-		driveSubsystem = new DriveSubsystem(true);
-		elevatorSubsystem = new ElevatorSubsystem(true);
+		driveSubsystem = new DriveSubsystem(true); //ensure pidDrive disabled
+		elevatorSubsystem = new ElevatorEncoderSubsystem(true);
 		intakeSubsystem = new IntakeSubsystem(true);
 		fibinacciSubsystem = new FibinacciSubsystem(true);
 		toteDetectionSubsystem = new ToteDetectionSubsystem(true);
-		pid = new PIDDrive(false);
+		pdpSubystem = new PDPSubystem(true);
+		
+		pot = new POTTest(false);
+		
+		pid = new PIDDrive(false); //do not enable unless drive disabled
 
 		//END SUBSYSTEMS
 		//OTHER INIT
@@ -98,7 +105,7 @@ public class Robot extends IterativeRobot {
 
 		logSubsystems();
 		log.write(Level.INFO, "ROBOT INITIALIZATION COMPLETE!");
-		log.closeStream();
+		//log.closeStream();
 		//Use for USB camera (maybe)
 		//CameraServer server = CameraServer.getInstance();
 		//		if (server != null)
@@ -112,11 +119,15 @@ public class Robot extends IterativeRobot {
 
 		for (Field f : getClass().getDeclaredFields())
 		{
-			if (f.getType() == SubsystemBase.class)
+			if (f.getType().getGenericSuperclass() == SubsystemBase.class)
 			{
 				try {
-					log.write(Level.INFO, f.getClass().getName() + " initialized: " 
-							+ ((SubsystemBase) f.get(this)).enabled);
+					Object get = f.get(this);
+
+					log.write(Level.INFO, f.getType().getSimpleName() + " initialized as: " 
+							+ (get == null ? "Null"
+									: (((SubsystemBase) f.get(this)).enabled) ? "Enabled" : "Disabled"));
+
 				} catch (IllegalArgumentException | IllegalAccessException e) {
 					e.printStackTrace();
 				}
@@ -174,8 +185,7 @@ public class Robot extends IterativeRobot {
 		// this line or comment it out.
 		if (autonomousCommand != null) autonomousCommand.cancel();
 
-		log.openStream();
-		Robot.log.write(Level.INFO, "Autonomous mode finished, beginning Teleop!");
+		Robot.log.write(Level.INFO, "Beginning Teleop!");
 	}
 
 	/**
@@ -183,8 +193,12 @@ public class Robot extends IterativeRobot {
 	 * You can use it to reset subsystems before shutting down.
 	 */
 	public void disabledInit(){
-		Robot.log.write(Level.INFO, "Robot disabled");
-		Robot.log.closeStream();
+		if (!initial)
+		{
+			initial = false;
+			Robot.log.write(Level.INFO, "Robot disabled");
+			Robot.log.closeStream();
+		}
 	}
 
 	/**

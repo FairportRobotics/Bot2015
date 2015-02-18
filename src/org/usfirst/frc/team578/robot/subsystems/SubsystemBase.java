@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public abstract class SubsystemBase extends Subsystem {
 
 	public final boolean enabled;
-	
+
 	/**
 	 * Constructs the subsystem. Sets the enabled constant.
 	 * @param enable
