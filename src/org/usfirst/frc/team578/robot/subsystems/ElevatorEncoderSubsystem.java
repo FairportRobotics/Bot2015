@@ -19,12 +19,12 @@ public class ElevatorEncoderSubsystem extends SubsystemBase {
 
 	private static final double LEVEL_ONE_MIN = 50;
 	private static final double LEVEL_ONE_MAX = 60;
-	private static final double LEVEL_TWO_MIN = 100;
-	private static final double LEVEL_TWO_MAX = 110;
+	private static final double LEVEL_TWO_MIN = 110;
+	private static final double LEVEL_TWO_MAX = 120;
 	private static final double LEVEL_THREE_MIN = 185;
 	private static final double LEVEL_THREE_MAX = 195;
-	private static final double LEVEL_FOUR_MIN = 410;
-	private static final double LEVEL_FOUR_MAX = 420;
+	private static final double LEVEL_FOUR_MIN = 450;
+	private static final double LEVEL_FOUR_MAX = 460;
 
 	private CANTalon elevatorTalon;
 
@@ -232,7 +232,7 @@ public class ElevatorEncoderSubsystem extends SubsystemBase {
 		talon.ConfigRevLimitSwitchNormallyOpen(false);
 		talon.changeControlMode(ControlMode.Position);
 		talon.setFeedbackDevice(FeedbackDevice.AnalogPot);
-		talon.setPID(3, 0, 0.85, 0, 0, 0, 0);
+		talon.setPID(3, .0001, 0.85, 0, 0, 0, 0);
 		//talon.setPID(1, 0.01, 0.85, 1.5, 0, 0, 0); //TUNED VALUES FOR FRONT RIGHT WHEEL
 		//talon.setPID(1.23, 0, 0, 1.33, 0, 10, 0); EXACT VALUES FOR OLD TESTBOARD PID DO NOT CHANGE
 		talon.enableControl();
