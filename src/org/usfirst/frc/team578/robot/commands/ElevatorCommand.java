@@ -4,9 +4,12 @@ import java.util.logging.Level;
 import org.usfirst.frc.team578.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class ElevatorCommand extends Command {
 
+	private boolean goingTo2 = false;
+	private long commandStartTime;
 	private int desiredPosition;
 
 	/**
@@ -16,6 +19,8 @@ public class ElevatorCommand extends Command {
 	public ElevatorCommand(int desiredPosition) {
 		requires(Robot.elevatorSubsystem);
 		this.desiredPosition = desiredPosition;
+		goingTo2 = desiredPosition == 2;
+		commandStartTime = System.currentTimeMillis();
 	}
 
 	@Override
@@ -29,7 +34,20 @@ public class ElevatorCommand extends Command {
 	 */
 	@Override
 	protected void execute() {
-		Robot.elevatorSubsystem.setLevel(desiredPosition);
+		
+		SmartDashboard.putNumber("Runtime", System.currentTimeMillis() - commandStartTime);
+		
+		if (goingTo2)
+		{
+			Robot.elevatorSubsystem.setLevel(3);
+			if (System.currentTimeMillis() - commandStartTime > 1000)
+			{
+				goingTo2 = false;
+			}
+		}else
+		{
+			Robot.elevatorSubsystem.setLevel(desiredPosition);
+		}
 		Robot.elevatorSubsystem.update();
 		Robot.elevatorSubsystem.writeStatus();
 

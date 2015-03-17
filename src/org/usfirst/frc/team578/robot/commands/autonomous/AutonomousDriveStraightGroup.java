@@ -8,8 +8,8 @@ public class AutonomousDriveStraightGroup extends CommandGroup {
 	
 	public AutonomousDriveStraightGroup()
 	{
-		addSequential(new AutonomousDriveCommand(.25, .25, .25, .25, 3));
+		addParallel(new ElevatorCommand(1));
+		addSequential(new AutonomousDriveCommand(.25, .25, .25, .25, 3.5));
 		addSequential(new AutonomousDriveCommand(0, 0, 0, 0));
-		addSequential(new ElevatorCommand(2));
 	}
 }

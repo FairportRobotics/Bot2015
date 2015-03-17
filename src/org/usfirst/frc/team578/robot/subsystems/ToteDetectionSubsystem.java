@@ -22,8 +22,8 @@ public class ToteDetectionSubsystem extends SubsystemBase {
 		dio = new DigitalInput(RobotMap.TOTE_SENSOR);
 	}
 
-	public void initDefaultCommand() {
-
+	public void initDefaultCommand()
+	{
 		setDefaultCommand(new ReadToteCommand());
 	}
 

@@ -17,14 +17,14 @@ public class ElevatorEncoderSubsystem extends SubsystemBase {
 
 	//Should be normally closed?
 
-	private static final double LEVEL_ONE_MIN = 50;
-	private static final double LEVEL_ONE_MAX = 60;
-	private static final double LEVEL_TWO_MIN = 110;
-	private static final double LEVEL_TWO_MAX = 120;
-	private static final double LEVEL_THREE_MIN = 185;
-	private static final double LEVEL_THREE_MAX = 195;
-	private static final double LEVEL_FOUR_MIN = 450;
-	private static final double LEVEL_FOUR_MAX = 460;
+	private static final double LEVEL_ONE_MIN = 213;
+	private static final double LEVEL_ONE_MAX = 223;
+	private static final double LEVEL_TWO_MIN = 293;
+	private static final double LEVEL_TWO_MAX = 303;
+	private static final double LEVEL_THREE_MIN = 378;
+	private static final double LEVEL_THREE_MAX = 388;
+	private static final double LEVEL_FOUR_MIN = 634;
+	private static final double LEVEL_FOUR_MAX = 644;
 
 	private CANTalon elevatorTalon;
 
@@ -118,7 +118,7 @@ public class ElevatorEncoderSubsystem extends SubsystemBase {
 		//MAKES IT GO UP! POSITIVE GOES DOWN!
 
 		desiredLevel = level;
-		
+
 		SmartDashboard.putNumber("Desired Level: ", level);
 		Robot.log.write(Level.INFO, "SetLevel " + level);
 
@@ -189,9 +189,9 @@ public class ElevatorEncoderSubsystem extends SubsystemBase {
 	public void update() {
 		if (!enabled)
 			return;
-		
+
 		boolean near = Math.abs(elevatorTalon.getPosition() - elevatorTalon.getSetpoint()) <= 20;
-		
+
 		if (elevatorTalon.getAnalogInVelocity() == 0 && !isAtLevel(desiredLevel) && !timing)
 		{
 			timing = true;
@@ -221,18 +221,17 @@ public class ElevatorEncoderSubsystem extends SubsystemBase {
 	public int getDesiredLevel() {
 		if (!enabled)
 			return -1;
-		
+
 		return desiredLevel;
 	}
 
 	private CANTalon initializeTalon(int channel) {
 		CANTalon talon = new CANTalon(channel);
 		talon.reverseOutput(true);
-		talon.ConfigFwdLimitSwitchNormallyOpen(false);
 		talon.ConfigRevLimitSwitchNormallyOpen(false);
 		talon.changeControlMode(ControlMode.Position);
 		talon.setFeedbackDevice(FeedbackDevice.AnalogPot);
-		talon.setPID(3, .0001, 0.85, 0, 0, 0, 0);
+		talon.setPID(6, .0001, 0.85, 0.75, 0, 0, 0);
 		//talon.setPID(1, 0.01, 0.85, 1.5, 0, 0, 0); //TUNED VALUES FOR FRONT RIGHT WHEEL
 		//talon.setPID(1.23, 0, 0, 1.33, 0, 10, 0); EXACT VALUES FOR OLD TESTBOARD PID DO NOT CHANGE
 		talon.enableControl();

@@ -5,6 +5,7 @@ import java.util.logging.Level;
 
 import org.usfirst.frc.team578.robot.commands.autonomous.AutonomousCanGroup;
 import org.usfirst.frc.team578.robot.commands.autonomous.AutonomousDriveStraightGroup;
+import org.usfirst.frc.team578.robot.commands.autonomous.AutonomousNothing;
 import org.usfirst.frc.team578.robot.commands.autonomous.AutonomousStackGroup;
 import org.usfirst.frc.team578.robot.commands.autonomous.AutonomousToteGroup;
 import org.usfirst.frc.team578.robot.subsystems.DriveSubsystem;
@@ -87,7 +88,7 @@ public class Robot extends IterativeRobot {
 		elevatorSubsystem = new ElevatorEncoderSubsystem(true);
 		intakeSubsystem = new IntakeSubsystem(true);
 		fibinacciSubsystem = new FibinacciSubsystem(true);
-		toteDetectionSubsystem = new ToteDetectionSubsystem(true);
+		toteDetectionSubsystem = new ToteDetectionSubsystem(false);
 		pdpSubystem = new PDPSubystem(true);
 		
 		pot = new POTTest(false);
@@ -146,6 +147,7 @@ public class Robot extends IterativeRobot {
 
 	private void initializeAutonomousChooser() {
 		autonomousChooser = new SendableChooser();
+		autonomousChooser.addObject("Do Nothing", new AutonomousNothing());
 		autonomousChooser.addDefault("Drive Straight", new AutonomousDriveStraightGroup());
 		autonomousChooser.addObject("Triple Stack", new AutonomousStackGroup());
 		autonomousChooser.addObject("Single Tote", new AutonomousToteGroup());
