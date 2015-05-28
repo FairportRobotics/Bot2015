@@ -5,6 +5,13 @@ import org.usfirst.frc.team578.robot.commands.ReadToteCommand;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 
+/**
+ * A small Subsystem to determine if the optical tote detection sensor 
+ * in the back, lower part of the robot is blocked.
+ * <br><br>
+ * As of recent, this has not been working correctly.
+ *
+ */
 public class ToteDetectionSubsystem extends SubsystemBase {
 
 	// Put methods for controlling this subsystem

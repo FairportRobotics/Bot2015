@@ -6,6 +6,10 @@ import org.usfirst.frc.team578.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.CANTalon;
 
+/**
+ * Subsystem to run the intake wheels for consuming and ejecting totes
+ *
+ */
 public class IntakeSubsystem extends SubsystemBase {
 	
 	private CANTalon leftIntakeTalon;

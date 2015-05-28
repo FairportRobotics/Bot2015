@@ -51,6 +51,8 @@ public class DriveSubsystem extends SubsystemBase {
 	}
 
 	/**
+	 * <p>Deprecated as the robot no longer has a mecanum drive.</p>
+	 * 
 	 * <p>
 	 * Drives the robot using joystick input values, and is designed for mecanum drive.
 	 *  Values will be scaled before being assigned as motor speeds. Use 
@@ -67,6 +69,7 @@ public class DriveSubsystem extends SubsystemBase {
 	 * @param rightX 	right joystick's x value
 	 * @param rightY 	right joystick's y value
 	 */
+	@Deprecated
 	public void driveMecanumJoysticks(double leftX, double leftY, double rightX, double rightY) 
 	{
 		if (!enabled)
@@ -89,6 +92,23 @@ public class DriveSubsystem extends SubsystemBase {
 		}
 	}
 	
+	/**
+	 * <p>
+	 * Drives the robot using joystick input values, and is designed for tank drive.
+	 *  Values will be scaled before being assigned as motor speeds. Use 
+	 * {@link #driveMotors(double, double, double, double)}
+	 * to set actual motor values. 
+	 * </p>
+	 * 
+	 * <p>
+	 * Accepts double values -1 to 1.
+	 * </p>
+	 * 
+	 * @param leftX		left joystick's x value
+	 * @param leftY 	left joystick's y value
+	 * @param rightX 	right joystick's x value
+	 * @param rightY 	right joystick's y value
+	 */
 	public void driveTankJoysticks(double leftX, double leftY, double rightX, double rightY)
 	{
 		if(!enabled)
@@ -119,7 +139,7 @@ public class DriveSubsystem extends SubsystemBase {
 	/**
 	 * <p>
 	 * Sets drive train motor speeds after scaling the values. Use
-	 * {@link #driveMecanumJoysticks(double, double, double, double)} for joysticks.
+	 * {@link #driveTankJoysticks(double, double, double, double)} for joysticks.
 	 * </p>
 	 * <p>
 	 * Accepts double values from -1 to 1.

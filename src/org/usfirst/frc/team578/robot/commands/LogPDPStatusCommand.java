@@ -6,6 +6,10 @@ import org.usfirst.frc.team578.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
+/**
+ * Logs PDP values every x period of time.
+ *
+ */
 public class LogPDPStatusCommand extends Command{
 
 	private long lastLogTime;

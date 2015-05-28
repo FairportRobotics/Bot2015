@@ -1,14 +1,16 @@
 package org.usfirst.frc.team578.robot.commands;
 
-import org.usfirst.frc.team578.robot.Robot;
-
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+/**
+ * Drives the robot using PID values (thereby requiring encoders on the drivetrain)
+ *
+ */
+@Deprecated
 public class PIDDriveCommand extends Command {
 
 	public PIDDriveCommand() {
-		requires(Robot.pid);
+		//requires(Robot.pid);
 	}
 	
 	@Override
@@ -18,9 +20,9 @@ public class PIDDriveCommand extends Command {
 
 	@Override
 	protected void execute() {
-		SmartDashboard.putNumber("LeftJoy", Robot.oi.getLeftStickY());
-		Robot.pid.drive(Robot.oi.getLeftStickY());
-		Robot.pid.writeStatus();
+		//SmartDashboard.putNumber("LeftJoy", Robot.oi.getLeftStickY());
+		//Robot.pid.drive(Robot.oi.getLeftStickY());
+		//Robot.pid.writeStatus();
 	}
 
 	@Override

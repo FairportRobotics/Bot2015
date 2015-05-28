@@ -4,6 +4,11 @@ import org.usfirst.frc.team578.robot.commands.LogPDPStatusCommand;
 
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 
+/**
+ * Subsystem to obtain values from the Power Distribution Panel (PDP).
+ * Automatically starts a non-finishing {@link LogPDPStatusCommand}
+ *
+ */
 public class PDPSubystem extends SubsystemBase {
 
 	private PowerDistributionPanel pdp;

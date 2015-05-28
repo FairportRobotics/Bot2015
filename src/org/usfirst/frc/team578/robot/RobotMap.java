@@ -16,9 +16,6 @@ public class RobotMap {
 	// number and the module. For example you with a rangefinder:
 	// public static int rangefinderPort = 1;
 	// public static int rangefinderModule = 1;
-
-	
-	//TODO: Remap and double check ALL values
 	
 	//DriveTrain talon ID's
 	public static final int FRONT_LEFT_TALON = 16;
@@ -41,7 +38,7 @@ public class RobotMap {
 	public static final int GAMEPAD = 0;
 	
 	//Elevator ID's
-	public static final int ELEVATOR_TALON = 15; //<---- Correct
+	public static final int ELEVATOR_TALON = 15;
 	public static final int ELEVATOR_LEVEL_TWO_SWITCH = 8;
 	public static final int ELEVATOR_LEVEL_THREE_SWITCH = 9;
 	

@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * For use with PID / encoder testing. Not for production use.
  *
  */
+@Deprecated
 public class PIDDrive extends SubsystemBase {
 
 	private CANTalon talon;

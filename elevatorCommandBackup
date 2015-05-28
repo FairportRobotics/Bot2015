@@ -11,6 +11,8 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class ElevatorCommand extends Command {
 
+	//private boolean goingTo2 = false;
+	private long commandStartTime;
 	private int desiredPosition;
 
 	/**
@@ -21,13 +23,23 @@ public class ElevatorCommand extends Command {
 	public ElevatorCommand(int desiredPosition) {
 		requires(Robot.elevatorSubsystem);
 		this.desiredPosition = desiredPosition;
+		commandStartTime = System.currentTimeMillis();
 	}
 
 	@Override
 	protected void initialize() {
-		//Robot.elevatorSubsystem.start();
-
+		Robot.elevatorSubsystem.start();
 		Robot.log.write(Level.WARNING, "Desired elevator position set to " + desiredPosition + "!");
+	}
+
+	/**
+	 * Sets the desired position of the elevator
+	 */
+	@Override
+	protected void execute() {
+
+		//SmartDashboard.putNumber("Runtime", System.currentTimeMillis() - commandStartTime);
+
 		if (desiredPosition == 0) //For calibration
 		{
 			Robot.elevatorSubsystem.calibrateElevator();
@@ -36,13 +48,7 @@ public class ElevatorCommand extends Command {
 		{
 			Robot.elevatorSubsystem.setLevel(desiredPosition);
 		}
-	}
 
-	/**
-	 * Sets the desired position of the elevator
-	 */
-	@Override
-	protected void execute() {
 		//Always update!
 		Robot.elevatorSubsystem.update();
 		Robot.elevatorSubsystem.writeStatus();
@@ -54,13 +60,12 @@ public class ElevatorCommand extends Command {
 	 */
 	@Override
 	protected boolean isFinished() {
-		return Robot.elevatorSubsystem.isStationary();
-//		return true;
+		return Robot.elevatorSubsystem.isFinished();
 	}
 
 	@Override
 	protected void end() {
-		
+
 	}
 
 	@Override

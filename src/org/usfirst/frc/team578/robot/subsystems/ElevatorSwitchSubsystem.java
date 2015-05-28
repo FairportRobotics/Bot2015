@@ -10,7 +10,14 @@ import edu.wpi.first.wpilibj.CANTalon.ControlMode;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class ElevatorSubsystem extends SubsystemBase {
+/**
+ * Original elevator control system, using physical digital input switches to establish
+ * elevator positions.
+ * @author Brian
+ *
+ */
+@Deprecated
+public class ElevatorSwitchSubsystem extends SubsystemBase {
 
 	//	DigitalInput levelOne
 	private DigitalInput levelTwo;
@@ -36,7 +43,7 @@ public class ElevatorSubsystem extends SubsystemBase {
 	 * Constructs the subsystem, including 2 digital inputs for switches,
 	 * and the Talon for the elevator. 
 	 */
-	public ElevatorSubsystem(boolean enable) 
+	public ElevatorSwitchSubsystem(boolean enable) 
 	{
 		super(enable);
 		
@@ -152,48 +159,6 @@ public class ElevatorSubsystem extends SubsystemBase {
 				elevatorTalon.set(ELEVATOR_SPEED);
 			}
 		}
-
-		//		if (talonStartTime == 0)
-		//		{
-		//			talonStartTime = System.currentTimeMillis();
-		//		}
-
-		//		if (elevatorTalon.isFwdLimitSwitchClosed())
-		//		{
-		//			if (level == 1)
-		//			{
-		//				elevatorTalon.set(0);
-		//				currLevel = 1;
-		//			}
-		//		}
-		//		else if (!levelTwo.get()) 
-		//		{
-		//			
-		//			if (level == 2) 
-		//			{
-		//				elevatorTalon.set(0);
-		//				currLevel = 2;
-		//			}
-		//		} 
-		//		else if (!levelThree.get()) 
-		//		{
-		//			
-		//
-		//			if (level == 3) 
-		//			{
-		//				elevatorTalon.set(0);
-		//				currLevel = 3;
-		//			}
-		//		} 
-		//		else if (elevatorTalon.isRevLimitSwitchClosed())
-		//		{
-		//
-		//			if (level == 4)
-		//			{
-		//				elevatorTalon.set(0);
-		//				currLevel = 4;
-		//			}
-		//		}
 
 		if (!elevatorTalon.isFwdLimitSwitchClosed())
 		{

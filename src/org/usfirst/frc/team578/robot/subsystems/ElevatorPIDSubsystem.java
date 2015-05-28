@@ -10,21 +10,35 @@ import edu.wpi.first.wpilibj.CANTalon.ControlMode;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class ElevatorEncoderSubsystem extends SubsystemBase {
+/**
+ * Old elevator control system, using always-on PID control.
+ * 
+ */
+@Deprecated
+public class ElevatorPIDSubsystem extends SubsystemBase {
 
 	//Reverse limit switch is the top
 	//Forward limit switch is the bottom
 
-	//Should be normally closed?
+	//Talons normally open
 
-	private static final double LEVEL_ONE_MIN = 213;
-	private static final double LEVEL_ONE_MAX = 223;
-	private static final double LEVEL_TWO_MIN = 293;
-	private static final double LEVEL_TWO_MAX = 303;
-	private static final double LEVEL_THREE_MIN = 378;
-	private static final double LEVEL_THREE_MAX = 388;
-	private static final double LEVEL_FOUR_MIN = 634;
-	private static final double LEVEL_FOUR_MAX = 644;
+	//	private static final double LEVEL_ONE_MIN = 40;
+	//	private static final double LEVEL_ONE_MAX = 50;
+	//	private static final double LEVEL_TWO_MIN = 110;
+	//	private static final double LEVEL_TWO_MAX = 120;
+	//	private static final double LEVEL_THREE_MIN = 185;
+	//	private static final double LEVEL_THREE_MAX = 195;
+	//	private static final double LEVEL_FOUR_MIN = 450;
+	//	private static final double LEVEL_FOUR_MAX = 460;
+
+	private static double levelOnePosition = 8; //This changes as the elevator belts shift
+
+	//	private static final double LEVEL_TWO_OFFSET = 70;
+	//	private static final double LEVEL_THREE_OFFSET = 75;
+	//	private static final double LEVEL_FOUR_OFFSET = 256;
+
+	private static final double[] OFFSETS = {0, 0, 70, 75, 256};
+	private static double[] positions = new double[5];
 
 	private CANTalon elevatorTalon;
 
@@ -38,18 +52,31 @@ public class ElevatorEncoderSubsystem extends SubsystemBase {
 	private boolean timedOut = false;
 	private boolean timing = false;
 
+	private boolean homing = false;
+	
 	/**
 	 * Constructs the subsystem, including 2 digital inputs for switches,
 	 * and the Talon for the elevator. 
 	 */
-	public ElevatorEncoderSubsystem(boolean enable) 
+	public ElevatorPIDSubsystem(boolean enable) 
 	{
 		super(enable);
 
 		if (!enabled)
 			return;
 
+		generatePositions();
+
 		elevatorTalon = initializeTalon(RobotMap.ELEVATOR_TALON);
+	}
+
+	private void generatePositions() {
+		positions[0] = 1; //definite bottom
+
+		positions[1] = levelOnePosition;
+		positions[2] = positions[1] + OFFSETS[2];
+		positions[3] = positions[2] + OFFSETS[3];
+		positions[4] = positions[3] + OFFSETS[4];
 	}
 
 	/**
@@ -124,21 +151,8 @@ public class ElevatorEncoderSubsystem extends SubsystemBase {
 
 		if (!timedOut)
 		{
-			switch(level)
-			{
-			case 1 : elevatorTalon.set((LEVEL_ONE_MIN + LEVEL_ONE_MAX) / 2);
-			Robot.log.write(Level.INFO, "Elevator sent to: " + (LEVEL_ONE_MIN + LEVEL_ONE_MAX) / 2);
-			break;
-			case 2 : elevatorTalon.set((LEVEL_TWO_MIN + LEVEL_TWO_MAX) / 2);
-			Robot.log.write(Level.INFO, "Elevator sent to: " + (LEVEL_TWO_MIN + LEVEL_TWO_MAX) / 2);
-			break;
-			case 3 : elevatorTalon.set((LEVEL_THREE_MIN + LEVEL_THREE_MAX) / 2);
-			Robot.log.write(Level.INFO, "Elevator sent to: " + (LEVEL_THREE_MIN + LEVEL_THREE_MAX) / 2);
-			break;
-			case 4 : elevatorTalon.set((LEVEL_FOUR_MIN + LEVEL_FOUR_MAX) / 2);
-			Robot.log.write(Level.INFO, "Elevator sent to: " + (LEVEL_FOUR_MIN + LEVEL_FOUR_MAX) / 2);
-			break;
-			}
+			elevatorTalon.set(positions[level]);
+			Robot.log.write(Level.INFO, "Elevator sent to: " + positions[level]);
 		}
 
 		if (isAtLevel(1))
@@ -166,6 +180,12 @@ public class ElevatorEncoderSubsystem extends SubsystemBase {
 		}
 	}
 
+	public void calibrateElevator()
+	{
+		homing = true;
+		elevatorTalon.set(1);
+	}
+
 	public boolean isAtLevel(int level)
 	{
 		if (!enabled)
@@ -173,23 +193,27 @@ public class ElevatorEncoderSubsystem extends SubsystemBase {
 
 		double position = elevatorTalon.getPosition();
 
-		boolean atLevel = false;
-
-		switch (level)
-		{
-		case 1: atLevel = (position >= LEVEL_ONE_MIN && position <= LEVEL_ONE_MAX); break;
-		case 2: atLevel = position >= LEVEL_TWO_MIN && position <= LEVEL_TWO_MAX; break;
-		case 3: atLevel = position >= LEVEL_THREE_MIN && position <= LEVEL_THREE_MAX; break;
-		case 4: atLevel = (position >= LEVEL_FOUR_MIN && position <= LEVEL_FOUR_MAX); break;
-		}
-
-		return atLevel;
+		return (position > positions[level] - 5 && position < positions[level] + 5);
 	}
 
 	public void update() {
 		if (!enabled)
 			return;
 
+
+		//HOMING DETECTION
+		if (homing)
+		{
+			if (elevatorTalon.isFwdLimitSwitchClosed()) //If we are on the bottom limit switch
+			{
+				homing = false;
+				levelOnePosition = elevatorTalon.get();
+				SmartDashboard.putNumber("LEVEL1POS", levelOnePosition);
+				generatePositions();
+			}
+		}
+
+		//SAFETY TIMEOUT
 		boolean near = Math.abs(elevatorTalon.getPosition() - elevatorTalon.getSetpoint()) <= 20;
 
 		if (elevatorTalon.getAnalogInVelocity() == 0 && !isAtLevel(desiredLevel) && !timing)

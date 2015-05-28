@@ -3,19 +3,23 @@ import org.usfirst.frc.team578.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
+/**
+ * Sets the the intake wheels to spin forward, drawing in a tote. Note: only
+ * works if the elevator is not in motion. Finishes instantly.
+ */
 public class SpinIntakeCommand extends Command {
 
 	@Override
 	protected void initialize() {
-		
+		//		if (Robot.elevatorSubsystem.isStationary())
+		//		{
+		Robot.intakeSubsystem.spinIntake();
+		//		}
 	}
 
-	/**
-	 * Sets the the intake wheels to spin forward, drawing in a tote.
-	 */
 	@Override
 	protected void execute() {
-		Robot.intakeSubsystem.spinIntake();
+
 	}
 
 	@Override
@@ -30,6 +34,6 @@ public class SpinIntakeCommand extends Command {
 
 	@Override
 	protected void interrupted() {
-		
+
 	}
 }

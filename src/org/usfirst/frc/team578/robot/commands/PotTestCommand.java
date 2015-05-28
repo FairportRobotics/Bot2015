@@ -1,13 +1,12 @@
 package org.usfirst.frc.team578.robot.commands;
 
-import org.usfirst.frc.team578.robot.Robot;
-
 import edu.wpi.first.wpilibj.command.Command;
 
+@Deprecated
 public class PotTestCommand extends Command {
 
 	public PotTestCommand() {
-		requires(Robot.pot);
+		//requires(Robot.pot);
 	}
 	
 	@Override
@@ -17,7 +16,7 @@ public class PotTestCommand extends Command {
 
 	@Override
 	protected void execute() {
-		Robot.pot.writeStatus();
+		//Robot.pot.writeStatus();
 		
 	}
 

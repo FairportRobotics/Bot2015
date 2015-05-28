@@ -5,39 +5,41 @@ import org.usfirst.frc.team578.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * Stops the elevator at its current position.
- *
+ * Updates the elevator subsystem loop for monitoring and logging purposes. 
+ * Not to be called normally, and never finishes. Is elevator's default command.
  */
-public class ElevatorStopCommand extends Command {
+public class ElevatorMonitorCommand extends Command {
 
-	public ElevatorStopCommand() {
+	public ElevatorMonitorCommand()
+	{
 		requires(Robot.elevatorSubsystem);
 	}
 	
 	@Override
 	protected void initialize() {
-		
+
 	}
 
 	@Override
 	protected void execute() {
-		Robot.elevatorSubsystem.stop();
+		Robot.elevatorSubsystem.update();
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return true;
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	@Override
 	protected void end() {
-		
+		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	protected void interrupted() {
-		
+		// TODO Auto-generated method stub
 
 	}
 

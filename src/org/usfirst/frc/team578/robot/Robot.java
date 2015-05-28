@@ -3,19 +3,17 @@ package org.usfirst.frc.team578.robot;
 import java.lang.reflect.Field;
 import java.util.logging.Level;
 
-import org.usfirst.frc.team578.robot.commands.autonomous.AutonomousCanGroup;
+import org.usfirst.frc.team578.robot.commands.ElevatorCommand;
+import org.usfirst.frc.team578.robot.commands.autonomous.AutonomousSingleCanGroup;
+import org.usfirst.frc.team578.robot.commands.autonomous.AutonomousSingleToteGroup;
 import org.usfirst.frc.team578.robot.commands.autonomous.AutonomousDriveStraightGroup;
 import org.usfirst.frc.team578.robot.commands.autonomous.AutonomousNothing;
-import org.usfirst.frc.team578.robot.commands.autonomous.AutonomousStackGroup;
-import org.usfirst.frc.team578.robot.commands.autonomous.AutonomousToteGroup;
 import org.usfirst.frc.team578.robot.subsystems.DriveSubsystem;
-import org.usfirst.frc.team578.robot.subsystems.ElevatorEncoderSubsystem;
+import org.usfirst.frc.team578.robot.subsystems.ElevatorPIDSpeedSubsystem;
 import org.usfirst.frc.team578.robot.subsystems.FibinacciSubsystem;
 import org.usfirst.frc.team578.robot.subsystems.IntakeSubsystem;
 import org.usfirst.frc.team578.robot.subsystems.LoggingSubsystem;
 import org.usfirst.frc.team578.robot.subsystems.PDPSubystem;
-import org.usfirst.frc.team578.robot.subsystems.PIDDrive;
-import org.usfirst.frc.team578.robot.subsystems.POTTest;
 import org.usfirst.frc.team578.robot.subsystems.SubsystemBase;
 import org.usfirst.frc.team578.robot.subsystems.ToteDetectionSubsystem;
 
@@ -38,14 +36,14 @@ public class Robot extends IterativeRobot {
 	//Read about disabling a subsystem in the robotInit() method! You	
 	//likely do not need to comment out a subsystem here.
 	public static DriveSubsystem driveSubsystem;
-	public static ElevatorEncoderSubsystem elevatorSubsystem;
+	public static ElevatorPIDSpeedSubsystem elevatorSubsystem;
 	public static IntakeSubsystem intakeSubsystem;
 	public static FibinacciSubsystem fibinacciSubsystem;
 	public static LoggingSubsystem log;
 	public static ToteDetectionSubsystem toteDetectionSubsystem;
 	public static PDPSubystem pdpSubystem;
-	public static PIDDrive pid;
-	public static POTTest pot;
+	//public static PIDDrive pid;
+	//public static POTTest pot;
 
 	public static OI oi;
 	private static long startTime;
@@ -54,6 +52,7 @@ public class Robot extends IterativeRobot {
 	private SendableChooser autonomousChooser;
 	private SendableChooser loggingLevelChooser;
 	private boolean initial = true;
+	//private boolean calibrated;
 
 	public static long getElapsedTime()
 	{
@@ -85,15 +84,15 @@ public class Robot extends IterativeRobot {
 		//
 
 		driveSubsystem = new DriveSubsystem(true); //ensure pidDrive disabled
-		elevatorSubsystem = new ElevatorEncoderSubsystem(true);
+		elevatorSubsystem = new ElevatorPIDSpeedSubsystem(true);
 		intakeSubsystem = new IntakeSubsystem(true);
 		fibinacciSubsystem = new FibinacciSubsystem(true);
 		toteDetectionSubsystem = new ToteDetectionSubsystem(false);
 		pdpSubystem = new PDPSubystem(true);
-		
-		pot = new POTTest(false);
-		
-		pid = new PIDDrive(false); //do not enable unless drive disabled
+
+		//pot = new POTTest(false);
+
+		//pid = new PIDDrive(false); //do not enable unless drive disabled
 
 		//END SUBSYSTEMS
 		//OTHER INIT
@@ -116,8 +115,10 @@ public class Robot extends IterativeRobot {
 		//		}
 	}
 
+	/**
+	 * Writes the status of all the subsystems to the log
+	 */
 	private void logSubsystems() {
-
 		for (Field f : getClass().getDeclaredFields())
 		{
 			if (f.getType().getGenericSuperclass() == SubsystemBase.class)
@@ -149,9 +150,8 @@ public class Robot extends IterativeRobot {
 		autonomousChooser = new SendableChooser();
 		autonomousChooser.addObject("Do Nothing", new AutonomousNothing());
 		autonomousChooser.addDefault("Drive Straight", new AutonomousDriveStraightGroup());
-		autonomousChooser.addObject("Triple Stack", new AutonomousStackGroup());
-		autonomousChooser.addObject("Single Tote", new AutonomousToteGroup());
-		autonomousChooser.addObject("Single Can", new AutonomousCanGroup());
+		autonomousChooser.addObject("Single Can - Backs up", new AutonomousSingleCanGroup());
+		autonomousChooser.addObject("Single Tote - Turns Right", new AutonomousSingleToteGroup());
 		SmartDashboard.putData("Autonomous Strategy", autonomousChooser);
 	}
 
@@ -214,6 +214,12 @@ public class Robot extends IterativeRobot {
 	 * This function is called periodically during test mode
 	 */
 	public void testPeriodic() {
+		Scheduler.getInstance().run();
 		LiveWindow.run();
+	}
+	
+	@Override
+	public void testInit() {
+		new ElevatorCommand(0).start();
 	}
 }

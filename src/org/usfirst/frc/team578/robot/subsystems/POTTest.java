@@ -8,6 +8,11 @@ import edu.wpi.first.wpilibj.CANTalon.ControlMode;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+/**
+ * For testing a potentiometer with a CANTalon. Not for production use.
+ *
+ */
+@Deprecated
 public class POTTest extends SubsystemBase {
 
 	CANTalon talon;

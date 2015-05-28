@@ -2,6 +2,8 @@ package org.usfirst.frc.team578.robot;
 
 import org.usfirst.frc.team578.robot.commands.EjectTotesCommand;
 import org.usfirst.frc.team578.robot.commands.ElevatorCommand;
+import org.usfirst.frc.team578.robot.commands.ElevatorLevel2CommandGroup;
+import org.usfirst.frc.team578.robot.commands.ElevatorLevel4CommandGroup;
 import org.usfirst.frc.team578.robot.commands.ElevatorStopCommand;
 import org.usfirst.frc.team578.robot.commands.SpinEjectCommand;
 import org.usfirst.frc.team578.robot.commands.SpinIntakeCommand;
@@ -83,9 +85,9 @@ public class OI {
     	rightJoystickButtonSEVEN = new JoystickButton(rightJoystick, RobotMap.JOYSTICK_STOP_ELEVATOR);
     	
     	buttonONE.whenPressed(new ElevatorCommand(1));
-    	buttonTWO.whenPressed(new ElevatorCommand(2));
+    	buttonTWO.whenPressed(new ElevatorLevel2CommandGroup());
     	buttonTHREE.whenPressed(new ElevatorCommand(3));
-    	buttonFOUR.whenPressed(new ElevatorCommand(4));
+    	buttonFOUR.whenPressed(new ElevatorLevel4CommandGroup());
     	
     	buttonFIVE.whenPressed(new SpinIntakeCommand());
     	buttonSEVEN.whenPressed(new SpinIntakeCommand());

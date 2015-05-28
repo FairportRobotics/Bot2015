@@ -4,30 +4,33 @@ import org.usfirst.frc.team578.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
+/**
+ * Stops the spinning of the intake wheels
+ *
+ */
+//TODO: Read old javadocs: Is this desired behavior? Should it be implemented?
 public class SpinStopCommand extends Command {
 
 	@Override
 	protected void initialize() {
 	}
 
-	/**
-	 * Sets the spin speeds to zero once the fibinacci wheel speed setting is
-	 * verified to be zero.
-	 */
+//	/**
+//	 * Sets the spin speeds to zero once the fibinacci wheel speed setting is
+//	 * verified to be zero.
+//	 */
 	@Override
 	protected void execute() {
 		Robot.intakeSubsystem.spinStop();
 	}
 
-	/**
-	 * Is finished once the intake speed is set to zero, which is only set after
-	 * the fibinacci wheel has stopped
-	 */
+//	/**
+//	 * Is finished once the intake speed is set to zero, which is only set after
+//	 * the fibinacci wheel has stopped
+//	 */
 	@Override
 	protected boolean isFinished() {
-		// TODO Does this work? FIX
-		// return Robot.intakeSubsystem.getSpeed() == 0;
-		return true;
+		return true; //is this right?
 	}
 
 	@Override

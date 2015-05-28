@@ -9,6 +9,10 @@ import java.util.logging.Level;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 
+/**
+ * Subsystem to continuously log information about the robot
+ *
+ */
 public class LoggingSubsystem extends Subsystem {
 
 	private FileWriter p;
@@ -66,7 +70,6 @@ public class LoggingSubsystem extends Subsystem {
 		Calendar c = Calendar.getInstance();
 
 		c.setTimeZone(TimeZone.getTimeZone("US/Eastern"));
-
 		int h = c.get(Calendar.HOUR);
 		int m = c.get(Calendar.MINUTE);
 		int s = c.get(Calendar.SECOND);

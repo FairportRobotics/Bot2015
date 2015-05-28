@@ -22,7 +22,6 @@ public class EjectTotesCommand extends Command {
 	 */
 	@Override
 	protected void initialize() {
-
 		running = false;
 		//offSwitch = false;
 	}
@@ -31,8 +30,8 @@ public class EjectTotesCommand extends Command {
 	 * Ejects the totes
 	 */
 	@Override
-	protected void execute() {
-
+	protected void execute() 
+	{
 		/*
 		 * Has the fibinacci wheel stop after the beam from the sensor has been
 		 * broken twice.
@@ -47,12 +46,12 @@ public class EjectTotesCommand extends Command {
 		// }else{
 		// Robot.fibinacciSubsystem.stopFibinacci();
 		// }
-		
-//		if (spinStart != 0 && System.currentTimeMillis() - spinStart > 4000)
-//		{
-//			Robot.intakeSubsystem.spinStop();
-//			stoppedSpin = true;
-//		}
+
+		//		if (spinStart != 0 && System.currentTimeMillis() - spinStart > 4000)
+		//		{
+		//			Robot.intakeSubsystem.spinStop();
+		//			stoppedSpin = true;
+		//		}
 
 		if (running == true) {
 			if (Robot.fibinacciSubsystem.readSwitch() == false) {
@@ -65,15 +64,21 @@ public class EjectTotesCommand extends Command {
 				fibWasFalse = true;
 			}
 		} else {
-			int currLevel = Robot.elevatorSubsystem.getCurrentLevel();
-			int desired = Robot.elevatorSubsystem.getDesiredLevel();
-			if ((currLevel == 1 || currLevel == 2 || currLevel == 3) 
-					&& (desired == 1 || desired == 2 || desired == 3))
-			{
-				//Robot.intakeSubsystem.spinOutput();
-				//spinStart = System.currentTimeMillis();
-				Robot.fibinacciSubsystem.extendFibinacci();
-			}
+			//			int currLevel = Robot.elevatorSubsystem.getCurrentLevel();
+			//			int desired = Robot.elevatorSubsystem.getDesiredLevel();
+			//			if ((currLevel == 1 || currLevel == 2 || currLevel == 3) 
+			//					&& (desired == 1 || desired == 2 || desired == 3) 
+			//					&& Robot.elevatorSubsystem.isFree()) //TODO: <--- Maybe works?
+			//			{
+
+			//New check, almost always works:
+
+			//			if (Robot.elevatorSubsystem.isStationary() 
+			//					&& !Robot.elevatorSubsystem.isAtLevel(4) 
+			//					&& !Robot.elevatorSubsystem.isAtLevel(3))
+			//			{
+			Robot.fibinacciSubsystem.extendFibinacci();
+			//}
 			running = true;
 		}
 

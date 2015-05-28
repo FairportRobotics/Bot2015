@@ -5,23 +5,31 @@ import org.usfirst.frc.team578.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * Stops the elevator at its current position.
+ * Moves the elevator in reverse for a specific amount of time. (milliseconds)
  *
  */
-public class ElevatorStopCommand extends Command {
+public class ElevatorReverseCommand extends Command {
 
-	public ElevatorStopCommand() {
+	private long runTime;
+
+	/**
+	 * Constructs the command
+	 * @param runTime - reverse time in milliseconds
+	 */
+	public ElevatorReverseCommand(long runTime) {
 		requires(Robot.elevatorSubsystem);
+
+		this.runTime = runTime;
 	}
-	
+
 	@Override
 	protected void initialize() {
-		
+		Robot.elevatorSubsystem.reverse(runTime);
 	}
 
 	@Override
 	protected void execute() {
-		Robot.elevatorSubsystem.stop();
+
 	}
 
 	@Override
@@ -31,13 +39,10 @@ public class ElevatorStopCommand extends Command {
 
 	@Override
 	protected void end() {
-		
-
 	}
 
 	@Override
 	protected void interrupted() {
-		
 
 	}
 
